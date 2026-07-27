@@ -173,4 +173,4 @@ Esto garantiza disponibilidad del servicio aunque la precisión de la respuesta 
 
 ## 👤 Autor
 
-Developed 💻 by [P4154N0](https://www.linkedin.com/in/hector-pablo-graff/) from 🇦🇷 who takes 🧉 and ❤️ country music 🤠 🎵🎵🎵 🇨🇦
+## 👥 Equipo Backend
