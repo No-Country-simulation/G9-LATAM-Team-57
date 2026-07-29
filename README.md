@@ -258,11 +258,11 @@ Para usarla:
 
 ## 👥 Equipo Backend
 
-| Nombre | Rol |
-|---|---|
-| [Pablo Graff](https://www.linkedin.com/in/hector-pablo-graff/) | Backend Developer |
-| Agustina Lerda | Backend Developer |
-| [Annie Lehmann](https://www.linkedin.com/in/annie-lehmann/) | Backend Developer |
+| Nombre                                                                   | Rol |
+|--------------------------------------------------------------------------|---|
+| [Pablo Graff](https://www.linkedin.com/in/hector-pablo-graff/)           | Backend Developer |
+| [Agustina Lerda](https://www.linkedin.com/in/agustina-lerda/)            | Backend Developer |
+| [Annie Lehmann](https://www.linkedin.com/in/annie-lehmann/)              | Backend Developer |
 | [Frank Mijhael Bendezu Hinostroza](https://www.linkedin.com/in/frankm01) | Full Stack Developer |
 
 Developed 💻 from 🇦🇷 who takes 🧉 and ❤️ country music 🤠 🎵🎵🎵 🇨🇦
