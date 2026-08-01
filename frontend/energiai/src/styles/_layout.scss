@@ -1,0 +1,124 @@
+// ============================================
+// EnergIAi – Layout Responsive Base
+// Desktop: ≥1200px
+// Tablet: 768–1199px
+// Mobile: <768px
+// ============================================
+
+@use 'variables' as v;
+
+// Container principal con max-width adaptativo
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 v.$spacing-md;
+
+  @include v.mobile {
+    max-width: 100%;
+    padding: 0 v.$spacing-md;
+  }
+
+  @include v.tablet {
+    max-width: 720px;
+    padding: 0 v.$spacing-lg;
+  }
+
+  @include v.desktop {
+    max-width: 1140px;
+    padding: 0 v.$spacing-xl;
+  }
+}
+
+// Container estrecho para formularios y contenido centrado
+.container--narrow {
+  @extend .container;
+
+  @include v.tablet {
+    max-width: 600px;
+  }
+
+  @include v.desktop {
+    max-width: 720px;
+  }
+}
+
+// Container ancho para dashboards futuros
+.container--wide {
+  @extend .container;
+
+  @include v.desktop {
+    max-width: 1320px;
+  }
+}
+
+// Grid responsive
+.grid {
+  display: grid;
+  gap: v.$spacing-lg;
+
+  @include v.mobile {
+    grid-template-columns: 1fr;
+    gap: v.$spacing-md;
+  }
+
+  @include v.tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include v.desktop {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// Sección con padding vertical
+.section {
+  padding: v.$spacing-2xl 0;
+
+  @include v.mobile {
+    padding: v.$spacing-lg 0;
+  }
+}
+
+// Ocultar por breakpoint
+.hide-mobile {
+  @include v.mobile {
+    display: none !important;
+  }
+}
+
+.hide-tablet {
+  @include v.tablet {
+    display: none !important;
+  }
+}
+
+.hide-desktop {
+  @include v.desktop {
+    display: none !important;
+  }
+}
+
+// Solo mostrar en breakpoint
+.show-mobile {
+  display: none !important;
+
+  @include v.mobile {
+    display: block !important;
+  }
+}
+
+.show-tablet {
+  display: none !important;
+
+  @include v.tablet {
+    display: block !important;
+  }
+}
+
+.show-desktop {
+  display: none !important;
+
+  @include v.desktop {
+    display: block !important;
+  }
+}
