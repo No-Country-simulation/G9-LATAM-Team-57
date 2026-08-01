@@ -23,7 +23,7 @@
 - [x] Definir estructura de carpetas: `core/`, `features/`, `shared/`, `assets/`, `styles/`
 
 ### Layout Global
-- [ ] Crear `NavbarComponent` (shared) – Logo + nombre "EnergIAi"
+- [x] Crear `NavbarComponent` (shared) – Logo + nombre "EnergIAi"
 - [ ] Crear `FooterComponent` (shared) – Pie de página
 - [ ] Configurar tipografía (Inter / Roboto)
 - [ ] Definir variables SCSS globales (colores primario, secundario, error, advertencia, fondo)
