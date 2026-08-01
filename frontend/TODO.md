@@ -30,9 +30,9 @@
 - [x] Implementar layout responsive base (Desktop ≥1200px, Tablet 768–1199px, Mobile <768px)
 
 ### Routing
-- [ ] Configurar Angular Router con rutas por feature
-- [ ] Ruta `/` → HomePageComponent
-- [ ] Ruta `/analysis` → AnalysisPageComponent
+- [x] Configurar Angular Router con rutas por feature
+- [x] Ruta `/` → HomePageComponent
+- [x] Ruta `/analysis` → AnalysisPageComponent
 
 ---
 
