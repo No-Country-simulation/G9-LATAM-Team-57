@@ -1,12 +1,69 @@
 // ============================================
-// EnergIAi – Variables SCSS
+// EnergIAi – Variables SCSS Globales
 // ============================================
 
-// Breakpoints
+// --- Colores Primarios ---
+$color-primary: #2e7d32; // Verde (sostenibilidad)
+$color-primary-light: #4caf50;
+$color-primary-dark: #1b5e20;
+
+// --- Colores Secundarios ---
+$color-secondary: #1565c0; // Azul (tecnología)
+$color-secondary-light: #2196f3;
+$color-secondary-dark: #0d47a1;
+
+// --- Colores Semánticos ---
+$color-success: #4caf50;
+$color-warning: #ff9800;
+$color-error: #f44336;
+$color-info: #2196f3;
+
+// --- Categorías Energéticas ---
+$color-eficiente: #4caf50;
+$color-moderado: #ff9800;
+$color-ineficiente: #f44336;
+
+// --- Fondos ---
+$color-bg-light: #fafafa;
+$color-bg-card: #ffffff;
+$color-bg-dark: #212121;
+
+// --- Texto ---
+$color-text-primary: #212121;
+$color-text-secondary: #616161;
+$color-text-disabled: #9e9e9e;
+$color-text-inverse: #ffffff;
+
+// --- Bordes ---
+$color-border: #e0e0e0;
+$color-border-light: #f5f5f5;
+
+// --- Espaciado ---
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-2xl: 48px;
+$spacing-3xl: 64px;
+
+// --- Border Radius ---
+$radius-sm: 4px;
+$radius-md: 8px;
+$radius-lg: 16px;
+$radius-xl: 24px;
+$radius-full: 50%;
+
+// --- Sombras ---
+$shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+$shadow-md: 0 2px 8px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.12);
+
+// --- Breakpoints ---
 $breakpoint-mobile: 768px;
 $breakpoint-tablet: 1200px;
 
-// Mixins responsive
+// --- Mixins Responsive ---
 @mixin mobile {
   @media (max-width: #{$breakpoint-mobile - 1}) {
     @content;
@@ -24,3 +81,8 @@ $breakpoint-tablet: 1200px;
     @content;
   }
 }
+
+// --- Transiciones ---
+$transition-fast: 150ms ease;
+$transition-normal: 200ms ease-in-out;
+$transition-slow: 300ms ease-in-out;
