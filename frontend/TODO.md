@@ -39,10 +39,10 @@
 ## Sprint 2 – Formulario y Validaciones
 
 ### DTOs y Modelos
-- [ ] Crear `EnergyAnalysisRequest` interface en `features/analysis/models/`
-- [ ] Crear `EnergyAnalysisResponse` interface en `features/analysis/models/`
-- [ ] Crear enums: `HousingType` (CASA, DEPARTAMENTO, MONOAMBIENTE)
-- [ ] Crear enum: `PeakUsageLevel` (LOW, MEDIUM, HIGH)
+- [x] Crear `EnergyAnalysisRequest` interface en `features/analysis/models/`
+- [x] Crear `EnergyAnalysisResponse` interface en `features/analysis/models/`
+- [x] Crear enums: `HousingType` (CASA, DEPARTAMENTO, MONOAMBIENTE)
+- [x] Crear enum: `PeakUsageLevel` (LOW, MEDIUM, HIGH)
 
 ### Formulario (EnergyFormComponent)
 - [ ] Crear `EnergyFormComponent` con Reactive Forms
