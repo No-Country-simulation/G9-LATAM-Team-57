@@ -1,0 +1,23 @@
+// ============================================
+// EnergIAi – Mixins SCSS
+// ============================================
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin card-shadow {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-radius: var(--energiai-radius-md);
+}
+
+@mixin transition-fade {
+  transition: opacity 200ms ease-in-out;
+}
