@@ -1,0 +1,26 @@
+// ============================================
+// EnergIAi – Variables SCSS
+// ============================================
+
+// Breakpoints
+$breakpoint-mobile: 768px;
+$breakpoint-tablet: 1200px;
+
+// Mixins responsive
+@mixin mobile {
+  @media (max-width: #{$breakpoint-mobile - 1}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: $breakpoint-mobile) and (max-width: #{$breakpoint-tablet - 1}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $breakpoint-tablet) {
+    @content;
+  }
+}

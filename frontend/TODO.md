@@ -15,12 +15,12 @@
 ### Configuración del Proyecto
 - [ x ] Crear proyecto Angular 20 con Standalone Components
 - [ x ] Configurar SCSS como preprocesador de estilos
-- [ ] Instalar y configurar Angular Material (tema personalizado con paleta verde/azul)
-- [ ] Instalar dependencias adicionales: SweetAlert2, ngx-spinner, ngx-echarts (opcional)
-- [ ] Configurar ESLint + Prettier
-- [ ] Configurar Husky + lint-staged para pre-commit hooks
-- [ ] Configurar `environments/` con `apiUrl` para desarrollo y producción
-- [ ] Definir estructura de carpetas: `core/`, `features/`, `shared/`, `assets/`, `styles/`
+- [ x] Instalar y configurar Angular Material (tema personalizado con paleta verde/azul)
+- [ x] Instalar dependencias adicionales: SweetAlert2, ngx-spinner, ngx-echarts (opcional)
+- [ x ] Configurar ESLint + Prettier
+- [ x ] Configurar Husky + lint-staged para pre-commit hooks
+- [x] Configurar `environments/` con `apiUrl` para desarrollo y producción
+- [x] Definir estructura de carpetas: `core/`, `features/`, `shared/`, `assets/`, `styles/`
 
 ### Layout Global
 - [ ] Crear `NavbarComponent` (shared) – Logo + nombre "EnergIAi"
