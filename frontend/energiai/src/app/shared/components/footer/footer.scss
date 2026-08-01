@@ -1,0 +1,46 @@
+.footer {
+  background: linear-gradient(135deg, #1b5e20, #2e7d32);
+  color: white;
+  padding: var(--energiai-spacing-lg) var(--energiai-spacing-xl);
+  margin-top: auto;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--energiai-spacing-sm);
+    padding-bottom: var(--energiai-spacing-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: var(--energiai-spacing-sm);
+  }
+
+  &__icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+
+  &__title {
+    font-family: 'Inter', 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  &__tagline {
+    font-size: 0.9rem;
+    opacity: 0.85;
+    margin: 0;
+  }
+
+  &__bottom {
+    text-align: center;
+    padding-top: var(--energiai-spacing-md);
+    font-size: 0.8rem;
+    opacity: 0.7;
+  }
+}
