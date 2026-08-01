@@ -1,1 +1,62 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+// ============================================
+// EnergIAi – Custom Theme
+// Primario: Verde (sostenibilidad)
+// Secundario/Terciario: Azul (tecnología)
+// ============================================
+
+html {
+  height: 100%;
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$green-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
+
+body {
+  color-scheme: light;
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+  margin: 0;
+  height: 100%;
+}
+
+// ============================================
+// Variables globales del proyecto
+// ============================================
+:root {
+  // Colores semánticos
+  --energiai-success: #4caf50;
+  --energiai-warning: #ff9800;
+  --energiai-danger: #f44336;
+  --energiai-info: #2196f3;
+
+  // Categorías energéticas
+  --energiai-eficiente: #4caf50;
+  --energiai-moderado: #ff9800;
+  --energiai-ineficiente: #f44336;
+
+  // Fondos
+  --energiai-bg-light: #fafafa;
+  --energiai-bg-card: #ffffff;
+
+  // Espaciado base
+  --energiai-spacing-xs: 4px;
+  --energiai-spacing-sm: 8px;
+  --energiai-spacing-md: 16px;
+  --energiai-spacing-lg: 24px;
+  --energiai-spacing-xl: 32px;
+
+  // Border radius
+  --energiai-radius-sm: 4px;
+  --energiai-radius-md: 8px;
+  --energiai-radius-lg: 16px;
+}
