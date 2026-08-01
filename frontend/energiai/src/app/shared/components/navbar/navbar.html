@@ -1,0 +1,20 @@
+<mat-toolbar class="navbar" color="primary">
+  <a routerLink="/" class="navbar__brand">
+    <mat-icon class="navbar__icon">bolt</mat-icon>
+    <span class="navbar__title">EnergIAi</span>
+  </a>
+
+  <span class="navbar__spacer"></span>
+
+  <nav class="navbar__nav">
+    <a
+      mat-button
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Inicio
+    </a>
+    <a mat-button routerLink="/analysis" routerLinkActive="active"> Analizar </a>
+  </nav>
+</mat-toolbar>
