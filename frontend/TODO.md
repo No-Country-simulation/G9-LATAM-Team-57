@@ -13,8 +13,8 @@
 ## Sprint 1 – Configuración y Layout Base
 
 ### Configuración del Proyecto
-- [ ] Crear proyecto Angular 20 con Standalone Components
-- [ ] Configurar SCSS como preprocesador de estilos
+- [ x ] Crear proyecto Angular 20 con Standalone Components
+- [ x ] Configurar SCSS como preprocesador de estilos
 - [ ] Instalar y configurar Angular Material (tema personalizado con paleta verde/azul)
 - [ ] Instalar dependencias adicionales: SweetAlert2, ngx-spinner, ngx-echarts (opcional)
 - [ ] Configurar ESLint + Prettier
