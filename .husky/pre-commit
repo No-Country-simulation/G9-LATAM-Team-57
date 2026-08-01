@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+cd frontend/energiai && npx lint-staged
