@@ -26,8 +26,8 @@
 - [x] Crear `NavbarComponent` (shared) – Logo + nombre "EnergIAi"
 - [x] Crear `FooterComponent` (shared) – Pie de página
 - [x] Configurar tipografía (Inter / Roboto)
-- [ ] Definir variables SCSS globales (colores primario, secundario, error, advertencia, fondo)
-- [ ] Implementar layout responsive base (Desktop ≥1200px, Tablet 768–1199px, Mobile <768px)
+- [x] Definir variables SCSS globales (colores primario, secundario, error, advertencia, fondo)
+- [x] Implementar layout responsive base (Desktop ≥1200px, Tablet 768–1199px, Mobile <768px)
 
 ### Routing
 - [ ] Configurar Angular Router con rutas por feature
