@@ -1,0 +1,116 @@
+// ============================================
+// EnergIAi – Buttons
+// Source: Penpot Design System (Button / Primary, Button / Secondary)
+// ============================================
+
+@use 'variables' as v;
+
+// --- Base Button ---
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: v.$spacing-sm;
+  font-family: v.$font-family-primary;
+  font-size: v.$font-size-label-large;
+  font-weight: v.$font-weight-medium;
+  line-height: v.$line-height-label-large;
+  border-radius: v.$radius-md;
+  padding: v.$spacing-sm v.$spacing-xl;
+  min-width: 200px;
+  min-height: 44px;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition:
+    background-color v.$transition-fast,
+    box-shadow v.$transition-fast,
+    opacity v.$transition-fast;
+  -webkit-font-smoothing: antialiased;
+
+  &:focus-visible {
+    outline: 2px solid v.$color-primary;
+    outline-offset: 2px;
+  }
+}
+
+// --- Primary Button ---
+// Penpot: bg #2E7D32, text white, radius 8px, padding 8px 32px
+.btn-primary {
+  @extend .btn;
+  background-color: v.$color-primary;
+  color: v.$color-on-primary;
+
+  &:hover:not(:disabled) {
+    background-color: #388e3c; // primary hover from Penpot
+    box-shadow: v.$elevation-1;
+  }
+
+  &:active:not(:disabled) {
+    background-color: v.$color-primary-dark;
+  }
+
+  &:disabled,
+  &.btn--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+// --- Secondary Button (Outlined) ---
+// Penpot: border 1px solid #2E7D32, text #2E7D32, bg transparent
+.btn-secondary {
+  @extend .btn;
+  background-color: transparent;
+  color: v.$color-primary;
+  border: 1px solid v.$color-primary;
+
+  &:hover:not(:disabled) {
+    background-color: v.$color-primary-container;
+  }
+
+  &:active:not(:disabled) {
+    background-color: #b9debb; // primary-container darkened
+  }
+
+  &:disabled,
+  &.btn--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+// --- Error Button (Outlined, used in Error Card) ---
+// Penpot: border 1px solid #F44336, text #F44336
+.btn-error {
+  @extend .btn;
+  background-color: transparent;
+  color: v.$color-error;
+  border: 1px solid v.$color-error;
+  min-width: auto;
+
+  &:hover:not(:disabled) {
+    background-color: rgba(v.$color-error, 0.08);
+  }
+}
+
+// --- Size Variants ---
+.btn--sm {
+  padding: v.$spacing-xs v.$spacing-md;
+  font-size: v.$font-size-label-medium;
+  min-width: auto;
+  min-height: 36px;
+}
+
+.btn--lg {
+  padding: v.$spacing-md v.$spacing-2xl;
+  font-size: v.$font-size-body-large;
+  min-height: 52px;
+}
+
+// --- Full Width ---
+.btn--full {
+  width: 100%;
+}

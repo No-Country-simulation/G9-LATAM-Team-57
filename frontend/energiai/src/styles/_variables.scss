@@ -1,44 +1,84 @@
 // ============================================
-// EnergIAi – Variables SCSS Globales
+// EnergIAi – Design System Tokens
+// Source: Penpot Design System (IAENERGY)
+// Material Design 3
 // ============================================
 
-// --- Colores Primarios ---
-$color-primary: #2e7d32; // Verde (sostenibilidad)
+// --- Primary Palette (Green – Sustainability) ---
+$color-primary: #2e7d32;
 $color-primary-light: #4caf50;
 $color-primary-dark: #1b5e20;
+$color-primary-container: #c8e6c9;
+$color-on-primary: #ffffff;
+$color-on-primary-container: #1b5e20;
 
-// --- Colores Secundarios ---
-$color-secondary: #1565c0; // Azul (tecnología)
+// --- Secondary Palette (Blue – Technology) ---
+$color-secondary: #1565c0;
 $color-secondary-light: #2196f3;
 $color-secondary-dark: #0d47a1;
+$color-secondary-container: #bbdefb;
+$color-on-secondary: #ffffff;
+$color-on-secondary-container: #0d47a1;
 
-// --- Colores Semánticos ---
+// --- Semantic Colors ---
 $color-success: #4caf50;
 $color-warning: #ff9800;
 $color-error: #f44336;
 $color-info: #2196f3;
 
-// --- Categorías Energéticas ---
+// --- Category Colors ---
 $color-eficiente: #4caf50;
 $color-moderado: #ff9800;
 $color-ineficiente: #f44336;
 
-// --- Fondos ---
-$color-bg-light: #fafafa;
-$color-bg-card: #ffffff;
-$color-bg-dark: #212121;
+// --- Neutral Palette ---
+$color-surface: #ffffff;
+$color-surface-variant: #fafafa;
+$color-surface-container: #f5f5f5;
+$color-on-surface: #212121;
+$color-on-surface-variant: #616161;
+$color-outline: #e0e0e0;
+$color-outline-variant: #bdbdbd;
 
-// --- Texto ---
-$color-text-primary: #212121;
-$color-text-secondary: #616161;
-$color-text-disabled: #9e9e9e;
-$color-text-inverse: #ffffff;
+// --- Typography ---
+$font-family-primary: 'Inter', sans-serif;
+$font-family-fallback: 'Roboto', sans-serif;
 
-// --- Bordes ---
-$color-border: #e0e0e0;
-$color-border-light: #f5f5f5;
+// Font Sizes
+$font-size-display-large: 40px;
+$font-size-display-medium: 32px;
+$font-size-headline-large: 28px;
+$font-size-headline-medium: 24px;
+$font-size-title-large: 20px;
+$font-size-title-medium: 16px;
+$font-size-body-large: 16px;
+$font-size-body-medium: 14px;
+$font-size-body-small: 12px;
+$font-size-label-large: 14px;
+$font-size-label-medium: 12px;
+$font-size-label-small: 11px;
 
-// --- Espaciado ---
+// Font Weights
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Line Heights
+$line-height-display-large: 48px;
+$line-height-display-medium: 40px;
+$line-height-headline-large: 36px;
+$line-height-headline-medium: 32px;
+$line-height-title-large: 28px;
+$line-height-title-medium: 24px;
+$line-height-body-large: 24px;
+$line-height-body-medium: 20px;
+$line-height-body-small: 16px;
+$line-height-label-large: 20px;
+$line-height-label-medium: 16px;
+$line-height-label-small: 16px;
+
+// --- Spacing (Base: 4px) ---
 $spacing-xs: 4px;
 $spacing-sm: 8px;
 $spacing-md: 16px;
@@ -52,18 +92,23 @@ $radius-sm: 4px;
 $radius-md: 8px;
 $radius-lg: 16px;
 $radius-xl: 24px;
-$radius-full: 50%;
+$radius-full: 9999px;
 
-// --- Sombras ---
-$shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-$shadow-md: 0 2px 8px rgba(0, 0, 0, 0.1);
-$shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.12);
+// --- Elevation / Shadows ---
+$elevation-1: 0 1px 3px rgba(0, 0, 0, 0.08);
+$elevation-2: 0 2px 8px rgba(0, 0, 0, 0.1);
+$elevation-3: 0 4px 16px rgba(0, 0, 0, 0.12);
 
 // --- Breakpoints ---
 $breakpoint-mobile: 768px;
 $breakpoint-tablet: 1200px;
 
-// --- Mixins Responsive ---
+// --- Transitions ---
+$transition-fast: 150ms ease;
+$transition-normal: 200ms ease-in-out;
+$transition-slow: 300ms ease-in-out;
+
+// --- Responsive Mixins ---
 @mixin mobile {
   @media (max-width: #{$breakpoint-mobile - 1}) {
     @content;
@@ -81,8 +126,3 @@ $breakpoint-tablet: 1200px;
     @content;
   }
 }
-
-// --- Transiciones ---
-$transition-fast: 150ms ease;
-$transition-normal: 200ms ease-in-out;
-$transition-slow: 300ms ease-in-out;
