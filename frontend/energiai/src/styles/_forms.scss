@@ -1,0 +1,250 @@
+// ============================================
+// EnergIAi – Form Components
+// Source: Penpot Design System (Input/Text Field, Select/Dropdown, Radio)
+// ============================================
+
+@use 'variables' as v;
+
+// --- Form Field Container ---
+// Layout: label above, input below, hint below input
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+// --- Field Label (above input) ---
+// Penpot: Inter 500, 14px, #212121, with icon prefix
+.form-field__label {
+  font-family: v.$font-family-primary;
+  font-size: v.$font-size-label-large;
+  font-weight: v.$font-weight-medium;
+  line-height: v.$line-height-label-large;
+  color: v.$color-on-surface;
+  display: flex;
+  align-items: center;
+  gap: v.$spacing-sm;
+
+  .form-field--error & {
+    color: v.$color-error;
+  }
+
+  .form-field--focus & {
+    color: v.$color-primary;
+  }
+}
+
+// --- Input Base ---
+// Penpot: border 1px #E0E0E0, radius 4px, height 48px, padding 12px 16px
+.form-field__input {
+  width: 100%;
+  height: 48px;
+  padding: 12px v.$spacing-md;
+  font-family: v.$font-family-primary;
+  font-size: v.$font-size-body-large;
+  font-weight: v.$font-weight-regular;
+  line-height: v.$line-height-body-large;
+  color: v.$color-on-surface;
+  background-color: v.$color-surface;
+  border: 1px solid v.$color-outline;
+  border-radius: v.$radius-sm;
+  outline: none;
+  transition:
+    border-color v.$transition-fast,
+    box-shadow v.$transition-fast;
+  box-sizing: border-box;
+
+  &::placeholder {
+    color: v.$color-on-surface-variant;
+  }
+
+  &:hover:not(:disabled):not(:focus) {
+    border-color: v.$color-outline-variant;
+  }
+
+  // Focus state: 2px solid primary
+  &:focus {
+    border-color: v.$color-primary;
+    border-width: 2px;
+    padding: 11px calc(v.$spacing-md - 1px); // compensate for border width change
+  }
+
+  // Error state
+  .form-field--error & {
+    border-color: v.$color-error;
+    border-width: 2px;
+    padding: 11px calc(v.$spacing-md - 1px);
+  }
+
+  // Disabled state
+  &:disabled {
+    background-color: v.$color-surface-container;
+    color: v.$color-outline-variant;
+    border-color: v.$color-outline;
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+// --- Hint Text ---
+// Penpot: Inter 400, 12px, #616161
+.form-field__hint {
+  font-family: v.$font-family-primary;
+  font-size: v.$font-size-body-small;
+  font-weight: v.$font-weight-regular;
+  line-height: v.$line-height-body-small;
+  color: v.$color-on-surface-variant;
+}
+
+// --- Error Message ---
+// Penpot: Inter 400, 12px, #F44336
+.form-field__error {
+  font-family: v.$font-family-primary;
+  font-size: v.$font-size-body-small;
+  font-weight: v.$font-weight-regular;
+  line-height: v.$line-height-body-small;
+  color: v.$color-error;
+}
+
+// --- Select ---
+// Penpot: same as input + dropdown arrow
+.form-field__select {
+  @extend .form-field__input;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23616161'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right v.$spacing-md center;
+  background-size: 20px;
+  padding-right: 40px;
+  cursor: pointer;
+
+  &:focus {
+    border-color: v.$color-primary;
+    border-width: 2px;
+    padding: 11px calc(v.$spacing-md - 1px);
+    padding-right: 39px;
+  }
+}
+
+// --- Radio Group ---
+// Penpot: horizontal layout, 24px gap between options
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: v.$spacing-sm;
+}
+
+.radio-group__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$spacing-lg;
+
+  @include v.mobile {
+    flex-direction: column;
+    gap: v.$spacing-sm;
+  }
+}
+
+// --- Radio Button ---
+// Penpot: 20px diameter circle, selected=#2E7D32, unselected=#616161
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: v.$spacing-sm;
+  cursor: pointer;
+  min-height: 44px; // touch target accessibility
+
+  input[type='radio'] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid v.$color-on-surface-variant;
+    border-radius: v.$radius-full;
+    cursor: pointer;
+    transition:
+      border-color v.$transition-fast,
+      background-color v.$transition-fast;
+    position: relative;
+
+    &:checked {
+      border-color: v.$color-primary;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 10px;
+        height: 10px;
+        border-radius: v.$radius-full;
+        background-color: v.$color-primary;
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid v.$color-primary;
+      outline-offset: 2px;
+    }
+
+    &:hover:not(:checked) {
+      border-color: v.$color-on-surface;
+    }
+  }
+
+  &__label {
+    font-family: v.$font-family-primary;
+    font-size: v.$font-size-body-medium;
+    font-weight: v.$font-weight-regular;
+    color: v.$color-on-surface;
+    user-select: none;
+  }
+}
+
+// --- Form Card (wrapper for the analysis form) ---
+// Penpot: white bg, radius 8px, shadow elevation-1, padding 48px 48px 40px 40px
+.form-card {
+  background-color: v.$color-surface;
+  border-radius: v.$radius-md;
+  box-shadow: v.$elevation-1;
+  padding: 40px v.$spacing-2xl;
+  display: flex;
+  flex-direction: column;
+  gap: v.$spacing-lg;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  box-sizing: border-box;
+
+  @include v.mobile {
+    padding: v.$spacing-lg v.$spacing-md;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+// --- Form Header ---
+.form-card__header {
+  display: flex;
+  align-items: center;
+  gap: v.$spacing-sm;
+}
+
+.form-card__icon {
+  font-size: 28px;
+}
+
+.form-card__title {
+  font-family: v.$font-family-primary;
+  font-size: v.$font-size-headline-medium;
+  font-weight: v.$font-weight-semibold;
+  line-height: v.$line-height-headline-medium;
+  color: v.$color-on-surface;
+}
+
+.form-card__subtitle {
+  font-family: v.$font-family-primary;
+  font-size: v.$font-size-body-medium;
+  font-weight: v.$font-weight-regular;
+  color: v.$color-on-surface-variant;
+}

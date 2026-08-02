@@ -1,25 +1,127 @@
 // ============================================
-// EnergIAi – Tipografía
-// Primaria: Inter (UI general)
-// Secundaria: Roboto (Angular Material)
+// EnergIAi – Typography Scale
+// Source: Penpot Design System
+// Font: Inter | Material Design 3
 // ============================================
 
-$font-primary: 'Inter', 'Roboto', sans-serif;
-$font-secondary: 'Roboto', sans-serif;
+@use 'variables' as v;
 
-// Tamaños
-$font-size-xs: 0.75rem; // 12px
-$font-size-sm: 0.875rem; // 14px
-$font-size-base: 1rem; // 16px
-$font-size-md: 1.125rem; // 18px
-$font-size-lg: 1.25rem; // 20px
-$font-size-xl: 1.5rem; // 24px
-$font-size-2xl: 2rem; // 32px
-$font-size-3xl: 2.5rem; // 40px
+// --- Type Scale Classes ---
 
-// Pesos
-$font-weight-light: 300;
-$font-weight-regular: 400;
-$font-weight-medium: 500;
-$font-weight-semibold: 600;
-$font-weight-bold: 700;
+.text-display-large {
+  font-family: v.$font-family-primary;
+  font-size: v.$font-size-display-large;
+  font-weight: v.$font-weight-bold;
+  line-height: v.$line-height-display-large;
+  color: v.$color-on-surface;
+}
+
+.text-display-medium {
+  font-family: v.$font-family-primary;
+  font-size: v.$font-size-display-medium;
+  font-weight: v.$font-weight-bold;
+  line-height: v.$line-height-display-medium;
+  color: v.$color-on-surface;
+}
+
+.text-headline-large {
+  font-family: v.$font-family-primary;
+  font-size: v.$font-size-headline-large;
+  font-weight: v.$font-weight-semibold;
+  line-height: v.$line-height-headline-large;
+  color: v.$color-on-surface;
+}
+
+.text-headline-medium {
+  font-family: v.$font-family-primary;
+  font-size: v.$font-size-headline-medium;
+  font-weight: v.$font-weight-semibold;
+  line-height: v.$line-height-headline-medium;
+  color: v.$color-on-surface;
+}
+
+.text-title-large {
+  font-family: v.$font-family-primary;
+  font-size: v.$font-size-title-large;
+  font-weight: v.$font-weight-semibold;
+  line-height: v.$line-height-title-large;
+  color: v.$color-on-surface;
+}
+
+.text-title-medium {
+  font-family: v.$font-family-primary;
+  font-size: v.$font-size-title-medium;
+  font-weight: v.$font-weight-medium;
+  line-height: v.$line-height-title-medium;
+  color: v.$color-on-surface;
+}
+
+.text-body-large {
+  font-family: v.$font-family-primary;
+  font-size: v.$font-size-body-large;
+  font-weight: v.$font-weight-regular;
+  line-height: v.$line-height-body-large;
+  color: v.$color-on-surface;
+}
+
+.text-body-medium {
+  font-family: v.$font-family-primary;
+  font-size: v.$font-size-body-medium;
+  font-weight: v.$font-weight-regular;
+  line-height: v.$line-height-body-medium;
+  color: v.$color-on-surface;
+}
+
+.text-body-small {
+  font-family: v.$font-family-primary;
+  font-size: v.$font-size-body-small;
+  font-weight: v.$font-weight-regular;
+  line-height: v.$line-height-body-small;
+  color: v.$color-on-surface-variant;
+}
+
+.text-label-large {
+  font-family: v.$font-family-primary;
+  font-size: v.$font-size-label-large;
+  font-weight: v.$font-weight-medium;
+  line-height: v.$line-height-label-large;
+  color: v.$color-on-surface;
+}
+
+.text-label-medium {
+  font-family: v.$font-family-primary;
+  font-size: v.$font-size-label-medium;
+  font-weight: v.$font-weight-medium;
+  line-height: v.$line-height-label-medium;
+  color: v.$color-on-surface-variant;
+}
+
+.text-label-small {
+  font-family: v.$font-family-primary;
+  font-size: v.$font-size-label-small;
+  font-weight: v.$font-weight-medium;
+  line-height: v.$line-height-label-small;
+  color: v.$color-on-surface-variant;
+}
+
+// --- Utility Modifiers ---
+
+.text-muted {
+  color: v.$color-on-surface-variant;
+}
+
+.text-primary {
+  color: v.$color-primary;
+}
+
+.text-error {
+  color: v.$color-error;
+}
+
+.text-success {
+  color: v.$color-success;
+}
+
+.text-center {
+  text-align: center;
+}

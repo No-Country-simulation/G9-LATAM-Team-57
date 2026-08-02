@@ -45,7 +45,7 @@
 - [x] Crear enum: `PeakUsageLevel` (LOW, MEDIUM, HIGH)
 
 ### Formulario (EnergyFormComponent)
-- [ ] Crear `EnergyFormComponent` con Reactive Forms
+- [x] Crear `EnergyFormComponent` con Reactive Forms
 - [ ] Campo: Personas en la vivienda (Input Number, min: 1, obligatorio)
 - [ ] Campo: Aire acondicionado (Radio Button: Sí/No → mapeo a 1/0)
 - [ ] Campo: Home Office (Radio Button: Sí/No → mapeo a true/false)
@@ -59,7 +59,22 @@
 - [ ] Agregar labels, placeholders y mensajes de ayuda por accesibilidad
 - [ ] Implementar método de construcción del Request DTO desde el formulario
 
+### Landing Page
+- [ ] Tener la landing page en base al design system definido.
 ---
+
+Design System (Figma)
+        ↓
+Wireframes
+        ↓
+Prototipo de Alta Fidelidad
+        ↓
+Figma MCP
+        ↓
+Angular Material Components
+        ↓
+Integración con Spring Boot
+
 
 ## Sprint 3 – Integración con Backend
 

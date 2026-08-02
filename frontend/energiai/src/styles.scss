@@ -1,12 +1,21 @@
 @use '@angular/material' as mat;
+
+// ============================================
+// EnergIAi – Global Styles
+// Design System imported from Penpot
+// ============================================
+
+// --- Design System Partials ---
+@use 'styles/variables' as v;
 @use 'styles/layout';
+@use 'styles/typography';
+@use 'styles/buttons';
+@use 'styles/forms';
+@use 'styles/cards';
+@use 'styles/badges';
+@use 'styles/feedback';
 
-// ============================================
-// EnergIAi – Custom Theme
-// Primario: Verde (sostenibilidad)
-// Secundario/Terciario: Azul (tecnología)
-// ============================================
-
+// --- Angular Material Theme ---
 html {
   height: 100%;
   @include mat.theme(
@@ -21,46 +30,104 @@ html {
   );
 }
 
+// --- Base Styles ---
 body {
   color-scheme: light;
-  background-color: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
-  font: var(--mat-sys-body-medium);
-  font-family: 'Inter', 'Roboto', sans-serif;
+  background-color: v.$color-surface-variant;
+  color: v.$color-on-surface;
+  font-family: v.$font-family-primary;
+  font-size: v.$font-size-body-medium;
+  font-weight: v.$font-weight-regular;
+  line-height: v.$line-height-body-medium;
   margin: 0;
   height: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-// ============================================
-// Variables globales del proyecto
-// ============================================
+// --- CSS Custom Properties (for component-level usage) ---
 :root {
-  // Colores semánticos
-  --energiai-success: #4caf50;
-  --energiai-warning: #ff9800;
-  --energiai-danger: #f44336;
-  --energiai-info: #2196f3;
+  // Colors
+  --energiai-primary: #{v.$color-primary};
+  --energiai-primary-light: #{v.$color-primary-light};
+  --energiai-primary-dark: #{v.$color-primary-dark};
+  --energiai-primary-container: #{v.$color-primary-container};
+  --energiai-secondary: #{v.$color-secondary};
+  --energiai-success: #{v.$color-success};
+  --energiai-warning: #{v.$color-warning};
+  --energiai-danger: #{v.$color-error};
+  --energiai-info: #{v.$color-info};
 
-  // Categorías energéticas
-  --energiai-eficiente: #4caf50;
-  --energiai-moderado: #ff9800;
-  --energiai-ineficiente: #f44336;
+  // Categories
+  --energiai-eficiente: #{v.$color-eficiente};
+  --energiai-moderado: #{v.$color-moderado};
+  --energiai-ineficiente: #{v.$color-ineficiente};
 
-  // Fondos
-  --energiai-bg-light: #fafafa;
-  --energiai-bg-card: #ffffff;
+  // Surfaces
+  --energiai-surface: #{v.$color-surface};
+  --energiai-surface-variant: #{v.$color-surface-variant};
+  --energiai-surface-container: #{v.$color-surface-container};
+  --energiai-on-surface: #{v.$color-on-surface};
+  --energiai-on-surface-variant: #{v.$color-on-surface-variant};
+  --energiai-outline: #{v.$color-outline};
 
-  // Espaciado base
-  --energiai-spacing-xs: 4px;
-  --energiai-spacing-sm: 8px;
-  --energiai-spacing-md: 16px;
-  --energiai-spacing-lg: 24px;
-  --energiai-spacing-xl: 32px;
+  // Spacing
+  --energiai-spacing-xs: #{v.$spacing-xs};
+  --energiai-spacing-sm: #{v.$spacing-sm};
+  --energiai-spacing-md: #{v.$spacing-md};
+  --energiai-spacing-lg: #{v.$spacing-lg};
+  --energiai-spacing-xl: #{v.$spacing-xl};
 
-  // Border radius
-  --energiai-radius-sm: 4px;
-  --energiai-radius-md: 8px;
-  --energiai-radius-lg: 16px;
+  // Radius
+  --energiai-radius-sm: #{v.$radius-sm};
+  --energiai-radius-md: #{v.$radius-md};
+  --energiai-radius-lg: #{v.$radius-lg};
+
+  // Elevation
+  --energiai-elevation-1: #{v.$elevation-1};
+  --energiai-elevation-2: #{v.$elevation-2};
+  --energiai-elevation-3: #{v.$elevation-3};
+}
+
+// --- Global Resets ---
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+a {
+  color: v.$color-secondary;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-family: v.$font-family-primary;
+}
+
+p {
+  margin: 0 0 v.$spacing-sm;
+}
+
+// --- Utility Classes ---
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

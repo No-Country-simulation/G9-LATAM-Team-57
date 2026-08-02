@@ -1,0 +1,59 @@
+// ============================================
+// EnergIAi – Badges / Chips
+// Source: Penpot Design System (Badge / Category)
+// Variants: Eficiente (green), Moderado (orange), Ineficiente (red)
+// ============================================
+
+@use 'variables' as v;
+
+// --- Base Badge ---
+// Penpot: pill shape, colored bg (0.15 opacity), dot indicator + text
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: v.$spacing-sm;
+  padding: 6px v.$spacing-md 6px v.$spacing-sm;
+  border-radius: v.$radius-lg;
+  font-family: v.$font-family-primary;
+  font-size: 13px;
+  font-weight: v.$font-weight-medium;
+  line-height: 1;
+  white-space: nowrap;
+
+  &__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: v.$radius-full;
+    flex-shrink: 0;
+  }
+}
+
+// --- Eficiente (Green) ---
+.badge--eficiente {
+  background-color: rgba(v.$color-eficiente, 0.15);
+  color: #2e7d32;
+
+  .badge__dot {
+    background-color: v.$color-eficiente;
+  }
+}
+
+// --- Moderado (Orange) ---
+.badge--moderado {
+  background-color: rgba(v.$color-moderado, 0.15);
+  color: #e65100;
+
+  .badge__dot {
+    background-color: v.$color-moderado;
+  }
+}
+
+// --- Ineficiente (Red) ---
+.badge--ineficiente {
+  background-color: rgba(v.$color-ineficiente, 0.15);
+  color: #c62828;
+
+  .badge__dot {
+    background-color: v.$color-ineficiente;
+  }
+}
