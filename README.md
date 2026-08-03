@@ -1,268 +1,275 @@
-# ⚡ EnergIAi API — Backend Service
+<div align="center">
 
-API REST desacoplada y de alta performance para el procesamiento, análisis e integración del consumo energético en tiempo real.
+# ⚡ EnergIAi
 
-Este backend está diseñado bajo una arquitectura por capas, garantizando resiliencia y separación limpia de responsabilidades frente a los modelos de inteligencia artificial y consumo de clientes.
+### Análisis Inteligente de Consumo Energético
+
+*Transformamos datos crudos de consumo eléctrico en decisiones más sostenibles.*
+
+[![Java](https://img.shields.io/badge/Java-21-orange?logo=openjdk)](#-tecnologías)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.x-brightgreen?logo=springboot)](#-tecnologías)
+[![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)](#-tecnologías)
+[![FastAPI](https://img.shields.io/badge/FastAPI-ML%20Service-009688?logo=fastapi)](#-tecnologías)
+[![OCI](https://img.shields.io/badge/Oracle%20Cloud-Infrastructure-F80000?logo=oracle)](#️-arquitectura-de-infraestructura-oci)
+[![Hackathon](https://img.shields.io/badge/Hackathon-ONE%20G9%20LATAM-purple)](https://alura-es-cursos.github.io/proyectos-hackathon-g9-latam/)
+[![Status](https://img.shields.io/badge/status-MVP%20en%20desarrollo-yellow)](#-estado-del-proyecto)
+
+</div>
 
 ---
 
-## 📋 Descripción del problema
+## 📖 Índice
 
-El monitoreo de consumo energético requiere un backend robusto capaz de gestionar peticiones, validar entradas y comunicarse de forma segura con modelos predictivos externos.
-
-Este servicio actúa como el orquestador central: recibe las solicitudes de consumo, procesa la lógica de negocio en Java y se conecta de forma agnóstica con servicios externos (como los modelos de Machine Learning desarrollados en Python).
+- [Descripción](#-descripción)
+- [Estado del proyecto](#-estado-del-proyecto)
+- [Problema](#-problema)
+- [Necesidad del cliente](#-necesidad-del-cliente)
+- [Validación de mercado](#-validación-de-mercado)
+- [Objetivos](#-objetivos)
+- [Arquitectura](#️-arquitectura)
+- [Arquitectura de infraestructura (OCI)](#️-arquitectura-de-infraestructura-oci)
+- [Componentes](#-componentes)
+- [Tecnologías](#️-tecnologías)
+- [Dataset](#-dataset)
+- [Equipo](#-equipo)
+- [Cómo ejecutar el proyecto](#-cómo-ejecutar-el-proyecto)
+- [Documentación](#-documentación)
+- [Roadmap](#️-roadmap)
+- [Créditos](#-créditos)
 
 ---
 
-## 🏗️ Arquitectura de la aplicación
+## 📋 Descripción
 
+**EnergIAi** es una plataforma que analiza el consumo eléctrico residencial mediante Inteligencia Artificial. A partir de datos como el consumo mensual, la cantidad de equipos y los hábitos de uso en horario pico, la solución:
+
+- Clasifica el perfil energético de una vivienda (**Eficiente**, **Moderado** o **Ineficiente**).
+- Genera recomendaciones concretas para reducir el desperdicio energético.
+- Estima el impacto financiero mensual del consumo.
+
+Desarrollado para el **Hackathon ONE — Proyectos G9 | Alura + Oracle**, dentro del track *Sostenibilidad, Energía y Casas Inteligentes*.
+
+🔗 [Consigna original del hackathon](https://alura-es-cursos.github.io/proyectos-hackathon-g9-latam/)
+
+---
+
+## 🚦 Estado del proyecto
+
+| Componente | Estado |
+|---|---|
+| Infraestructura OCI (VCN, subred, Security Lists, 2 VMs) | ✅ Desplegada y operativa |
+| API de Machine Learning (Python/FastAPI) | ✅ Desplegada en OCI, corriendo como servicio persistente (systemd) |
+| Modelo de clasificación (`.pkl`) | ✅ Entrenado, evaluado y servido en producción |
+| Backend principal (Java/Spring Boot) | 🔧 En desarrollo — estructura y DTOs listos, falta cablear el cliente HTTP hacia el servicio de ML y desplegar en la VM |
+| Front-end | 🔧 En desarrollo |
+
+> Este README refleja el estado real del proyecto al momento de la última actualización. La sección de arquitectura OCI y las IPs son definitivas (infraestructura ya desplegada); el resto se irá marcando ✅ a medida que cada componente se complete.
+
+---
+
+## 🧩 Problema
+
+Muchas personas reciben facturas de energía elevadas, pero tienen poca visibilidad sobre qué hábitos de consumo son los que más impactan en sus gastos. **EnergIAi** transforma datos crudos de consumo en información clara y accionable, aplicando Ciencia de Datos para:
+
+- Analizar patrones de consumo eléctrico de una vivienda.
+- Clasificar el perfil energético en categorías (Eficiente / Moderado / Ineficiente).
+- Generar recomendaciones concretas para reducir el desperdicio energético.
+- Estimar el impacto financiero del consumo, usando una tarifa de referencia de **$0.75 USD/kWh**.
+
+### 🎯 Necesidad del cliente
+
+La solución permite a un usuario residencial:
+
+- Comprender su perfil de consumo energético.
+- Identificar posibles fuentes de desperdicio.
+- Recibir recomendaciones de mejora personalizadas.
+- Estimar el costo asociado a su consumo.
+- Hacer seguimiento de sus indicadores de eficiencia a lo largo del tiempo.
+
+El objetivo es transformar datos de consumo en información clara y útil para apoyar decisiones más conscientes.
+
+### 📈 Validación de mercado
+
+La preocupación por la eficiencia energética y la sostenibilidad crece continuamente en distintos sectores de la sociedad. Empresas, gobiernos y consumidores buscan soluciones capaces de:
+
+- Reducir costos operativos.
+- Mejorar indicadores de sostenibilidad.
+- Incentivar el consumo consciente.
+- Monitorear patrones de uso de energía.
+- Apoyar estrategias de eficiencia energética con datos, no solo con intuición.
+
+Incluso las soluciones simples pueden generar valor al proporcionar análisis y recomendaciones personalizadas con base en los datos de los usuarios.
+
+---
+
+## 🎯 Objetivos
+
+Desarrollar un **MVP funcional** que:
+
+- ✅ Analice patrones de consumo energético.
+- ✅ Clasifique el perfil de eficiencia energética mediante un modelo de Machine Learning.
+- ✅ Genere recomendaciones de mejora.
+- ✅ Estime el impacto financiero con base en una tarifa de referencia.
+- ✅ Exponga los resultados mediante una API REST documentada.
+- ✅ Utilice al menos un servicio de OCI como parte de la arquitectura.
+
+---
+
+## 🏗️ Arquitectura
+
+```text
+                 Usuario
+                    │
+                    ▼
+             API Java (Spring Boot)
+             Oracle Cloud (VM Pública)
+                    │
+                 HTTP REST
+                    ▼
+        API Machine Learning (FastAPI)
+          Oracle Cloud (VM Pública, acceso
+          restringido por firewall)
+                    │
+                    ▼
+      Modelo entrenado (Scikit-Learn)
 ```
-┌──────────────┐     HTTP REST     ┌────────────────────────┐
-│   Postman /  │ ────────────────▶ │  EnergIAi API (Java)   │
-│   Frontend   │ ◀──────────────── │  Spring Boot 3.3 +     │
-└──────────────┘                   │  Virtual Threads       │
-                                    └───────────┬────────────┘
-                                                │
-                                 ┌──────────────┴──────────────┐
-                                 ▼                             ▼
-                       ┌──────────────────┐          ┌──────────────────┐
-                       │ Client Layer     │          │ Persistencia BDD │
-                       │ (Python ML Model │          │ (PostgreSQL /    │
-                       │ / Fallback Mock) │          │ TimescaleDB)*    │
-                       └──────────────────┘          └──────────────────┘
-```
 
-\* Nota: La capa de persistencia en base de datos está planificada como un hito incremental futuro.
+El backend en **Java** actúa como orquestador central: recibe la solicitud de consumo, ejecuta la lógica de negocio (cálculo del promedio diario), valida los datos y se comunica de forma agnóstica con el modelo de Machine Learning servido en **Python**.
 
-📌 El recorrido completo de una petición, capa por capa, con datos reales de ejemplo:
-
-![Flujo real de una petición en EnergIAi](docs/images/flujo_real_energiai_con_datos.png)
+> 📌 El detalle completo del recorrido de una petición, capa por capa y con datos reales de ejemplo, está documentado en [`backend-java/README.md`](./backend-java/README.md).
 
 ---
 
 ## ☁️ Arquitectura de infraestructura (OCI)
 
-El proyecto se despliega sobre **dos máquinas virtuales (Oracle Cloud Infrastructure — Free Tier)**, separadas por motivos de seguridad y de responsabilidad:
+El proyecto está desplegado sobre **dos máquinas virtuales de Oracle Cloud Infrastructure (Free Tier)**, dentro de la VCN `vcn-energiai` (`10.0.0.0/16`), subred `subnet-energiai-public` (`10.0.0.0/24`), región Brazil East (São Paulo):
 
-| Máquina | Rol | Acceso | Puerto |
-|---|---|---|---|
-| **VM Java** | Backend principal (Spring Boot) | Pública — accesible desde internet | 8080 |
-| **VM Python** | Servicio de Machine Learning (FastAPI + modelo `.pkl`) | Privada — **solo accesible desde la VM Java**, dentro de la misma VCN | 8000 |
+| Máquina | Rol | IP pública | IP privada | Puerto | Estado |
+|---|---|---|---|---|---|
+| **VM Java** | Backend principal (Spring Boot) | `163.176.43.143` | `10.0.0.213` | 8080 | 🔧 En desarrollo |
+| **VM Python** | Servicio de Machine Learning (FastAPI + modelo `.pkl`) | `147.15.16.156` | `10.0.0.164` | 8000 | ✅ Desplegado y corriendo (systemd) |
 
-La VM de Python **no tiene IP pública ni acceso desde internet**. Solo responde a peticiones que provienen de la IP privada de la VM Java, dentro de la misma **VCN (Virtual Cloud Network)** de OCI. Esto reduce la superficie de ataque: nadie externo puede consultar directamente el modelo de IA, únicamente a través de nuestra API en Java, que valida y orquesta cada solicitud.
+**Nota sobre el acceso a la VM Python:** el diseño original preveía una subred privada sin salida a internet, pero las cuentas *Always Free* de OCI no incluyen NAT Gateway. Por eso la VM Python tiene IP pública (necesaria para instalar dependencias), y la restricción de acceso se logra por **reglas de firewall**: la Security List de OCI y el `iptables` interno solo aceptan tráfico al puerto 8000 desde la subred interna (`10.0.0.0/24`), nunca desde internet. En la práctica, el resultado de seguridad es el mismo — nadie externo puede consultar el modelo directamente — logrado por firewall en vez de aislamiento de red.
 
-![Arquitectura de red con las dos máquinas en OCI](docs/images/arquitectura_oci_dos_maquinas.png)
-
-> ⚠️ Las IPs reales de cada máquina se completan una vez desplegadas. Ver sección [Despliegue en OCI](#-despliegue-en-oci).
+> 🔧 Detalle completo del proceso de configuración de OCI (paso a paso, decisiones y problemas resueltos) en [`oci/README.md`](./oci/README.md).
 
 ---
 
-## 🛠️ Tecnologías utilizadas
+## 📦 Componentes
 
-| Componente | Tecnología |
+| Carpeta | Responsabilidad | Documentación |
+|---|---|---|
+| [`backend-java/`](./backend-java) | API principal, orquestación y lógica de negocio | [README](./backend-java/README.md) |
+| [`backend-python/`](./backend-python) | Servicio de Machine Learning (inferencia) | [README](./backend-python/README.md) |
+| [`data-science/`](./data-science) | Entrenamiento, evaluación y serialización del modelo | [README](./data-science/README.md) |
+| [`oci/`](./oci) | Configuración de infraestructura en Oracle Cloud | [README](./oci/README.md) |
+| `docs/` | Diagramas de arquitectura y flujo | — |
+| `postman/` | Colección de Postman para probar los endpoints | — |
+
+Cada componente cuenta con su propio README técnico.
+
+---
+
+## 🛠️ Tecnologías
+
+| Área | Tecnología |
 |---|---|
-| Lenguaje | Java 21 (Virtual Threads / LTS) |
-| Framework | Spring Boot 3.3.x |
-| Integración externa | Spring Web Client / RestClient (comunicación con API Python) |
-| Herramienta de Construcción | Maven |
-| Documentación | Swagger / OpenAPI 3 |
-| Control de versiones | Git + GitHub (feature/hpg-backend-java) |
-| Infraestructura | Oracle Cloud Infrastructure (OCI) — 2 VM Compute (Free Tier) |
-| Persistencia (Fase Futura) | PostgreSQL + TimescaleDB / Flyway |
+| Backend | Java 21 (Virtual Threads) + Spring Boot 3.3.x |
+| Machine Learning | Python 3.12 + FastAPI |
+| Ciencia de Datos | Pandas + Scikit-Learn |
+| Infraestructura | Oracle Cloud Infrastructure (2 VM Compute, Free Tier) |
+| Documentación de API | Swagger / OpenAPI 3 |
+| Control de versiones | Git + GitHub |
+| Persistencia (fase futura) | PostgreSQL + TimescaleDB / Flyway |
 
 ---
 
-## 📁 Estructura del proyecto
+## 📊 Dataset
 
-```
-energiai-api/
-├── .gitignore
-├── pom.xml
-├── README.md
-├── docs/
-│   └── images/                              # Diagramas de arquitectura y flujo, referenciados en este README
-├── postman/                                 # Colección de Postman para probar los endpoints (ver sección Postman)
-└── src/
-    ├── main/
-    │   ├── java/
-    │   │   └── com/
-    │   │       └── energiai/
-    │   │           └── api/
-    │   │               ├── client/          # Clientes para consumir la API de Python (con Mock-Fallback)
-    │   │               ├── config/          # Configuraciones globales (CORS, Beans, RestClient)
-    │   │               ├── controller/      # Endpoints REST anémicos
-    │   │               ├── exception/       # Manejador global de excepciones
-    │   │               ├── model/
-    │   │               │   ├── dto/
-    │   │               │   │   ├── request/  # DTOs de entrada
-    │   │               │   │   └── response/ # DTOs de salida
-    │   │               │   └── entity/       # Entidades de dominio (fase futura)
-    │   │               ├── repository/      # Capa de acceso a datos (fase futura)
-    │   │               ├── service/         # Interfaces de lógica de negocio
-    │   │               │   └── impl/        # Implementación del negocio
-    │   │               └── EnergiaiApiApplication.java
-    │   └── resources/
-    │       ├── application.properties
-    │       └── db/
-    │           └── migration/               # Scripts de Flyway (Fase Futura)
-    └── test/                                # Tests unitarios con JUnit 5 y Mockito
-```
+El modelo de clasificación fue entrenado con el dataset público **[Household Energy Consumption](https://www.kaggle.com/datasets/samxsam/household-energy-consumption)** (Kaggle), que registra consumo diario de energía, temperatura y niveles de uso en horario pico por hogar.
+
+El equipo de Data Science procesó este dataset (EDA, limpieza, entrenamiento y evaluación) y exportó el modelo entrenado en formato `.pkl`, servido en producción desde la API en Python.
+
+> Detalle completo de variables, metodología y métricas en [`data-science/README.md`](./data-science/README.md).
 
 ---
 
-## ⚙️ Instalación y ejecución local
+## 👥 Equipo
 
-### 1. Cloná el repositorio y posicionate en tu rama
+| Nombre | Rol | Aporte |
+|---|---|---|
+| **[Jonathan Marino](https://www.linkedin.com/in/jonathan-marino/)** | Data Analyst | Exploración y limpieza de datos (EDA) |
+| **[Hernán Pérez Melgar](https://www.linkedin.com/in/hernan-perez-melgar-320088184/)** | Data Scientist | Entrenamiento del modelo, serialización (`.pkl`) |
+| **[Pablo Graff](https://www.linkedin.com/in/hector-pablo-graff/)** | Backend Developer | API Java/Spring Boot, API de Machine Learning (FastAPI) e infraestructura OCI |
+| **[Agustina Lerda](https://www.linkedin.com/in/agustina-lerda/)** | Backend Developer | API Java/Spring Boot |
+| **[Annie Lehmann](https://www.linkedin.com/in/annie-lehmann/)** | Backend Developer | API Java/Spring Boot |
+| **[Frank Mijhael Bendezu Hinostroza](https://www.linkedin.com/in/frankm01)** | Full Stack Developer | Front-end / soporte transversal |
+
+---
+
+## ⚙️ Cómo ejecutar el proyecto
+
+### 1. Cloná el repositorio
 
 ```bash
 git clone https://github.com/No-Country-simulation/G9-LATAM-Team-57.git
-cd energiai-api
-git checkout feature/hpg-backend-java
+cd energiai
 ```
 
-### 2. Compilá e iniciá la aplicación
+### 2. Levantá el servicio de Machine Learning (Python)
+
+```bash
+cd backend-python
+pip install -r requirements.txt
+uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+### 3. Levantá la API principal (Java)
 
 En Windows (PowerShell / CMD):
 ```bash
+cd backend-java
 mvnw.cmd spring-boot:run
 ```
 
 En Linux / macOS / Git Bash:
 ```bash
+cd backend-java
 ./mvnw spring-boot:run
 ```
 
-La aplicación estará escuchando en: http://localhost:8080
+La API principal queda disponible en `http://localhost:8080` y consume internamente al servicio de Python en `http://localhost:8000` (local) o `http://10.0.0.164:8000` (en OCI).
+
+> Si el servicio de Python no está disponible, la API Java activa automáticamente un mecanismo de **Mock-Fallback** para no interrumpir el servicio. Ver detalle en [`backend-java/README.md`](./backend-java/README.md#-mock-fallback-client-layer).
 
 ---
 
-## 📊 Contrato de datos con el modelo (Data Science)
+## 📚 Documentación
 
-El equipo de Ciencia de Datos entrena el modelo con un dataset propio. Estas son las variables **ya confirmadas y cerradas** por el equipo de Data Science, y cómo se traducen al backend en Java.
-
-| Columna (Python) | Dtype | Tipo en Java | Descripción |
-|---|---|---|---|
-| `Household_Size` | int64 | `Integer` | Cantidad de personas en el hogar |
-| `Has_AC` | int64 | `Integer` | Si el hogar cuenta con aire acondicionado |
-| `Home_Office` | bool | `Boolean` | Si se realiza home office en la vivienda |
-| `Housing_Type` | object | `HousingType` (enum) | Tipo de vivienda |
-| `Equipment_Count` | int64 | `Integer` | Cantidad de equipos eléctricos |
-| `Avg_Energy_Consumption_kWh` | float64 | `Double` | Consumo energético promedio diario, calculado por Java (ver sección siguiente) |
-| `Peak_Usage_Level` | object | `PeakUsageLevel` (enum) | Nivel de uso en horario pico |
-
-### Enums
-
-Estos dos campos tienen valores fijos y cerrados, confirmados por Data Science, por lo que se modelan como `enum` en vez de `String` libre — así el backend rechaza automáticamente cualquier valor inválido, sin depender de validación manual.
-
-```java
-package com.energiai.api.model.dto.request;
-
-public enum HousingType {
-    CASA,
-    DEPARTAMENTO,
-    MONOAMBIENTE
-}
-```
-
-```java
-package com.energiai.api.model.dto.request;
-
-public enum PeakUsageLevel {
-    LOW,
-    MEDIUM,
-    HIGH
-}
-```
-
-### DTO de entrada
-
-```java
-package com.energiai.api.model.dto.request;
-
-public class ConsumoEnergeticoRequest {
-
-    private Integer householdSize;
-    private Integer hasAc;
-    private Boolean homeOffice;
-    private HousingType housingType;
-    private Integer equipmentCount;
-    private Double avgEnergyConsumptionKwh;
-    private PeakUsageLevel peakUsageLevel;
-
-    // getters y setters
-}
-```
+- [`backend-java/README.md`](./backend-java/README.md) — API principal, arquitectura, DTOs, endpoints, Mock-Fallback y despliegue en OCI.
+- [`backend-python/README.md`](./backend-python/README.md) — Servicio de Machine Learning, contrato de inferencia y ejecución con Docker.
+- [`data-science/README.md`](./data-science/README.md) — Dataset, metodología, modelo entrenado y métricas de evaluación.
+- [`oci/README.md`](./oci/README.md) — Configuración de infraestructura, paso a paso, decisiones y problemas resueltos.
+- [`postman/`](./postman) — Colección de Postman con requests listas para probar la API.
 
 ---
 
-## 🧮 Cálculo del consumo energético promedio diario
+## 🗺️ Roadmap
 
-El usuario **no ingresa directamente** el promedio diario (`Avg_Energy_Consumption_kWh`) — ingresa el **consumo total del mes anterior**. Java se encarga de calcularlo antes de mandarlo al modelo.
-
-**Lógica:**
-
-1. Java obtiene la fecha actual del sistema.
-2. Calcula cuál fue el **mes anterior** al actual (no se puede tomar el mes en curso, porque todavía no finalizó y el consumo real no está cerrado).
-3. Determina **cuántos días tuvo ese mes anterior** (considerando meses de 28, 29, 30 o 31 días).
-4. Divide el consumo total ingresado por esa cantidad de días, obteniendo el promedio diario.
-
-```
-Avg_Energy_Consumption_kWh = consumo_total_mes_anterior / cantidad_de_dias_del_mes_anterior
-```
-
-Esta lógica se implementa en el **`service`** (`AnalisisEnergeticoServiceImpl`), **antes** de invocar al `client` que se comunica con la API de Python — es lógica de negocio pura, no debe vivir en el `controller` ni en el `client`.
+- [ ] Terminar y desplegar el backend Java en la VM correspondiente.
+- [ ] Persistencia de resultados con PostgreSQL + TimescaleDB (historial de análisis por usuario/vivienda).
+- [ ] Migraciones versionadas con Flyway.
+- [ ] Dashboard de seguimiento y comparación entre períodos.
+- [ ] Procesamiento por lotes vía CSV.
+- [ ] Containerización completa con Docker.
+- [ ] Tests automatizados end-to-end.
+- [ ] Alertas de alto consumo.
+- [ ] Front-end de carga y visualización de resultados.
 
 ---
 
-## 🔄 Mock-Fallback (Client Layer)
+## 🙌 Créditos
 
-La capa `client/` se comunica con la API de Machine Learning en Python. Como ese servicio puede no estar disponible (todavía no existe, está caído, o tarda demasiado en responder), se implementa un **mecanismo de fallback**:
+Proyecto desarrollado en el marco del **Hackathon ONE — Proyectos G9 | Alura + Oracle**.
 
-- Si la API de Python responde correctamente → se usa la predicción real del modelo.
-- Si la API de Python falla o no responde → el backend en Java devuelve una respuesta simulada (mock), generada con reglas simples predefinidas (ej: umbrales de consumo), para que el servicio nunca quede completamente caído.
-
-Esto garantiza disponibilidad del servicio aunque la precisión de la respuesta sea menor en ese caso puntual.
-
----
-
-## 📄 Endpoints del MVP
-
-| Método | Endpoint | Descripción |
-|---|---|---|
-| GET | `/api/v1/health` | Estado del servicio backend |
-| POST | `/analisis-energetico` | Recibe el consumo del usuario, devuelve categoría, probabilidad, recomendaciones y costo estimado mensual |
-
----
-
-## 📮 Postman
-
-En la carpeta [`/postman`](./postman) se comparte la colección con las requests ya armadas para probar todos los endpoints de la API (incluyendo ejemplos de body para `POST /analisis-energetico`).
-
-Para usarla:
-1. Abrí Postman → **Import**
-2. Seleccioná el archivo `.json` dentro de la carpeta `postman/`
-3. Ejecutá las requests contra `http://localhost:8080` (entorno local) o la IP pública de la VM Java (entorno desplegado)
-
----
-
-## 🚀 Despliegue en OCI
-
-> 🔧 Sección en construcción — se completa a medida que se aprovisionan las máquinas.
-
-- **VM Java**: IP pública `pendiente`
-- **VM Python**: IP privada `pendiente`
-- VCN: `pendiente`
-- Security Lists configuradas para que la VM Python solo acepte tráfico desde la VM Java.
-
----
-
-## 👥 Equipo Backend
-
-| Nombre                                                                   | Rol |
-|--------------------------------------------------------------------------|---|
-| [Pablo Graff](https://www.linkedin.com/in/hector-pablo-graff/)           | Backend Developer |
-| [Agustina Lerda](https://www.linkedin.com/in/agustina-lerda/)            | Backend Developer |
-| [Annie Lehmann](https://www.linkedin.com/in/annie-lehmann/)              | Backend Developer |
-| [Frank Mijhael Bendezu Hinostroza](https://www.linkedin.com/in/frankm01) | Full Stack Developer |
-
-Developed 💻 from 🇦🇷 who takes 🧉 and ❤️ country music 🤠 🎵🎵🎵 🇨🇦
+Developed 💻 from 🇦🇷 and 🇵🇪.
