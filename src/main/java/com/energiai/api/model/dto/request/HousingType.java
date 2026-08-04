@@ -3,7 +3,8 @@ package com.energiai.api.model.dto.request;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/** Mapea lo que ingresa el usuario por teclado
+/* Mapea el tipo de hogar que ingresa
+ *  el usuario por teclado
  * */
 public enum HousingType {
     CASA,

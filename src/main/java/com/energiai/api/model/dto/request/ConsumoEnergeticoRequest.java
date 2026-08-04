@@ -2,7 +2,9 @@ package com.energiai.api.model.dto.request;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
-
+/* DTO para los datos que envía el usuario al modelo (API
+* python) para la clasificación
+* */
 public record ConsumoEnergeticoRequest (
         @NotNull @PositiveOrZero Integer household_size,
         @NotNull @PositiveOrZero Integer has_ac,
