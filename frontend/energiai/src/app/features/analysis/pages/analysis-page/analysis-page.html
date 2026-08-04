@@ -1,5 +1,96 @@
-<section class="analysis-page section">
-  <div class="container container--narrow">
-    <app-energy-form (submitForm)="onFormSubmit($event)" />
-  </div>
+<section class="analysis-page">
+  <!-- STATE: Form -->
+  @if (state() === 'form') {
+    <div class="analysis-page__form section page-enter">
+      <div class="container container--narrow">
+        <app-energy-form (submitForm)="onFormSubmit($event)" />
+      </div>
+    </div>
+  }
+
+  <!-- STATE: Loading -->
+  @if (state() === 'loading') {
+    <div class="analysis-page__loading page-enter">
+      <div class="loading">
+        <div class="loading__spinner"></div>
+        <p class="loading__text">Analizando consumo energético...</p>
+      </div>
+    </div>
+  }
+
+  <!-- STATE: Result -->
+  @if (state() === 'result' && result()) {
+    <div class="analysis-page__result section page-enter">
+      <div class="container">
+        <h2 class="text-display-medium analysis-page__title">Resultados del Análisis</h2>
+
+        <div class="results-grid">
+          <!-- Category Card -->
+          <div class="result-card">
+            <span class="result-card__label">Categoría</span>
+            <div class="badge" [ngClass]="getCategoryClass(result()!.categoria)">
+              <span class="badge__dot"></span>
+              {{ result()!.categoria }}
+            </div>
+            <span class="result-card__value">{{ getProgressWidth(result()!.probabilidad) }}</span>
+            <span class="result-card__subtitle">Probabilidad</span>
+            <div class="result-card__progress">
+              <div
+                class="result-card__progress-bar"
+                [ngClass]="getProgressClass(result()!.categoria)"
+                [style.width]="getProgressWidth(result()!.probabilidad)"
+              ></div>
+            </div>
+          </div>
+
+          <!-- Cost Card -->
+          <div class="cost-card">
+            <span class="cost-card__icon">💰</span>
+            <span class="cost-card__label">Costo estimado mensual</span>
+            <span class="cost-card__value"
+              >${{ result()!.costoEstimadoMensual | number: '1.2-2' }}</span
+            >
+            <span class="cost-card__period">/mes</span>
+          </div>
+
+          <!-- Recommendations Card -->
+          <div class="recommendation-card">
+            <h3 class="recommendation-card__title">Recomendaciones</h3>
+            <ul class="recommendation-card__list">
+              @for (rec of result()!.recomendaciones; track rec) {
+                <li class="recommendation-card__item">{{ rec }}</li>
+              }
+            </ul>
+          </div>
+        </div>
+
+        <!-- New Analysis Button -->
+        <div class="analysis-page__actions">
+          <button class="btn-secondary" (click)="onNewAnalysis()">
+            <mat-icon>refresh</mat-icon>
+            Nuevo análisis
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- STATE: Error -->
+  @if (state() === 'error') {
+    <div class="analysis-page__error page-enter">
+      <div class="container container--narrow">
+        <div class="error-card">
+          <div class="error-card__header">
+            <mat-icon class="error-card__icon">error_outline</mat-icon>
+            <span class="error-card__title">Error</span>
+          </div>
+          <p class="error-card__message">{{ error() }}</p>
+          <button class="btn-error" (click)="onRetry()">
+            <mat-icon>refresh</mat-icon>
+            Reintentar
+          </button>
+        </div>
+      </div>
+    </div>
+  }
 </section>
