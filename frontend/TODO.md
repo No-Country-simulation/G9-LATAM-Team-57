@@ -46,21 +46,21 @@
 
 ### Formulario (EnergyFormComponent)
 - [x] Crear `EnergyFormComponent` con Reactive Forms
-- [ ] Campo: Personas en la vivienda (Input Number, min: 1, obligatorio)
-- [ ] Campo: Aire acondicionado (Radio Button: Sí/No → mapeo a 1/0)
-- [ ] Campo: Home Office (Radio Button: Sí/No → mapeo a true/false)
-- [ ] Campo: Tipo de vivienda (Select: Casa, Departamento, Monoambiente → CASA, DEPARTAMENTO, MONOAMBIENTE)
-- [ ] Campo: Equipos eléctricos (Input Number, min: 0, obligatorio)
-- [ ] Campo: Consumo último recibo (Input Number, min: >0, unidad kWh, obligatorio)
-- [ ] Campo: Horas uso simultáneo (Radio Button: 0–2h, 3–5h, >5h → LOW, MEDIUM, HIGH)
-- [ ] Implementar validaciones con Validators (required, min, max, pattern)
-- [ ] Mostrar mensajes de error por campo (mat-error)
-- [ ] Botón "Analizar consumo" deshabilitado si formulario inválido
-- [ ] Agregar labels, placeholders y mensajes de ayuda por accesibilidad
-- [ ] Implementar método de construcción del Request DTO desde el formulario
+- [x] Campo: Personas en la vivienda (Input Number, min: 1, obligatorio)
+- [x] Campo: Aire acondicionado (Radio Button: Sí/No → mapeo a 1/0)
+- [x] Campo: Home Office (Radio Button: Sí/No → mapeo a true/false)
+- [x] Campo: Tipo de vivienda (Select: Casa, Departamento, Monoambiente → CASA, DEPARTAMENTO, MONOAMBIENTE)
+- [x] Campo: Equipos eléctricos (Input Number, min: 0, obligatorio)
+- [x] Campo: Consumo último recibo (Input Number, min: >0, unidad kWh, obligatorio)
+- [x] Campo: Horas uso simultáneo (Radio Button: 0–2h, 3–5h, >5h → LOW, MEDIUM, HIGH)
+- [x] Implementar validaciones con Validators (required, min, max, pattern)
+- [x] Mostrar mensajes de error por campo (mat-error)
+- [x] Botón "Analizar consumo" deshabilitado si formulario inválido
+- [x] Agregar labels, placeholders y mensajes de ayuda por accesibilidad
+- [x] Implementar método de construcción del Request DTO desde el formulario
 
 ### Landing Page
-- [ ] Tener la landing page en base al design system definido.
+- [x] Tener la landing page en base al design system definido.
 ---
 
 Design System (Figma)
