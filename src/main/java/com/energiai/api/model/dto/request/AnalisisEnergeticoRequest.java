@@ -12,7 +12,7 @@ public record AnalisisEnergeticoRequest(
         @NotNull HousingType housingType,
         @NotNull @PositiveOrZero Integer equipmentCount,
         @NotNull @PositiveOrZero Double consumoTotalMesAnterior,
-        @NotNull String peakUsageLevel)
+        @NotNull PeakUsageLevel peakUsageLevel)
 
 {
 }

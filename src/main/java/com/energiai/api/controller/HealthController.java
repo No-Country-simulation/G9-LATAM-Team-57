@@ -1,4 +1,4 @@
 package com.energiai.api.controller;
 
-public class HelthController {
+public class HealthController {
 }
