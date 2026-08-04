@@ -1,6 +1,6 @@
 package com.energiai.api.model.dto.response;
-/* DTO que deserializa la respuesta JSON que manda
-* la API de python
+/* DTO que deserializa la respuesta JSON
+*  que manda la API de python
 * */
 public record AnalisisEnergeticoResponse(
         Categoria categoria,
