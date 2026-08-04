@@ -1,4 +1,9 @@
 package com.energiai.api.model.dto.response;
-
-public class AnalisisEnergeticoResponse {
+/* DTO que deserializa la respuesta JSON que manda
+* la API de python
+* */
+public record AnalisisEnergeticoResponse(
+        Categoria categoria,
+        Double probabilidad,
+        Probabilidades probabilidades) {
 }
