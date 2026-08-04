@@ -11,6 +11,7 @@ import org.springframework.web.client.RestClient;
 * Recibe el PrediccionRequest (información ingresada por el usuario
 * mapeada a lo que espera la API-python) y con esta información
 * hace POST y luego recibe la respuesta.
+* apiKey y baseUrl son variables de entorno
 * */
 @Service
 public class ModelClient {
