@@ -1,5 +1,5 @@
 package com.energiai.api.model.dto.response;
 
-public enum EnergyClassification {
-    
+public enum Categoria {
+    Eficiente, Moderado, Ineficiente
 }
