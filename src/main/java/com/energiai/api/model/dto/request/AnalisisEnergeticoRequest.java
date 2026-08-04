@@ -6,9 +6,9 @@ import jakarta.validation.constraints.PositiveOrZero;
 * python) para la clasificación
 * */
 public record AnalisisEnergeticoRequest(
-        @NotNull @PositiveOrZero Integer household_size,
-        @NotNull @PositiveOrZero Integer has_ac,
-        @NotNull Boolean home_office,
+        @NotNull @PositiveOrZero Integer householdSize,
+        @NotNull @PositiveOrZero Integer hasAc,
+        @NotNull Boolean homeOffice,
         @NotNull HousingType housingType,
         @NotNull @PositiveOrZero Integer equipmentCount,
         @NotNull @PositiveOrZero Double consumoTotalMesAnterior,
