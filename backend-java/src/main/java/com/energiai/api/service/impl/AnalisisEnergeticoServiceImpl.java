@@ -29,7 +29,6 @@ import java.util.List;
  * la réplica exacta en la misma vajilla dorada. El comensal en el salón jamás sabrá del drama
  * en la cocina; solo disfrutará de la excelencia de su banquete.
  */
-
 @Service
 public class AnalisisEnergeticoServiceImpl implements AnalisisEnergeticoService {
 
@@ -53,15 +52,21 @@ public class AnalisisEnergeticoServiceImpl implements AnalisisEnergeticoService 
         MlPrediccionRequest mlRequest = mapToMlRequest(request);
 
         MlPrediccionResultado resultadoMl;
+        String fuenteDatos;
+        String detalleFuente;
 
         // 2. Estrategia de Fallback (Resiliencia ante fallas de red)
         try {
             resultadoMl = realClient.predecir(mlRequest);
+            fuenteDatos = "IA_PYTHON_REAL";
+            detalleFuente = "Procesado exitosamente por el modelo de IA en Python";
         } catch (Exception e) {
             System.err.println("⚠️ ALERTA: No se pudo conectar con el servicio de IA en Python (" + e.getMessage() + ")");
             System.out.println("🔄 ACTIVANDO MODO FALLBACK: Utilizando MlModelClientMock para responder...");
 
             resultadoMl = mockClient.predecir(mlRequest);
+            fuenteDatos = "MOCK_FALLBACK";
+            detalleFuente = "Respuesta estimada por caída o timeout del servicio de IA. Causa técnica: " + e.getMessage();
         }
 
         // 3. Cálculos de negocio propios de Java (Costo Estimado Mensual)
@@ -71,12 +76,14 @@ public class AnalisisEnergeticoServiceImpl implements AnalisisEnergeticoService 
         // 4. Construcción de recomendaciones personalizadas según perfil e IA
         List<String> recomendaciones = recomendacionesEngine.generarRecomendaciones(request, resultadoMl);
 
-        // 5. Retorno de la respuesta
+        // 5. Retorno de la respuesta con metadatos de observabilidad
         return new AnalisisEnergeticoResponse(
                 resultadoMl.getCategoria(),
                 resultadoMl.getProbabilidad(),
                 recomendaciones,
-                costoEstimado
+                costoEstimado,
+                fuenteDatos,
+                detalleFuente
         );
     }
 

@@ -3,6 +3,7 @@ package com.energiai.api.controller;
 import com.energiai.api.model.dto.request.ConsumoEnergeticoRequest;
 import com.energiai.api.model.dto.response.AnalisisEnergeticoResponse;
 import com.energiai.api.service.AnalisisEnergeticoService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,11 +35,10 @@ public class AnalisisEnergeticoController {
         this.service = service;    // ← Spring me la pasa acá, yo la guardo
     }
 
-    @PostMapping("/analisis-energetico")   // ← etiqueta del MÉTODO (arriba de cada acción)
+    @PostMapping("/analisis-energetico")
     public AnalisisEnergeticoResponse recibirConsumo(
-            @RequestBody ConsumoEnergeticoRequest request   // ← etiqueta del PARÁMETRO (arriba de cada dato)
+            @Valid @RequestBody ConsumoEnergeticoRequest request // ← ¡ACÁ SUMAMOS @Valid!
     ) {
-
         System.out.println("householdSize: " + request.getHouseholdSize());
         System.out.println("hasAc: " + request.getHasAc());
         System.out.println("housingType: " + request.getHousingType());
