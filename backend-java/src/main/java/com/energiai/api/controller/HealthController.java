@@ -1,5 +1,19 @@
 package com.energiai.api.controller;
 
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
+
+@RestController
+@RequestMapping("/api/v1")
 public class HealthController {
-    // TODO: el endpoint GET /api/v1/health que ya tenían documentado
+
+    @GetMapping("/health")
+    public Map<String, String> health() {
+        return Map.of("status", "UP");
+    }
+
 }
