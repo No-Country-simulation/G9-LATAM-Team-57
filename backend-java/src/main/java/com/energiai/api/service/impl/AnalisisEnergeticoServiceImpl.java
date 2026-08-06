@@ -6,10 +6,10 @@ import com.energiai.api.client.MlPrediccionResultado;
 import com.energiai.api.model.dto.request.ConsumoEnergeticoRequest;
 import com.energiai.api.model.dto.response.AnalisisEnergeticoResponse;
 import com.energiai.api.service.AnalisisEnergeticoService;
+import com.energiai.api.service.RecomendacionesEngine;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,12 +35,15 @@ public class AnalisisEnergeticoServiceImpl implements AnalisisEnergeticoService 
 
     private final MlModelClient realClient;
     private final MlModelClient mockClient;
+    private final RecomendacionesEngine recomendacionesEngine;
 
     public AnalisisEnergeticoServiceImpl(
             @Qualifier("mlModelClientImpl") MlModelClient realClient,
-            @Qualifier("mlModelClientMock") MlModelClient mockClient) {
+            @Qualifier("mlModelClientMock") MlModelClient mockClient,
+            RecomendacionesEngine recomendacionesEngine) {
         this.realClient = realClient;
         this.mockClient = mockClient;
+        this.recomendacionesEngine = recomendacionesEngine;
     }
 
     @Override
@@ -66,7 +69,7 @@ public class AnalisisEnergeticoServiceImpl implements AnalisisEnergeticoService 
         Double costoEstimado = (consumoTotal != null) ? consumoTotal * 0.75 : 0.0;
 
         // 4. Construcción de recomendaciones personalizadas según perfil e IA
-        List<String> recomendaciones = generarRecomendaciones(request, resultadoMl);
+        List<String> recomendaciones = recomendacionesEngine.generarRecomendaciones(request, resultadoMl);
 
         // 5. Retorno de la respuesta
         return new AnalisisEnergeticoResponse(
@@ -100,50 +103,5 @@ public class AnalisisEnergeticoServiceImpl implements AnalisisEnergeticoService 
         }
 
         return mlReq;
-    }
-
-    /**
-     * Motor de reglas acumulativo para sugerencias personalizadas
-     */
-    private List<String> generarRecomendaciones(ConsumoEnergeticoRequest request, MlPrediccionResultado resultadoMl) {
-        List<String> recomendaciones = new ArrayList<>();
-
-        String categoria = resultadoMl.getCategoria();
-
-        // 1. Regla según la clasificación de la IA
-        if ("Ineficiente".equalsIgnoreCase(categoria)) {
-            recomendaciones.add("Su nivel de consumo es elevado. Se recomienda auditar los equipos de mayor potencia para reducir el impacto económico.");
-        } else if ("Moderado".equalsIgnoreCase(categoria)) {
-            recomendaciones.add("Su consumo es aceptable, pero existen oportunidades de optimización en horarios de pico.");
-        } else if ("Eficiente".equalsIgnoreCase(categoria)) {
-            recomendaciones.add("¡Felicitaciones! Su hogar mantiene un patrón de uso de energía altamente eficiente.");
-        } else {
-            recomendaciones.add("Consumo clasificado como: " + categoria + ".");
-        }
-
-        // 2. Regla por Trabajo Remoto (Home Office)
-        if (Boolean.TRUE.equals(request.getHomeOffice())) {
-            recomendaciones.add("Al trabajar desde casa, utilice zapatillas con interruptor para apagar computadoras, monitores y cargadores al finalizar su jornada (evite el consumo 'vampiro').");
-        }
-
-        // 3. Regla por Climatización (Aire Acondicionado + Pico de consumo alto)
-        boolean tieneAc = request.getHasAc() != null && request.getHasAc() == 1;
-        boolean usoPicoAlto = request.getPeakUsageLevel() != null && "HIGH".equalsIgnoreCase(request.getPeakUsageLevel().name());
-
-        if (tieneAc && usoPicoAlto) {
-            recomendaciones.add("Mantenga el aire acondicionado fijado a 24°C y limpie los filtros mensualmente para evitar sobreexigir el compresor.");
-        } else if (tieneAc) {
-            recomendaciones.add("Recuerde programar el aire acondicionado en modo ECO o mantener la temperatura recomendada de 24°C.");
-        }
-
-        // 4. Regla por Equipamiento y Densidad de Hogar
-        boolean altaCantidadEquipos = request.getEquipmentCount() != null && request.getEquipmentCount() >= 5;
-        boolean hogarNumeroso = request.getHouseholdSize() != null && request.getHouseholdSize() >= 4;
-
-        if (altaCantidadEquipos || hogarNumeroso) {
-            recomendaciones.add("Evite encender simultáneamente electrodomésticos de gran potencia (lavarropas, horno eléctrico, plancha) durante las horas de mayor consumo.");
-        }
-
-        return recomendaciones;
     }
 }
