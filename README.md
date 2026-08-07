@@ -146,7 +146,7 @@ El proyecto está desplegado sobre **dos máquinas virtuales de Oracle Cloud Inf
 
 | Máquina | Rol | IP pública | IP privada | Puerto | Estado |
 |---|---|---|---|---|---|
-| **VM Java** | Backend principal (Spring Boot) | `163.176.43.143` | `10.0.0.213` | 8080 | 🔧 En desarrollo |
+| **VM Java** | Backend principal (Spring Boot) | `163.176.43.143` | `10.0.0.213` | 8080 | ✅ Desplegado y corriendo (systemd) |
 | **VM Python** | Servicio de Machine Learning (FastAPI + modelo `.pkl`) | `147.15.16.156` | `10.0.0.164` | 8000 | ✅ Desplegado y corriendo (systemd) |
 
 **Nota sobre el acceso a la VM Python:** el diseño original preveía una subred privada sin salida a internet, pero las cuentas *Always Free* de OCI no incluyen NAT Gateway. Por eso la VM Python tiene IP pública (necesaria para instalar dependencias), y la restricción de acceso se logra por **reglas de firewall**: la Security List de OCI y el `iptables` interno solo aceptan tráfico al puerto 8000 desde la subred interna (`10.0.0.0/24`), nunca desde internet. En la práctica, el resultado de seguridad es el mismo — nadie externo puede consultar el modelo directamente — logrado por firewall en vez de aislamiento de red.
