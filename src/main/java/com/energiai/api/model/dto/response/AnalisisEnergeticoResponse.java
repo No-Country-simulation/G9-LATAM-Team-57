@@ -4,6 +4,5 @@ package com.energiai.api.model.dto.response;
 * */
 public record AnalisisEnergeticoResponse(
         Categoria categoria,
-        Double probabilidad,
-        Probabilidades probabilidades) {
+        Double probabilidad) {
 }
