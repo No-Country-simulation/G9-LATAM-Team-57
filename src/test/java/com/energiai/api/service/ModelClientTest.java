@@ -1,6 +1,7 @@
 package com.energiai.api.service;
 
 import com.energiai.api.model.dto.request.HousingType;
+import com.energiai.api.model.dto.request.PeakUsageLevel;
 import com.energiai.api.model.dto.request.PrediccionRequest;
 import com.energiai.api.model.dto.response.AnalisisEnergeticoResponse;
 import com.energiai.api.model.dto.response.Categoria;
@@ -42,7 +43,7 @@ public class ModelClientTest {
                 .andExpect(header("X-API-Key", "test-api-key"))
                 .andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON));
 
-        PrediccionRequest request = new PrediccionRequest(3, 1, true, HousingType.CASA, 5, 14.0, "HIGH");
+        PrediccionRequest request = new PrediccionRequest(3, 1, true, HousingType.CASA, 5, 14.0, PeakUsageLevel.HIGH.HIGH);
         AnalisisEnergeticoResponse response = modelClient.predict(request);
 
         assertThat(response.categoria()).isEqualTo(Categoria.Eficiente);

@@ -24,7 +24,7 @@ public class RequestMapper {
           request.housingType(),
           request.equipmentCount(),
           request.consumoTotalMesAnterior()/diasDelMes,
-          request.peakUsageLevel().name()
+          request.peakUsageLevel()
         );
     }
 }

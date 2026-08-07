@@ -13,7 +13,7 @@ public record PrediccionRequest(
         HousingType housing_type,
         Integer equipment_count,
         Double avg_energy_consumption_kwh,
-        String peak_usage_level
+        PeakUsageLevel peak_usage_level
 ) {
 
 }
