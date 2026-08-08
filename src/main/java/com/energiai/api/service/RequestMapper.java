@@ -19,7 +19,7 @@ public class RequestMapper {
     public PrediccionRequest toPrediccionRequest(AnalisisEnergeticoRequest request){
         return new PrediccionRequest(
           request.householdSize(),
-          request.hasAc(),
+          request.hasAc()? 1:0 ,
           request.homeOffice(),
           request.housingType(),
           request.equipmentCount(),

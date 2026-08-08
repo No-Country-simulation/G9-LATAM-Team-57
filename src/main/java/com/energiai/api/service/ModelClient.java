@@ -19,7 +19,7 @@ public class ModelClient {
     private final RestClient restClient;
     private final String apiKey;
 
-    public ModelClient(RestClient.Builder restClientBuilder, @Value("${fastapi.base-url}") String baseUrl ,@Value("${fastapi.api-key}") String apiKey) {
+    public ModelClient(RestClient.Builder restClientBuilder, @Value("${fastapi.base-url}") String baseUrl, @Value("${fastapi.api-key}") String apiKey) {
         this.apiKey = apiKey;
         this.restClient =restClientBuilder.baseUrl(baseUrl).build();
     }
