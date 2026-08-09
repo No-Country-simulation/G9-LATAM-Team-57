@@ -12,7 +12,7 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-ML%20Service-009688?logo=fastapi)](#-tecnologías)
 [![OCI](https://img.shields.io/badge/Oracle%20Cloud-Infrastructure-F80000?logo=oracle)](#️-arquitectura-de-infraestructura-oci)
 [![Hackathon](https://img.shields.io/badge/Hackathon-ONE%20G9%20LATAM-purple)](https://alura-es-cursos.github.io/proyectos-hackathon-g9-latam/)
-[![Status](https://img.shields.io/badge/status-MVP%20en%20desarrollo-yellow)](#-estado-del-proyecto)
+[![Status](https://img.shields.io/badge/status-MVP%20Production%20Ready-brightgreen)](#-estado-del-proyecto)
 
 </div>
 
@@ -28,6 +28,7 @@
 - [Objetivos](#-objetivos)
 - [Arquitectura](#️-arquitectura)
 - [Arquitectura de infraestructura (OCI)](#️-arquitectura-de-infraestructura-oci)
+- [Pruebas de Carga y Rendimiento (Benchmarking)](#-pruebas-de-carga-y-rendimiento-benchmarking)
 - [Componentes](#-componentes)
 - [Tecnologías](#️-tecnologías)
 - [Dataset](#-dataset)
@@ -152,6 +153,36 @@ El proyecto está desplegado sobre **dos máquinas virtuales de Oracle Cloud Inf
 **Nota sobre el acceso a la VM Python:** el diseño original preveía una subred privada sin salida a internet, pero las cuentas *Always Free* de OCI no incluyen NAT Gateway. Por eso la VM Python tiene IP pública (necesaria para instalar dependencias), y la restricción de acceso se logra por **reglas de firewall**: la Security List de OCI y el `iptables` interno solo aceptan tráfico al puerto 8000 desde la subred interna (`10.0.0.0/24`), nunca desde internet. En la práctica, el resultado de seguridad es el mismo — nadie externo puede consultar el modelo directamente — logrado por firewall en vez de aislamiento de red.
 
 > 🔧 Detalle completo del proceso de configuración de OCI (paso a paso, decisiones y problemas resueltos) en [`oci/README.md`](./oci/README.md).
+
+---
+
+## ⚡ Pruebas de Carga, Rendimiento y Elasticidad (Benchmarking)
+
+Para garantizar un estándar de producción real, la API desplegada en **Oracle Cloud Infrastructure (OCI)** fue sometida a pruebas de carga destructiva y concurrencia utilizando **Grafana k6**, monitoreando en tiempo real la salud del hardware (`htop`) en la Virtual Machine Ubuntu.
+
+---
+
+### 🏥 1. Diagnóstico de Infraestructura (`GET /health`)
+* **Concurrencia Probada:** Ráfagas de hasta **30 usuarios virtuales (VUs)** simultáneos.
+* **Elasticidad de Procesador:** La JVM despertó los núcleos bajo demanda pasando de **0.7% a 27.2% de CPU**, retornando al estado basal inmediatamente al finalizar.
+* **Métrica SLA:** Latencia **$p(95) = 57.37\text{ ms}$** y **0.00% tasa de fallos** sobre 1,687 peticiones.
+
+| 🟢 1. Estado Inicial (Basal) | 🟡 2. Pico de Carga (30 VUs) | 🟢 3. Reporte Final (`k6`) |
+|:---:|:---:|:---:|
+| ![Health Baseline](./backend-java/k6/images/health/health-htop-baseline.png) | ![Health CPU Peak](./backend-java/k6/images/health/health-htop-cpu-peak.png) | ![Health Metrics](./backend-java/k6/images/health/health-k6-metrics-verde.png) |
+| *Servidor en reposo (0.7% CPU, ~420 MB RAM).* | *Escalado elástico de CPU sin degradar la memoria.* | *1,00% de éxito, 0% errores y $p(95) < 58\text{ ms}$.* |
+
+---
+
+### 🧪 2. Servicio de Ingesta y Cálculo Energético (`POST /analisis-energetico`)
+* **Carga de Negocio:** Procesamiento e interpretación de DTOs JSON con evaluación del perfil energético.
+* **Estabilidad de Memoria:** Memoria RAM congelada en **418 MB / 954 MB** demostrando la ausencia de fugas de memoria (*memory leaks*).
+* **Métrica SLA:** Latencia **$p(95) = 74.36\text{ ms}$** y **0.00% tasa de fallos** sobre 133 peticiones reales.
+
+| 🟢 1. Estado Inicial (Basal) | 🟡 2. Pico de Carga (5 VUs) | 🟢 3. Reporte Final (`k6`) |
+|:---:|:---:|:---:|
+| ![Energiai Baseline](./backend-java/k6/images/energiai/analisis-energetico-htop-baseline.png) | ![Energiai CPU Peak](./backend-java/k6/images/energiai/analisis-energetico-htop-cpu-peak.png) | ![Energiai Metrics](./backend-java/k6/images/energiai/analisis-energetico-k6-metrics-verde.png) |
+| *Servidor listo para recibir payloads de ingesta.* | *Absorción de carga JSON manteniendo consumo en ~418 MB.* | *133 peticiones POST procesadas en $< 75\text{ ms}$.* |
 
 ---
 
