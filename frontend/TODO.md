@@ -79,49 +79,49 @@ Integración con Spring Boot
 ## Sprint 3 – Integración con Backend
 
 ### Servicios
-- [ ] Crear `EnergyAnalysisService` en `features/analysis/services/`
+- [x] Crear `EnergyAnalysisService` en `features/analysis/services/`
   - Método `analyzeConsumption(request: EnergyAnalysisRequest): Observable<EnergyAnalysisResponse>`
   - Consumir `POST /api/v1/analisis-energetico`
   - Usar `HttpClient` con URL desde `environment.apiUrl`
-- [ ] Crear `NotificationService` en `core/services/` (wrapper de SweetAlert2)
-- [ ] Crear `LoadingService` en `core/services/` (administrar spinner global)
+- [x] Crear `NotificationService` en `core/services/` (wrapper de SweetAlert2)
+- [x] Crear `LoadingService` en `core/services/` (administrar spinner global)
 
 ### Interceptor de Errores
-- [ ] Crear `HttpErrorInterceptor` en `core/interceptors/`
+- [x] Crear `HttpErrorInterceptor` en `core/interceptors/`
   - Manejar 400: mostrar validaciones del backend
   - Manejar 404: servicio no encontrado
   - Manejar 500: error interno
   - Manejar 503: servicio no disponible
   - Manejar timeout: mensaje de conexión
-- [ ] Registrar interceptor en la configuración de la app
+- [x] Registrar interceptor en la configuración de la app
 
 ### Signals (Estado)
-- [ ] Implementar `loading = signal(false)` en el componente/servicio
-- [ ] Implementar `result = signal<EnergyAnalysisResponse | null>(null)`
-- [ ] Implementar `error = signal<string | null>(null)`
+- [x] Implementar `loading = signal(false)` en el componente/servicio
+- [x] Implementar `result = signal<EnergyAnalysisResponse | null>(null)`
+- [x] Implementar `error = signal<string | null>(null)`
 
 ---
 
 ## Sprint 4 – Pantalla de Resultados
 
 ### Componentes de Resultado
-- [ ] Crear `AnalysisPageComponent` (page container)
-- [ ] Crear `ResultCardComponent` – Muestra categoría + probabilidad con indicador visual
+- [x] Crear `AnalysisPageComponent` (page container)
+- [x] Crear `ResultCardComponent` – Muestra categoría + probabilidad con indicador visual
   - 🟢 Eficiente (verde)
   - 🟡 Moderado (amarillo)
   - 🔴 Ineficiente (rojo)
   - Barra de progreso con porcentaje de probabilidad
-- [ ] Crear `CostCardComponent` – Muestra costo estimado mensual (formato moneda)
-- [ ] Crear `RecommendationCardComponent` – Lista de recomendaciones con íconos ✓
-- [ ] Crear `ErrorComponent` – Tarjeta de error con mensaje + botón "Reintentar"
-- [ ] Crear `LoadingComponent` – Spinner + mensaje "Analizando consumo energético..."
+- [x] Crear `CostCardComponent` – Muestra costo estimado mensual (formato moneda)
+- [x] Crear `RecommendationCardComponent` – Lista de recomendaciones con íconos ✓
+- [x] Crear `ErrorComponent` – Tarjeta de error con mensaje + botón "Reintentar"
+- [x] Crear `LoadingComponent` – Spinner + mensaje "Analizando consumo energético..."
 
 ### Flujo Completo
-- [ ] Integrar formulario → servicio → resultados en AnalysisPageComponent
-- [ ] Implementar transición entre estados: formulario → loading → resultado/error
-- [ ] Botón "Nuevo análisis" que resetea formulario y vuelve al estado inicial
-- [ ] Prevenir envío múltiple de solicitudes simultáneas
-- [ ] Animaciones: Fade In (200ms) entre pantallas
+- [x] Integrar formulario → servicio → resultados en AnalysisPageComponent
+- [x] Implementar transición entre estados: formulario → loading → resultado/error
+- [x] Botón "Nuevo análisis" que resetea formulario y vuelve al estado inicial
+- [x] Prevenir envío múltiple de solicitudes simultáneas
+- [x] Animaciones: Fade In (200ms) entre pantallas
 
 ---
 
