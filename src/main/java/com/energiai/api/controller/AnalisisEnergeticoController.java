@@ -33,11 +33,11 @@ public class AnalisisEnergeticoController {
     *  el POST y devuelve la respuesta de la API de python*/
     @PostMapping("/analisis-energetico")
     public ApiResponse predict(@Valid @RequestBody AnalisisEnergeticoRequest request){
-
+        //requestMapper --> prepara los datos para el modelo de prediccion
         PrediccionRequest modelRequest= requestMapper.toPrediccionRequest(request);
-
+        //modelClient --> realiza el post y recibe la rta
         AnalisisEnergeticoResponse modelResponse = modelClient.predict(modelRequest);
-
+        //Mapeo lo que quiero devolverle al front
         return new ApiResponse(modelResponse.categoria(),
                                modelResponse.probabilidad(),
                                recomendacionService.recomendacionesPara(modelResponse.categoria(),request),
