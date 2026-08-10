@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
 import { EnergyForm } from '../../components/energy-form/energy-form';
@@ -15,6 +15,7 @@ import { NotificationService } from '../../../../core/services/notification.serv
 type AnalysisState = 'form' | 'loading' | 'result' | 'error';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-analysis-page',
   standalone: true,
   imports: [
