@@ -20,6 +20,7 @@ import org.springframework.web.client.ResourceAccessException;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -57,11 +58,19 @@ public class PredictControllerTest {
 
     @Test
     void returnsClassificationRecommendationsAndCost() throws Exception {
-        PrediccionRequest mappedRequest = new PrediccionRequest(4, 1, true, HousingType.CASA, 10, 14.0, PeakUsageLevel.HIGH);
+
+        PrediccionRequest mappedRequest = new PrediccionRequest(4,
+                                                            1,
+                                                        true,
+                                                                   HousingType.CASA,
+                                                    10,
+                                           14.0,
+                                                                   PeakUsageLevel.HIGH);
+
         when(requestMapper.toPrediccionRequest(any())).thenReturn(mappedRequest);
         when(modelClient.predict(mappedRequest))
-                .thenReturn(new AnalisisEnergeticoResponse( Categoria.Ineficiente, 0.81));
-        when(recomendacionService.recomendacionesPara(Categoria.Ineficiente))
+                .thenReturn(new AnalisisEnergeticoResponse(Categoria.Ineficiente, 0.81));
+        when(recomendacionService.recomendacionesPara(eq(Categoria.Ineficiente), any()))
                 .thenReturn(List.of("Recomendación 1", "Recomendación 2", "Recomendación 3"));
         when(costoEstimadoService.calcularCostoMensual(420.0)).thenReturn(294.0);
 
