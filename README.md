@@ -61,8 +61,8 @@ Desarrollado para el **Hackathon ONE — Proyectos G9 | Alura + Oracle**, dentro
 | Infraestructura OCI (VCN, subred, Security Lists, 2 VMs) | ✅ Desplegada y operativa |
 | API de Machine Learning (Python/FastAPI) | ✅ Desplegada en OCI, corriendo como servicio persistente (systemd) |
 | Modelo de clasificación (`.pkl`) | ✅ Entrenado, evaluado y servido en producción |
-| Backend principal (Java/Spring Boot) | 🔧 En desarrollo — estructura y DTOs listos, falta cablear el cliente HTTP hacia el servicio de ML y desplegar en la VM |
-| Front-end | 🔧 En desarrollo |
+| Backend principal (Java/Spring Boot) | ✅ — Estructura y DTOs listos, falta cablear el cliente HTTP hacia el servicio de ML y desplegar en la VM |
+| Front-end | ✅ |
 
 > Este README refleja el estado real del proyecto al momento de la última actualización. La sección de arquitectura OCI y las IPs son definitivas (infraestructura ya desplegada); el resto se irá marcando ✅ a medida que cada componente se complete.
 
