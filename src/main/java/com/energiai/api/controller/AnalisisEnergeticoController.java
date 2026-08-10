@@ -27,6 +27,10 @@ public class AnalisisEnergeticoController {
         this.costoEstimadoService = costoEstimadoService;
         this.requestMapper = requestMapper;
     }
+
+    /*Recibe la request que envía el frontend, los mapeo con
+    * los datos para el  POST a la API de python , luego hace
+    *  el POST y devuelve la respuesta de la API de python*/
     @PostMapping("/analisis-energetico")
     public ApiResponse predict(@Valid @RequestBody AnalisisEnergeticoRequest request){
 

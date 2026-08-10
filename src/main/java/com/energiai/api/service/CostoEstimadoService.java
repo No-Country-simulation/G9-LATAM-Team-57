@@ -1,6 +1,6 @@
 package com.energiai.api.service;
 
-import com.energiai.api.model.dto.request.PeakUsageLevel;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

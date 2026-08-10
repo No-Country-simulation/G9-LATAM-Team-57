@@ -4,6 +4,7 @@ import com.energiai.api.model.dto.request.AnalisisEnergeticoRequest;
 import com.energiai.api.model.dto.request.PrediccionRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
 /* Mapea el DTO con los datos que se recibe desde el frontend
 * al que espera API-python.
 diasDelMes es una variable de entorno
