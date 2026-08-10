@@ -128,16 +128,16 @@ Integración con Spring Boot
 ## Sprint 5 – Responsive, Optimización y Pruebas
 
 ### Responsive
-- [ ] Verificar y ajustar formulario en Mobile (<768px)
-- [ ] Verificar y ajustar resultados en Tablet (768–1199px)
-- [ ] Verificar y ajustar layout general en Desktop (≥1200px)
+- [x] Verificar y ajustar formulario en Mobile (<768px)
+- [x] Verificar y ajustar resultados en Tablet (768–1199px)
+- [x] Verificar y ajustar layout general en Desktop (≥1200px)
 - [ ] Testear navegación y usabilidad en todos los breakpoints
 
 ### Optimización
-- [ ] Aplicar OnPush Change Detection en todos los componentes
-- [ ] Verificar Lazy Loading para rutas futuras
-- [ ] Minimizar re-renders con Signals
-- [ ] Verificar bundle size
+- [x] Aplicar OnPush Change Detection en todos los componentes
+- [x] Verificar Lazy Loading para rutas futuras
+- [x] Minimizar re-renders con Signals
+- [x] Verificar bundle size
 
 ### Pruebas
 - [ ] Verificar que el formulario se completa en menos de 2 minutos
@@ -149,14 +149,14 @@ Integración con Spring Boot
 - [ ] Verificar accesibilidad (labels, keyboard navigation)
 
 ### Calidad de Código
-- [ ] Verificar: no existen `console.log()`
-- [ ] Verificar: no se usa `any`
-- [ ] Verificar: todos los formularios usan Reactive Forms
-- [ ] Verificar: componentes son Standalone
-- [ ] Verificar: servicios consumen HttpClient (no fetch)
-- [ ] Verificar: no hay URLs hardcodeadas
-- [ ] Verificar: estructura del proyecto respetada
-- [ ] Verificar: código formateado (ESLint + Prettier)
+- [x] Verificar: no existen `console.log()`
+- [x] Verificar: no se usa `any`
+- [x] Verificar: todos los formularios usan Reactive Forms
+- [x] Verificar: componentes son Standalone
+- [x] Verificar: servicios consumen HttpClient (no fetch)
+- [x] Verificar: no hay URLs hardcodeadas
+- [x] Verificar: estructura del proyecto respetada
+- [x] Verificar: código formateado (ESLint + Prettier)
 
 ---
 
