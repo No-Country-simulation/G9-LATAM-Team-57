@@ -89,6 +89,11 @@ PENPOT_MCP_SERVER_PORT=5000 npx -y @penpot/mcp@latest
 - **Kiro no detecta el MCP**: Reiniciar la sesión de Kiro después de crear `.kiro/mcp.json`
 - **Timeout en operaciones**: Aumentar `PENPOT_MCP_TOOL_TIMEOUT_S` si las operaciones son complejas
 - **Pestaña suspendida**: En Chrome, agregar la URL de Penpot a Settings → Performance → Always keep these sites active
+- Si no deja ejecutar el servidor mcp de penpot en dev, limpiar cache rm -rf /Users/fbendezu/.npm/_npx/f4739471492be2e8
+- Luego ejecutar el comando npx -y @penpot/mcp@latest (Ya se aprobo)
+  - * cd ~/.npm/_npx/$(ls ~/.npm/_npx | head -1)/node_modules/@penpot/mcp
+  - * pnpm approve-builds 
+
 
 ## Referencia
 
