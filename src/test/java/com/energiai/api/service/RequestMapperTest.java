@@ -16,7 +16,7 @@ public class RequestMapperTest {
     void convertMonthlyConsumptionToDailyAverage(){
         AnalisisEnergeticoRequest request = new AnalisisEnergeticoRequest(
                 4,
-                1,
+                true,
                 true,
                 HousingType.CASA,
                 10,
@@ -31,7 +31,7 @@ public class RequestMapperTest {
         assertThat(resultado.home_office()).isTrue();
         assertThat(resultado.housing_type()).isEqualTo(HousingType.CASA);
         assertThat(resultado.equipment_count()).isEqualTo(10);
-        assertThat(resultado.peak_usage_level()).isEqualTo("HIGH");
+        assertThat(resultado.peak_usage_level()).isEqualTo(PeakUsageLevel.HIGH );
 
     }
 }

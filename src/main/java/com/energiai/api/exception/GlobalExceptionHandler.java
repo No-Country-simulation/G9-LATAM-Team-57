@@ -8,6 +8,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResourceAccessException;
 
 import java.util.Map;
@@ -28,7 +29,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<Map<String, String>> handleMalformedJson(HttpMessageNotReadableException e){
 
-        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(Map.of("error","Solicitud invalida."));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error","Solicitud invalida."));
     }
     /*  No respone la API a la que realizo el POST (fastapi) desde esta API
     * */
@@ -38,7 +39,7 @@ public class GlobalExceptionHandler {
 
     }
 
-    @ExceptionHandler(HttpClientErrorException.class)
+    @ExceptionHandler({HttpClientErrorException.class, HttpServerErrorException.class})
     public ResponseEntity<Map<String,String>> handleModelError(Exception e){
         return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(Map.of("error","Error interno."));
     }
