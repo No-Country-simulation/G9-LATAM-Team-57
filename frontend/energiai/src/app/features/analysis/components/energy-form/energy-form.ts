@@ -1,10 +1,11 @@
-import { Component, inject, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 
 import { EnergyAnalysisRequest, HousingType, PeakUsageLevel } from '../../models';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-energy-form',
   standalone: true,
   imports: [ReactiveFormsModule, MatIconModule],

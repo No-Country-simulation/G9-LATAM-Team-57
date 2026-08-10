@@ -75,10 +75,10 @@
       class="form-field"
       [class.form-field--error]="form.get('hasAc')?.invalid && form.get('hasAc')?.touched"
     >
-      <label class="form-field__label">
+      <span class="form-field__label">
         <mat-icon>ac_unit</mat-icon>
         ¿La vivienda cuenta con aire acondicionado?
-      </label>
+      </span>
       <div class="radio-group__options">
         <label class="radio-option">
           <input type="radio" formControlName="hasAc" [value]="1" />
@@ -99,10 +99,10 @@
       class="form-field"
       [class.form-field--error]="form.get('homeOffice')?.invalid && form.get('homeOffice')?.touched"
     >
-      <label class="form-field__label">
+      <span class="form-field__label">
         <mat-icon>laptop</mat-icon>
         ¿Algún integrante trabaja regularmente desde casa?
-      </label>
+      </span>
       <div class="radio-group__options">
         <label class="radio-option">
           <input type="radio" formControlName="homeOffice" [value]="true" />
@@ -198,10 +198,10 @@
         form.get('peakUsageLevel')?.invalid && form.get('peakUsageLevel')?.touched
       "
     >
-      <label class="form-field__label">
+      <span class="form-field__label">
         <mat-icon>schedule</mat-icon>
         ¿Cuántas horas al día utiliza varios equipos eléctricos al mismo tiempo?
-      </label>
+      </span>
       <div class="radio-group__options">
         @for (level of peakUsageLevels; track level.value) {
           <label class="radio-option">
