@@ -1,0 +1,11 @@
+<div class="error-card">
+  <div class="error-card__header">
+    <mat-icon class="error-card__icon">error_outline</mat-icon>
+    <span class="error-card__title">Error</span>
+  </div>
+  <p class="error-card__message">{{ message() }}</p>
+  <button class="btn-error" (click)="onRetry()">
+    <mat-icon>refresh</mat-icon>
+    Reintentar
+  </button>
+</div>

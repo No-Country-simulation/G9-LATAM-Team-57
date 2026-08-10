@@ -1,0 +1,8 @@
+<div class="recommendation-card">
+  <h3 class="recommendation-card__title">Recomendaciones</h3>
+  <ul class="recommendation-card__list">
+    @for (rec of recomendaciones(); track rec) {
+      <li class="recommendation-card__item">{{ rec }}</li>
+    }
+  </ul>
+</div>

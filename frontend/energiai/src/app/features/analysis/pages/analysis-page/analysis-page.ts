@@ -1,8 +1,12 @@
 import { Component, inject, signal } from '@angular/core';
-import { NgClass, DecimalPipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
 import { EnergyForm } from '../../components/energy-form/energy-form';
+import { ResultCard } from '../../components/result-card/result-card';
+import { CostCard } from '../../components/cost-card/cost-card';
+import { RecommendationCard } from '../../components/recommendation-card/recommendation-card';
+import { ErrorComponent } from '../../components/error/error';
+import { LoadingComponent } from '../../components/loading/loading';
 import { EnergyAnalysisRequest, EnergyAnalysisResponse } from '../../models';
 import { EnergyAnalysisService } from '../../services/energy-analysis.service';
 import { LoadingService } from '../../../../core/services/loading.service';
@@ -13,7 +17,15 @@ type AnalysisState = 'form' | 'loading' | 'result' | 'error';
 @Component({
   selector: 'app-analysis-page',
   standalone: true,
-  imports: [EnergyForm, MatIconModule, NgClass, DecimalPipe],
+  imports: [
+    EnergyForm,
+    ResultCard,
+    CostCard,
+    RecommendationCard,
+    ErrorComponent,
+    LoadingComponent,
+    MatIconModule,
+  ],
   templateUrl: './analysis-page.html',
   styleUrl: './analysis-page.scss',
 })
@@ -51,47 +63,7 @@ export class AnalysisPage {
     this.error.set(null);
   }
 
-  /**
-   * Returns the CSS class for the category badge
-   */
-  getCategoryClass(categoria: string): string {
-    switch (categoria.toLowerCase()) {
-      case 'eficiente':
-        return 'badge--eficiente';
-      case 'moderado':
-        return 'badge--moderado';
-      case 'ineficiente':
-        return 'badge--ineficiente';
-      default:
-        return 'badge--moderado';
-    }
-  }
-
-  /**
-   * Returns the progress bar width based on probability
-   */
-  getProgressWidth(probabilidad: number): string {
-    return `${Math.round(probabilidad * 100)}%`;
-  }
-
-  /**
-   * Returns the progress bar CSS class based on category
-   */
-  getProgressClass(categoria: string): string {
-    switch (categoria.toLowerCase()) {
-      case 'eficiente':
-        return 'result-card__progress-bar--eficiente';
-      case 'moderado':
-        return 'result-card__progress-bar--moderado';
-      case 'ineficiente':
-        return 'result-card__progress-bar--ineficiente';
-      default:
-        return 'result-card__progress-bar--moderado';
-    }
-  }
-
   private executeAnalysis(request: EnergyAnalysisRequest): void {
-    // Prevent multiple simultaneous submissions
     if (this.state() === 'loading') {
       return;
     }
