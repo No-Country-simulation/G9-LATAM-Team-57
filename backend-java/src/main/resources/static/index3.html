@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EnergiAI - Plataforma de Análisis Energético | Grupo 57</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #eff6ff;
+            --accent: #10b981;
+            --accent-dark: #059669;
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --radius-lg: 16px;
+            --radius-md: 10px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.5;
+        }
+
+        /* HEADER INSTITUCIONAL */
+        header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: #ffffff;
+            padding: 24px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .header-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo-icon {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .brand-title h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #ffffff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-title p {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            font-weight: 400;
+        }
+
+        .group-badge {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(8px);
+        }
+
+        .group-badge i {
+            color: var(--accent);
+        }
+
+        /* MAIN CONTENT */
+        main {
+            flex: 1;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 36px 24px;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            align-items: start;
+        }
+
+        @media (max-width: 868px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+        }
+
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 14px;
+            border-bottom: 2px solid var(--bg);
+        }
+
+        .card-header i {
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+
+        .card-header h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        /* FORM STYLING */
+        .form-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        label {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 14px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        input[type="number"], select {
+            width: 100%;
+            padding: 11px 14px 11px 40px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+            color: var(--text-main);
+            background-color: #ffffff;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        input[type="number"]:focus, select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .checkbox-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 6px;
+            padding: 12px 14px;
+            background: var(--bg);
+            border-radius: var(--radius-md);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        .checkbox-group span {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #475569;
+        }
+
+        button.btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: #ffffff;
+            border: none;
+            padding: 14px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+            transition: all 0.2s ease;
+            margin-top: 8px;
+        }
+
+        button.btn-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+        }
+
+        /* RESULT PANEL */
+        .placeholder-state {
+            text-align: center;
+            padding: 48px 16px;
+            color: var(--text-muted);
+        }
+
+        .placeholder-state i {
+            font-size: 3rem;
+            color: #cbd5e1;
+            margin-bottom: 16px;
+        }
+
+        .spinner {
+            display: none;
+            text-align: center;
+            padding: 40px 16px;
+        }
+
+        .spinner i {
+            font-size: 2.2rem;
+            color: var(--primary);
+            animation: spin 1s infinite linear;
+            margin-bottom: 12px;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .result-hidden {
+            display: none;
+        }
+
+        .status-badge-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .badge-status {
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+        }
+
+        .confidence-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border: 1px solid #bfdbfe;
+            border-radius: var(--radius-md);
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .metric-card small {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .metric-card .metric-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #1e3a8a;
+            margin-top: 4px;
+        }
+
+        .recommendations-section h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-main);
+        }
+
+        .recommendations-section h3 i {
+            color: #f59e0b;
+        }
+
+        ul.recommendations-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        ul.recommendations-list li {
+            background: var(--bg);
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            border-left: 4px solid var(--accent);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            line-height: 1.4;
+        }
+
+        ul.recommendations-list li i {
+            color: var(--accent-dark);
+            margin-top: 3px;
+        }
+
+        /* FOOTER INSTITUCIONAL */
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 28px 0;
+            border-top: 1px solid #1e293b;
+            margin-top: auto;
+            font-size: 0.88rem;
+        }
+
+        .footer-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-credits {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .footer-tag {
+            background: #1e293b;
+            color: #cbd5e1;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.8rem;
+            border: 1px solid #334155;
+        }
+
+        .footer-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent);
+        }
+    </style>
+</head>
+<body>
+
+<!-- ENCABEZADO INSTITUCIONAL -->
+<header>
+    <div class="header-container">
+        <div class="brand-logo">
+            <div class="logo-icon">
+                <i class="fa-solid fa-bolt"></i>
+            </div>
+            <div class="brand-title">
+                <h1>EnergiAI</h1>
+                <p>Sistema Inteligente de Diagnóstico & Eficiencia Energética</p>
+            </div>
+        </div>
+        <div class="group-badge">
+            <i class="fa-solid fa-users"></i> Grupo 57
+        </div>
+    </div>
+</header>
+
+<!-- CONTENIDO PRINCIPAL -->
+<main>
+    <div class="grid-layout">
+
+        <!-- FORMULARIO DE ENTRADA -->
+        <div class="card">
+            <div class="card-header">
+                <i class="fa-solid fa-sliders"></i>
+                <h2>Parámetros del Hogar</h2>
+            </div>
+
+            <form id="energiaForm" class="form-grid">
+
+                <div class="form-group">
+                    <label for="householdSize">Personas en la vivienda</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-user-group"></i>
+                        <input type="number" id="householdSize" value="3" min="1" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="equipmentCount">Cantidad de electrodomésticos</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-plug"></i>
+                        <input type="number" id="equipmentCount" value="6" min="0" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="consumoTotalMesAnterior">Consumo Mes Anterior (kWh)</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <input type="number" step="0.1" id="consumoTotalMesAnterior" value="280.5" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="peakUsageLevel">Nivel de uso en horas pico</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-clock"></i>
+                        <select id="peakUsageLevel">
+                            <option value="LOW">Bajo (LOW)</option>
+                            <option value="MEDIUM">Medio (MEDIUM)</option>
+                            <option value="HIGH" selected>Alto (HIGH)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="housingType">Tipo de Vivienda</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-house"></i>
+                        <select id="housingType">
+                            <option value="CASA" selected>Casa</option>
+                            <option value="DEPARTAMENTO">Departamento</option>
+                            <option value="MONOAMBIENTE">Monoambiente</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="checkbox-container">
+                    <label class="checkbox-group">
+                        <input type="checkbox" id="hasAc" value="1" checked>
+                        <span><i class="fa-solid fa-snowflake"></i> Posee Aire Acondicionado</span>
+                    </label>
+
+                    <label class="checkbox-group">
+                        <input type="checkbox" id="homeOffice">
+                        <span><i class="fa-solid fa-laptop-house"></i> Trabajo Remoto / Home Office</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    <i class="fa-solid fa-microchip"></i>
+                    <span>Procesar Análisis</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- PANEL DE SALIDA -->
+        <div class="card">
+            <div class="card-header">
+                <i class="fa-solid fa-square-poll-vertical"></i>
+                <h2>Resultado del Diagnóstico</h2>
+            </div>
+
+            <!-- ESTADO INICIAL / PLACEHOLDER -->
+            <div id="placeholder" class="placeholder-state">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <p>Complete los parámetros del hogar y presione <strong>"Procesar Análisis"</strong> para consultar al motor de IA.</p>
+            </div>
+
+            <!-- CARGANDO / SPINNER -->
+            <div id="loading" class="spinner">
+                <i class="fa-solid fa-circle-notch"></i>
+                <p>Consultando modelo predictivo...</p>
+            </div>
+
+            <!-- PANEL DE RESULTADOS -->
+            <div id="resultPanel" class="result-hidden">
+                <div class="status-badge-container">
+                    <span id="categoriaBadge" class="badge-status">Procesado</span>
+                    <span class="confidence-text">Certeza IA: <strong id="probabilidadText">0%</strong></span>
+                </div>
+
+                <div class="metric-card">
+                    <small>Costo Estimado Mensual</small>
+                    <div id="costoValue" class="metric-value">$0.00</div>
+                </div>
+
+                <div class="recommendations-section">
+                    <h3><i class="fa-solid fa-lightbulb"></i> Recomendaciones del Sistema:</h3>
+                    <ul id="recomendacionesList" class="recommendations-list">
+                        <!-- Inyección dinámica -->
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</main>
+
+<!-- PIE DE PÁGINA INSTITUCIONAL -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-credits">
+            <span><strong>EnergiAI</strong> © 2026</span>
+            <span class="footer-tag">Grupo 57</span>
+            <span class="footer-tag">Alura Latam</span>
+            <span class="footer-tag">ONE G9</span>
+            <span class="footer-tag">No Country</span>
+        </div>
+        <div class="footer-status">
+            <div class="status-dot"></div>
+            <span>Backend API v1.0 • Running</span>
+        </div>
+    </div>
+</footer>
+
+<!-- SCRIPT DE INTERACCIÓN -->
+<script>
+    document.getElementById('energiaForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        document.getElementById('placeholder').style.display = 'none';
+        document.getElementById('resultPanel').classList.add('result-hidden');
+        document.getElementById('loading').style.display = 'block';
+
+        const payload = {
+            householdSize: parseInt(document.getElementById('householdSize').value),
+            equipmentCount: parseInt(document.getElementById('equipmentCount').value),
+            consumoTotalMesAnterior: parseFloat(document.getElementById('consumoTotalMesAnterior').value),
+            peakUsageLevel: document.getElementById('peakUsageLevel').value,
+            housingType: document.getElementById('housingType').value,
+            hasAc: document.getElementById('hasAc').checked ? 1 : 0,
+            homeOffice: document.getElementById('homeOffice').checked
+        };
+
+        try {
+            const response = await fetch('/analisis-energetico', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Código ${response.status}: ${errorText || response.statusText}`);
+            }
+
+            const data = await response.json();
+            renderResults(data);
+
+        } catch (error) {
+            alert('⚠️ Error al procesar la solicitud:\n' + error.message);
+            document.getElementById('placeholder').style.display = 'block';
+        } finally {
+            document.getElementById('loading').style.display = 'none';
+        }
+    });
+
+    function renderResults(data) {
+        const categoria = data.categoria || data.category || 'Sin Clasificar';
+        const probabilidadRaw = data.probabilidad ?? data.probability ?? data.certeza ?? 0;
+        const costoRaw = data.costoEstimado ?? data.costo ?? data.costoEstimadoMensual ?? 0;
+        const recomendaciones = data.recomendaciones || data.recommendations || [];
+
+        const probNum = Number(probabilidadRaw) || 0;
+        const costoNum = Number(costoRaw) || 0;
+
+        document.getElementById('categoriaBadge').textContent = categoria;
+        document.getElementById('probabilidadText').textContent = (probNum > 1 ? probNum : probNum * 100).toFixed(1) + '%';
+        document.getElementById('costoValue').textContent = '$' + costoNum.toFixed(2);
+
+        const recList = document.getElementById('recomendacionesList');
+        recList.innerHTML = '';
+
+        if (Array.isArray(recomendaciones) && recomendaciones.length > 0) {
+            recomendaciones.forEach(rec => {
+                const li = document.createElement('li');
+                li.innerHTML = `<i class="fa-solid fa-check"></i> <span>${rec}</span>`;
+                recList.appendChild(li);
+            });
+        } else {
+            const li = document.createElement('li');
+            li.innerHTML = `<i class="fa-solid fa-info-circle"></i> <span>Sin recomendaciones adicionales registradas.</span>`;
+            recList.appendChild(li);
+        }
+
+        document.getElementById('resultPanel').classList.remove('result-hidden');
+    }
+</script>
+</body>
+</html>
