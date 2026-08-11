@@ -290,46 +290,6 @@
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
         }
 
-        /* SECCIÓN DIFERENCIADA: CORPORATIVA / EMPRESA */
-        .enterprise-card-section {
-            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-            border: 1px solid #cbd5e1;
-            border-left: 4px solid #0284c7;
-            border-radius: var(--radius-md);
-            padding: 16px;
-            margin-top: 6px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .enterprise-card-section .enterprise-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .enterprise-card-section .enterprise-header span {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #0369a1;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .enterprise-badge {
-            background: #0284c7;
-            color: #ffffff;
-            font-size: 0.68rem;
-            font-weight: 700;
-            padding: 2px 8px;
-            border-radius: 12px;
-            text-transform: uppercase;
-        }
-
         .checkbox-container {
             display: flex;
             flex-direction: column;
@@ -597,7 +557,7 @@
                     <label for="householdSize">Personas en la vivienda</label>
                     <div class="input-wrapper">
                         <i class="fa-solid fa-user-group"></i>
-                        <input type="number" id="householdSize" value="4" min="1" required>
+                        <input type="number" id="householdSize" value="3" min="1" required>
                     </div>
                 </div>
 
@@ -605,7 +565,7 @@
                     <label for="equipmentCount">Cantidad de electrodomésticos</label>
                     <div class="input-wrapper">
                         <i class="fa-solid fa-plug"></i>
-                        <input type="number" id="equipmentCount" value="10" min="0" required>
+                        <input type="number" id="equipmentCount" value="6" min="0" required>
                     </div>
                 </div>
 
@@ -613,7 +573,7 @@
                     <label for="consumoTotalMesAnterior">Consumo Mes Anterior (kWh)</label>
                     <div class="input-wrapper">
                         <i class="fa-solid fa-chart-line"></i>
-                        <input type="number" step="0.01" id="consumoTotalMesAnterior" value="420.0" required>
+                        <input type="number" step="0.1" id="consumoTotalMesAnterior" value="280.5" required>
                     </div>
                 </div>
 
@@ -648,24 +608,9 @@
                     </label>
 
                     <label class="checkbox-group">
-                        <input type="checkbox" id="homeOffice" checked>
+                        <input type="checkbox" id="homeOffice">
                         <span><i class="fa-solid fa-laptop-house"></i> Trabajo Remoto / Home Office</span>
                     </label>
-                </div>
-
-                <!-- SECCIÓN CORPORATIVA: DEDICADA A LOS PARÁMETROS DE LA EMPRESA DE ENERGÍA -->
-                <div class="enterprise-card-section">
-                    <div class="enterprise-header">
-                        <span><i class="fa-solid fa-building-columns"></i> Parámetros de la Distribuidora</span>
-                        <span class="enterprise-badge">Config Oficial</span>
-                    </div>
-                    <div class="form-group">
-                        <label for="costoPorKwh">Tarifa Aplicada ($ / kWh)</label>
-                        <div class="input-wrapper">
-                            <i class="fa-solid fa-file-invoice-dollar"></i>
-                            <input type="number" step="0.01" id="costoPorKwh" value="0.75" required>
-                        </div>
-                    </div>
                 </div>
 
                 <button type="submit" class="btn-submit">
@@ -751,8 +696,7 @@
             peakUsageLevel: document.getElementById('peakUsageLevel').value,
             housingType: document.getElementById('housingType').value,
             hasAc: document.getElementById('hasAc').checked ? 1 : 0,
-            homeOffice: document.getElementById('homeOffice').checked,
-            costoPorKwh: parseFloat(document.getElementById('costoPorKwh').value)
+            homeOffice: document.getElementById('homeOffice').checked
         };
 
         try {
@@ -825,7 +769,7 @@
 
         if (fuente === 'IA_PYTHON_REAL') {
             pill.className = 'api-status-pill status-connected';
-            statusText.textContent = 'API CONECTADA';
+            statusText.textContent = 'API CONECTADA · AGRARIO';
             pill.title = detalle || 'Procesado exitosamente por la API de IA en Python';
             if (footerStatusText) {
                 footerStatusText.textContent = 'Backend API v1.0 • Running (IA Python Online)';
