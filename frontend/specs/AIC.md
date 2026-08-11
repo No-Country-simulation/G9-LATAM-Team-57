@@ -116,7 +116,7 @@ POST
 
 ```
 
-POST /api/v1/analisis-energetico
+POST /analisis-energetico
 
 ```
 
@@ -133,7 +133,7 @@ Accept: application/json
 
 # 5. Endpoint
 
-## POST /api/v1/analisis-energetico
+## POST /analisis-energetico
 
 Descripción
 

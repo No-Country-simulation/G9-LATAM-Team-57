@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, delay } from 'rxjs';
+import { Observable, of, delay, timeout } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
 import { EnergyAnalysisRequest } from '../models/energy-analysis-request.interface';
@@ -9,21 +9,16 @@ import { EnergyAnalysisResponse } from '../models/energy-analysis-response.inter
 /**
  * Service to consume the energy analysis API.
  *
- * Currently uses mock data for development.
- * When the backend is ready, set `useMock = false` or remove the mock logic.
+ * The backend Java exposes POST /analisis-energetico. Mock mode is configured
+ * by the active environment to keep development independent from the API.
  */
 @Injectable({
   providedIn: 'root',
 })
 export class EnergyAnalysisService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = `${environment.apiUrl}/analisis-energetico`;
-
-  /**
-   * Toggle to switch between mock and real API.
-   * Set to `false` when the backend is available.
-   */
-  private readonly useMock = true;
+  private readonly apiUrl = new URL('/analisis-energetico', environment.apiUrl).toString();
+  private readonly useMock = environment.useMock;
 
   /**
    * Analyzes energy consumption based on the provided request.
@@ -34,7 +29,7 @@ export class EnergyAnalysisService {
       return this.getMockResponse(request);
     }
 
-    return this.http.post<EnergyAnalysisResponse>(this.apiUrl, request);
+    return this.http.post<EnergyAnalysisResponse>(this.apiUrl, request).pipe(timeout(10_000));
   }
 
   /**
