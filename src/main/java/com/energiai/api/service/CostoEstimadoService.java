@@ -7,15 +7,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class CostoEstimadoService {
 
-    private final double precioKWH;
+    private final double precioKWHDefault;
 
-    public CostoEstimadoService( @Value("${precio.kwh}") double precioKWH) {
-        this.precioKWH = precioKWH;
+    public CostoEstimadoService( @Value("${precio.kwh}") double precioKWHDefault) {
+        this.precioKWHDefault = precioKWHDefault;
     }
 
 
-    public Double calcularCostoMensual(Double consumo){
-
-        return consumo*precioKWH;
+    public Double calcularCostoMensual(Double consumo, Double precioKWHRequest){
+        Double precioKwh= (precioKWHRequest!= null)? precioKWHRequest:precioKWHDefault;
+        return consumo* precioKwh;
     }
 }

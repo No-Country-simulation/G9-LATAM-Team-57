@@ -15,7 +15,7 @@ public class RecomendacionServiceTest {
     private final RecomendacionService service = new RecomendacionService();
 
     private static AnalisisEnergeticoRequest requestCon(boolean hasAc, boolean homeOffice, int equipmentCount, PeakUsageLevel peakUsageLevel) {
-        return new AnalisisEnergeticoRequest(3, hasAc, homeOffice, HousingType.CASA, equipmentCount, 300.0, peakUsageLevel);
+        return new AnalisisEnergeticoRequest(3, hasAc, homeOffice, HousingType.CASA, equipmentCount, 300.0, peakUsageLevel,0.0);
     }
 
     @Test

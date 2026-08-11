@@ -52,7 +52,8 @@ public class PredictControllerTest {
           "housingType": "CASA",
           "equipmentCount": 10,
           "consumoTotalMesAnterior": 420,
-          "peakUsageLevel": "HIGH"
+          "peakUsageLevel": "HIGH",
+          "costoPorKwh":0.8
         }
         """;
 
@@ -72,7 +73,7 @@ public class PredictControllerTest {
                 .thenReturn(new AnalisisEnergeticoResponse(Categoria.Ineficiente, 0.81));
         when(recomendacionService.recomendacionesPara(eq(Categoria.Ineficiente), any()))
                 .thenReturn(List.of("Recomendación 1", "Recomendación 2", "Recomendación 3"));
-        when(costoEstimadoService.calcularCostoMensual(420.0)).thenReturn(294.0);
+        when(costoEstimadoService.calcularCostoMensual(420.0,0.8)).thenReturn(336.0);
 
         mockMvc.perform(post("/analisis-energetico")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -81,7 +82,7 @@ public class PredictControllerTest {
                 .andExpect(jsonPath("$.categoria").value("Ineficiente"))
                 .andExpect(jsonPath("$.probabilidad").value(0.81))
                 .andExpect(jsonPath("$.recomendaciones.length()").value(3))
-                .andExpect(jsonPath("$.costoEstimadoMensual").value(294.0));
+                .andExpect(jsonPath("$.costoEstimadoMensual").value(336.0));
     }
 
     @Test

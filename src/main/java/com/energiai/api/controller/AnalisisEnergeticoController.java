@@ -41,7 +41,7 @@ public class AnalisisEnergeticoController {
         return new ApiResponse(modelResponse.categoria(),
                                modelResponse.probabilidad(),
                                recomendacionService.recomendacionesPara(modelResponse.categoria(),request),
-                               costoEstimadoService.calcularCostoMensual(request.consumoTotalMesAnterior())
+                               costoEstimadoService.calcularCostoMensual(request.consumoTotalMesAnterior(), request.costoPorKwh())
                                 );
     }
 }

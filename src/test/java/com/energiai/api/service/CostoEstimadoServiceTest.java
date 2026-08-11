@@ -8,7 +8,7 @@ public class CostoEstimadoServiceTest {
 
     @Test
     void calculatesMonthlyCostFromConsumption() {
-        Double costo = service.calcularCostoMensual(420.0);
-        assertThat(costo).isEqualTo(294.0);
+        Double costo = service.calcularCostoMensual(420.0,0.8);
+        assertThat(costo).isEqualTo(336.0);
     }
 }

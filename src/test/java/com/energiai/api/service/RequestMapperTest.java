@@ -21,7 +21,7 @@ public class RequestMapperTest {
                 HousingType.CASA,
                 10,
                 420.0,
-                PeakUsageLevel.HIGH);
+                PeakUsageLevel.HIGH,0.0);
 
         PrediccionRequest resultado= mapper.toPrediccionRequest(request);
 
