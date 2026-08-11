@@ -71,7 +71,8 @@ public class AnalisisEnergeticoServiceImpl implements AnalisisEnergeticoService 
 
         // 3. Cálculos de negocio propios de Java (Costo Estimado Mensual)
         Double consumoTotal = request.getConsumoTotalMesAnterior();
-        Double costoEstimado = (consumoTotal != null) ? consumoTotal * 0.75 : 0.0;
+        Double tarifa = request.getCostoPorKwh();
+        Double costoEstimado = (consumoTotal != null) ? consumoTotal * tarifa : 0.0;
 
         // 4. Construcción de recomendaciones personalizadas según perfil e IA
         List<String> recomendaciones = recomendacionesEngine.generarRecomendaciones(request, resultadoMl);

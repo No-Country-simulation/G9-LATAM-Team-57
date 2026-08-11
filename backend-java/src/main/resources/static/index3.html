@@ -17,8 +17,6 @@
             --primary-light: #eff6ff;
             --accent: #10b981;
             --accent-dark: #059669;
-            --danger: #ef4444;
-            --danger-dark: #dc2626;
             --bg: #f8fafc;
             --surface: #ffffff;
             --text-main: #0f172a;
@@ -99,12 +97,6 @@
             font-weight: 400;
         }
 
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
         .group-badge {
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.15);
@@ -121,64 +113,6 @@
 
         .group-badge i {
             color: var(--accent);
-        }
-
-        /* OBSERVABILIDAD: BADGE DE ESTADO DE API */
-        .api-status-pill {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            cursor: help;
-        }
-
-        .api-status-pill.status-connected {
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.4);
-            color: #34d399;
-        }
-
-        .api-status-pill.status-fallback {
-            background: rgba(239, 68, 68, 0.15);
-            border: 1px solid rgba(239, 68, 68, 0.4);
-            color: #f87171;
-        }
-
-        .status-dot-pulse {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        .status-connected .status-dot-pulse {
-            background-color: var(--accent);
-            box-shadow: 0 0 10px var(--accent);
-        }
-
-        .status-fallback .status-dot-pulse {
-            background-color: var(--danger);
-            box-shadow: 0 0 10px var(--danger);
-            animation: pulse-red 1.2s infinite alternate;
-        }
-
-        @keyframes pulse-red {
-            0% {
-                transform: scale(0.9);
-                opacity: 0.4;
-                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
-            }
-            100% {
-                transform: scale(1.15);
-                opacity: 1;
-                box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
-            }
         }
 
         /* MAIN CONTENT */
@@ -205,10 +139,6 @@
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 16px;
-            }
-            .header-actions {
-                width: 100%;
-                justify-content: space-between;
             }
         }
 
@@ -510,6 +440,14 @@
             font-size: 0.8rem;
             color: #64748b;
         }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent);
+        }
     </style>
 </head>
 <body>
@@ -526,16 +464,8 @@
                 <p>Sistema Inteligente de Diagnóstico & Eficiencia Energética</p>
             </div>
         </div>
-        <div class="header-actions">
-            <!-- PULSADOR REACTIVO DE OBSERVABILIDAD DE API -->
-            <div id="headerApiStatus" class="api-status-pill status-connected" title="Inicializando estado de API...">
-                <span id="headerStatusDot" class="status-dot-pulse"></span>
-                <span id="headerStatusText">API CONECTADA</span>
-            </div>
-
-            <div class="group-badge">
-                <i class="fa-solid fa-users"></i> Grupo 57
-            </div>
+        <div class="group-badge">
+            <i class="fa-solid fa-users"></i> Grupo 57
         </div>
     </div>
 </header>
@@ -675,7 +605,8 @@
             <span class="footer-tag">No Country</span>
         </div>
         <div class="footer-status">
-            <span id="footerStatusText">Backend API v1.0 • Running</span>
+            <div class="status-dot"></div>
+            <span>Backend API v1.0 • Running</span>
         </div>
     </div>
 </footer>
@@ -719,7 +650,6 @@
         } catch (error) {
             alert('⚠️ Error al procesar la solicitud:\n' + error.message);
             document.getElementById('placeholder').style.display = 'block';
-            updateApiStatus('MOCK_FALLBACK', 'Error al comunicar con el servidor backend: ' + error.message);
         } finally {
             document.getElementById('loading').style.display = 'none';
         }
@@ -730,12 +660,6 @@
         const probabilidadRaw = data.probabilidad ?? data.probability ?? data.certeza ?? 0;
         const costoRaw = data.costoEstimado ?? data.costo ?? data.costoEstimadoMensual ?? 0;
         const recomendaciones = data.recomendaciones || data.recommendations || [];
-
-        const fuenteDatos = data.fuenteDatos || 'IA_PYTHON_REAL';
-        const detalleFuente = data.detalleFuente || '';
-
-        // Actualización de observabilidad
-        updateApiStatus(fuenteDatos, detalleFuente);
 
         const probNum = Number(probabilidadRaw) || 0;
         const costoNum = Number(costoRaw) || 0;
@@ -760,28 +684,6 @@
         }
 
         document.getElementById('resultPanel').classList.remove('result-hidden');
-    }
-
-    function updateApiStatus(fuente, detalle) {
-        const pill = document.getElementById('headerApiStatus');
-        const statusText = document.getElementById('headerStatusText');
-        const footerStatusText = document.getElementById('footerStatusText');
-
-        if (fuente === 'IA_PYTHON_REAL') {
-            pill.className = 'api-status-pill status-connected';
-            statusText.textContent = 'API CONECTADA · AGRARIO';
-            pill.title = detalle || 'Procesado exitosamente por la API de IA en Python';
-            if (footerStatusText) {
-                footerStatusText.textContent = 'Backend API v1.0 • Running (IA Python Online)';
-            }
-        } else {
-            pill.className = 'api-status-pill status-fallback';
-            statusText.textContent = 'API DESCONECTADA · MODO FALLBACK';
-            pill.title = detalle || 'Respuesta contingente por caída del servicio de IA';
-            if (footerStatusText) {
-                footerStatusText.textContent = 'Backend API v1.0 • Modo Fallback (Resiliencia Activa)';
-            }
-        }
     }
 </script>
 </body>
