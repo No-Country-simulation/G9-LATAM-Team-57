@@ -1,0 +1,21 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="EnergiaiApiApplication" type="Application" factoryName="Application" nameIsGenerated="true">
+    <envs>
+      <env name="FASTAPI_KEY" value="123" />
+      <env name="FASTAPI_BASE_URL" value="http://127.0.0.1:8000" />
+      <env name="DIAS_MES" value="30" />
+      <env name="PRECIO_KWH" value="0.70" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="com.energiai.api.EnergiaiApiApplication" />
+    <module name="energiai-api" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.energiai.api.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
