@@ -6,10 +6,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration;
 
 // Excluimos temporalmente DataSource y Flyway para probar el servidor Web
-@SpringBootApplication(exclude = {
-		DataSourceAutoConfiguration.class,
-		FlywayAutoConfiguration.class
-})
+@SpringBootApplication()
 public class EnergiaiApiApplication {
 
 	public static void main(String[] args) {
