@@ -36,6 +36,12 @@ ng build
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
+## Integración con backend
+
+La ruta canónica actual de análisis es la que expone Java: `POST /analisis-energetico`. El frontend adoptará exactamente esta ruta cuando se habilite la integración real.
+
+Antes de desactivar el modo simulado, `environment.apiUrl` deberá apuntar al origen del backend Java sin el sufijo `/api/v1`, para que el servicio construya la solicitud `POST /analisis-energetico`. Esta configuración se aplicará tras confirmar CORS y el acceso al entorno desplegado. El health check de Java se mantiene separado en `GET /api/v1/health`.
+
 ## Running unit tests
 
 To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
