@@ -160,6 +160,99 @@ Integración con Spring Boot
 
 ---
 
+## Sprint 5.5 – Validación Local Pre-Integración
+
+### 5.5.1 Punto de Partida y Aislamiento Git
+
+- [x] Ejecutar `git fetch origin main frontend`.
+- [x] Crear el worktree `../G9-LATAM-Team-57-integration` desde `origin/main`.
+- [x] Crear la rama local `integration/frontend-api`.
+- [x] Aplicar los commits completos del frontend mediante `cherry-pick` en orden cronológico hasta `a51d1a5`.
+- [x] Resolver los conflictos `modify/delete` conservando los archivos del frontend.
+- [x] Verificar que el worktree contiene `backend-java/`, `backend-python/`, `oci/` y `frontend/energiai/`.
+- [x] Mantener `integration/frontend-api` únicamente local y sin cambios pendientes.
+
+### 5.5.2 Levantamiento Local de la Arquitectura
+
+- [x] Crear el virtualenv `/tmp/energiai-sprint55-py313` con Python 3.13.
+- [x] Instalar `backend-python/requirements.txt` correctamente.
+- [x] Levantar FastAPI en `http://localhost:8000`.
+- [x] Confirmar `GET /health` con `modelo_cargado: true`.
+- [x] Confirmar `POST /predict` con HTTP 200.
+- [ ] Levantar Spring Boot en `http://localhost:8080`; el puerto estaba ocupado por un contenedor Docker existente.
+- [x] Levantar Spring Boot temporalmente en `http://localhost:18080`.
+- [x] Confirmar `GET /api/v1/health` con HTTP 200 y `status: UP`.
+- [x] Ejecutar `npm ci` con `--legacy-peer-deps` debido a la incompatibilidad Angular 20/22 existente.
+- [x] Ejecutar `npx ng test --watch=false` con 4/4 pruebas exitosas.
+- [x] Ejecutar `npx eslint src/app/` sin errores.
+- [x] Ejecutar `npx ng build` correctamente.
+- [x] Levantar Angular con `useMock=true` y validar el flujo mock en `http://localhost:4200`.
+
+### 5.5.3 Validación Java → Python
+
+- [x] Ejecutar `POST /analisis-energetico` contra Spring Boot local con HTTP 200.
+- [x] Confirmar respuesta con categoría, probabilidad, costo y recomendaciones.
+- [x] Confirmar `fuenteDatos: "IA_PYTHON_REAL"` y uso efectivo del modelo Python.
+- [x] Probar datos inválidos y errores controlados.
+- [x] Confirmar `householdSize=0` con HTTP 400 y `ErrorResponse.message` utilizable.
+- [x] Confirmar indisponibilidad de Python con HTTP 200 y `fuenteDatos: "MOCK_FALLBACK"`.
+- [ ] Corregir en Backend la aceptación de `consumoTotalMesAnterior=0` (actualmente responde HTTP 200; el contrato exige `> 0`).
+- [ ] Corregir en Backend el tratamiento de enums inválidos (actualmente responde HTTP 500; debe responder HTTP 400).
+
+---
+
+## Pre-integración Local – Frontend · Java · Python
+
+> **Objetivo:** validar de forma iterativa que el frontend funciona contra Spring Boot y FastAPI en local, sin copiar Angular a `backend-java/src/main/resources/static`, sin generar el JAR final y sin publicar cambios.
+
+### Alcance y aislamiento
+
+- [x] Trabajar exclusivamente en `../G9-LATAM-Team-57-integration`.
+- [x] Mantener intactas las ramas `frontend` y `main`.
+- [x] Identificar claramente cualquier cambio temporal de configuración.
+- [x] No publicar ni hacer push de la rama de integración durante estas pruebas.
+
+### Configuración de integración local
+
+- [x] Configurar temporalmente `useMock=false` en `environment.integration.ts`.
+- [x] Configurar un proxy Angular local hacia Spring Boot.
+- [x] Mantener la API del navegador bajo `/analisis-energetico` mediante el origen Angular.
+- [x] Mantener FastAPI interno en `localhost:8000` y accesible únicamente desde Java.
+- [x] Levantar Angular, Spring Boot y FastAPI simultáneamente.
+
+### Smoke test desde navegador
+
+- [ ] Confirmar URL, método, headers y payload en DevTools.
+- [x] Confirmar que el proxy Angular recibe HTTP 200 desde Java.
+- [ ] Confirmar loading, categoría, probabilidad, costo y recomendaciones reales.
+- [ ] Confirmar el botón `Nuevo análisis` después de una respuesta real.
+- [ ] Confirmar que el navegador no llama directamente a FastAPI.
+
+### Errores y resiliencia
+
+- [ ] Probar validación frontend antes de enviar datos inválidos.
+- [x] Probar HTTP 400 a través del proxy y recibir `ErrorResponse.message`.
+- [x] Probar HTTP 500 a través del proxy.
+- [ ] Probar HTTP 503 y timeout controlados.
+- [x] Probar fallback Java cuando FastAPI no está disponible.
+- [ ] Confirmar mensajes comprensibles y botón `Reintentar`.
+
+Hallazgos de esta iteración:
+
+- [ ] Cambiar el error de enum inválido de HTTP 500 a HTTP 400 en Backend.
+- [ ] Evitar exponer al frontend el detalle técnico de `MOCK_FALLBACK`.
+
+### Iteración funcional y cierre
+
+- [ ] Registrar cada hallazgo como ajuste frontend, backend o requisito del Sprint 6.
+- [ ] Implementar únicamente ajustes necesarios para completar el flujo local.
+- [ ] Repetir tests, ESLint y build después de cada ajuste.
+- [ ] Revisar responsive y accesibilidad del flujo integrado.
+- [ ] Restaurar o dejar identificados los cambios temporales antes del cierre.
+- [ ] Emitir decisión Go/No-Go para iniciar el empaquetado del Sprint 6.
+
+---
+
 ## Sprint 6 – Integración Angular · Spring Boot · OCI (MVP same-origin)
 
 > **Decisión del equipo:** para el MVP, Angular se compilará como contenido estático de Spring Boot en `backend-java/src/main/resources/static`. La SPA y `POST /analisis-energetico` se publicarán bajo el mismo origen HTTPS. Java continuará como único backend público y Python/ML permanecerá interno.
