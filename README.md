@@ -40,6 +40,18 @@
 
 ---
 
+<div align="center">
+
+### 🌐 ¡Escanear para Probar en Vivo!
+
+[![QR Code](docs/images/qr-app.png)](http://163.176.43.143:8080)
+
+*📱 **Escaneá el QR** desde tu celular o hacé [👉 clic aquí para abrir la app](http://163.176.43.143:8080)*
+
+</div>
+
+---
+
 ## 📋 Descripción
 
 **EnergIAi** es una plataforma que analiza el consumo eléctrico residencial mediante Inteligencia Artificial. A partir de datos como el consumo mensual, la cantidad de equipos y los hábitos de uso en horario pico, la solución:

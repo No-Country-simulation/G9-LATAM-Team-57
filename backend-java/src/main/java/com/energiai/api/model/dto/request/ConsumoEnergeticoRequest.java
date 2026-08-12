@@ -3,6 +3,7 @@ package com.energiai.api.model.dto.request;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.Setter;
@@ -49,4 +50,20 @@ public class ConsumoEnergeticoRequest {
     @NotNull(message = "El nivel de consumo pico es obligatorio")
     private PeakUsageLevel peakUsageLevel;
 
+    /**
+     * Parámetro tarifario ingresado por el usuario o empresa por kWh.
+     * Si no se especifica o llega nulo/inválido, se utiliza el costo por defecto (0.75).
+     */
+    @Positive(message = "El costo por kWh debe ser un valor estrictamente mayor a cero")
+    private Double costoPorKwh;
+
+    /**
+     * Getter personalizado para garantizar que nunca viaje un costo nulo o <= 0 al cálculo de negocio.
+     */
+    public Double getCostoPorKwh() {
+        if (costoPorKwh == null || costoPorKwh <= 0.0) {
+            return 0.75;
+        }
+        return costoPorKwh;
+    }
 }
