@@ -1,12 +1,12 @@
 package com.energiai.api.controller;
 
+import com.energiai.api.client.MlModelClient;
 import com.energiai.api.model.dto.request.HousingType;
 import com.energiai.api.model.dto.request.PeakUsageLevel;
 import com.energiai.api.model.dto.request.PrediccionRequest;
 import com.energiai.api.model.dto.response.AnalisisEnergeticoResponse;
 import com.energiai.api.model.dto.response.Categoria;
 import com.energiai.api.service.CostoEstimadoService;
-import com.energiai.api.service.ModelClient;
 import com.energiai.api.service.RecomendacionService;
 import com.energiai.api.service.RequestMapper;
 import org.junit.jupiter.api.Test;
@@ -33,7 +33,7 @@ public class PredictControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private ModelClient modelClient;
+    private MlModelClient mlModelClient;
 
     @MockBean
     private RecomendacionService recomendacionService;
@@ -69,8 +69,10 @@ public class PredictControllerTest {
                                                                    PeakUsageLevel.HIGH);
 
         when(requestMapper.toPrediccionRequest(any())).thenReturn(mappedRequest);
-        when(modelClient.predict(mappedRequest))
+        when(mlModelClient.predict(mappedRequest))
                 .thenReturn(new AnalisisEnergeticoResponse(Categoria.Ineficiente, 0.81));
+
+
         when(recomendacionService.recomendacionesPara(eq(Categoria.Ineficiente), any()))
                 .thenReturn(List.of("Recomendación 1", "Recomendación 2", "Recomendación 3"));
         when(costoEstimadoService.calcularCostoMensual(420.0,0.8)).thenReturn(336.0);
@@ -99,7 +101,7 @@ public class PredictControllerTest {
     void returns503WhenModelServiceUnavailable() throws Exception {
         when(requestMapper.toPrediccionRequest(any()))
                 .thenReturn(new PrediccionRequest(4, 1, true, HousingType.CASA, 10, 14.0, PeakUsageLevel.HIGH));
-        when(modelClient.predict(any())).thenThrow(new ResourceAccessException("timeout"));
+        when(mlModelClient.predict(any())).thenThrow(new ResourceAccessException("timeout"));
 
         mockMvc.perform(post("/analisis-energetico")
                         .contentType(MediaType.APPLICATION_JSON)
