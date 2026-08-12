@@ -15,7 +15,12 @@ public class CostoEstimadoService {
 
 
     public Double calcularCostoMensual(Double consumo, Double precioKWHRequest){
-        Double precioKwh= (precioKWHRequest!= null)? precioKWHRequest:precioKWHDefault;
+        double precioKwh= precioKWHDefault;
+
+        if (precioKWHRequest!=null){
+            precioKwh=precioKWHRequest;
+        }
+
         return consumo* precioKwh;
     }
 }

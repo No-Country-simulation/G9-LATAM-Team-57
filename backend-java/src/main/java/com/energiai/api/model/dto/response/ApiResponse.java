@@ -8,6 +8,7 @@ public record ApiResponse(
         Categoria categoria,
         Double probabilidad,
         List<String> recomendaciones,
-        Double costoEstimadoMensual
+        Double costoEstimadoMensual,
+        Boolean simulado
         ) {
 }

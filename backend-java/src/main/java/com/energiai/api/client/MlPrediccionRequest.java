@@ -4,14 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * LA COMANDA INTERNA DE REPOSTERÍA (DTO Request para la IA)
- *
- * La pequeña nota que el Cocinero Jefe escribe de su propio puño y letra
- * para la estación de postres. Traduce los datos generales de la comanda
- * del cliente a las proporciones exactas que el Repostero (sea Titular o Ayudante)
- * necesita para hornear la predicción.
- */
+
 
 @Getter
 @Setter

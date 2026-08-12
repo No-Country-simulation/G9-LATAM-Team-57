@@ -1,5 +1,7 @@
 package com.energiai.api.service;
 
+import com.energiai.api.client.MlModelClient;
+import com.energiai.api.client.MlModelClientImpl;
 import com.energiai.api.model.dto.request.HousingType;
 import com.energiai.api.model.dto.request.PeakUsageLevel;
 import com.energiai.api.model.dto.request.PrediccionRequest;
@@ -16,18 +18,15 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
-public class ModelClientTest {
+public class MlModelClientImplTest {
     private MockRestServiceServer mockServer;
-    private ModelClient modelClient;
-
+    private MlModelClientImpl mlModelClientImpl;
 
     @BeforeEach
     void setUP(){
-
         RestClient.Builder builder = RestClient.builder();
         mockServer = MockRestServiceServer.bindTo(builder).build();
-        modelClient = new ModelClient(builder, "http://fastapi.local", "test-api-key");
+        mlModelClientImpl = new MlModelClientImpl(builder, "http://fastapi.local");
     }
 
     @Test
@@ -35,16 +34,14 @@ public class ModelClientTest {
         String responseBody = """
             {
               "categoria": "Eficiente",
-              "probabilidad": 0.87,
-              "probabilidades": {"Eficiente": 0.87, "Moderado": 0.11, "Ineficiente": 0.02}
+              "probabilidad": 0.87
             }
             """;
         mockServer.expect(requestTo("http://fastapi.local/predict"))
-                .andExpect(header("X-API-Key", "test-api-key"))
                 .andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON));
 
-        PrediccionRequest request = new PrediccionRequest(3, 1, true, HousingType.CASA, 5, 14.0, PeakUsageLevel.HIGH.HIGH);
-        AnalisisEnergeticoResponse response = modelClient.predict(request);
+        PrediccionRequest request = new PrediccionRequest(3, 1, true, HousingType.CASA, 5, 14.0, PeakUsageLevel.HIGH);
+        AnalisisEnergeticoResponse response = mlModelClientImpl.predict(request);
 
         assertThat(response.categoria()).isEqualTo(Categoria.Eficiente);
         assertThat(response.probabilidad()).isEqualTo(0.87);
