@@ -31,12 +31,13 @@ export class EnergyForm {
 
   readonly form = this.fb.group({
     householdSize: [null as number | null, [Validators.required, Validators.min(1)]],
-    hasAc: [null as number | null, [Validators.required]],
+    hasAc: [null as boolean | null, [Validators.required]],
     homeOffice: [null as boolean | null, [Validators.required]],
     housingType: [null as HousingType | null, [Validators.required]],
     equipmentCount: [null as number | null, [Validators.required, Validators.min(0)]],
     consumoTotalMesAnterior: [null as number | null, [Validators.required, Validators.min(0.01)]],
     peakUsageLevel: [null as PeakUsageLevel | null, [Validators.required]],
+    costoPorKwh: [0.75 as number | null, [Validators.required, Validators.min(0.01)]],
   });
 
   onSubmit(): void {
@@ -50,6 +51,7 @@ export class EnergyForm {
         equipmentCount: formValue.equipmentCount!,
         consumoTotalMesAnterior: formValue.consumoTotalMesAnterior!,
         peakUsageLevel: formValue.peakUsageLevel!,
+        costoPorKwh: formValue.costoPorKwh!,
       };
       this.submitForm.emit(request);
     } else {

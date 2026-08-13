@@ -4,6 +4,37 @@ import { catchError, throwError, TimeoutError } from 'rxjs';
 
 import { NotificationService } from '../services/notification.service';
 
+/**
+ * Extrae un mensaje legible del cuerpo de error que devuelve el backend.
+ * El backend puede responder con `{message}`, `{error}` o un mapa `{campo: mensaje}`.
+ */
+function extractMessage(httpError: HttpErrorResponse, fallback: string): string {
+  const body = httpError.error;
+
+  if (!body) {
+    return fallback;
+  }
+
+  if (typeof body === 'string') {
+    return body;
+  }
+
+  if (typeof body.message === 'string' && body.message) {
+    return body.message;
+  }
+
+  if (typeof body.error === 'string' && body.error) {
+    return body.error;
+  }
+
+  const messages = Object.values(body)
+    .filter((value): value is string => typeof value === 'string' && value.length > 0)
+    .map((value) => value)
+    .join(' ');
+
+  return messages || fallback;
+}
+
 export const httpErrorInterceptor: HttpInterceptorFn = (req, next) => {
   const notification = inject(NotificationService);
 
@@ -21,36 +52,54 @@ export const httpErrorInterceptor: HttpInterceptorFn = (req, next) => {
 
       switch (httpError.status) {
         case 400: {
-          const message = httpError.error?.message || 'Los datos enviados no son válidos.';
-          notification.showError('Error de validación', message);
+          notification.showError(
+            'Error de validación',
+            extractMessage(httpError, 'Los datos enviados no son válidos.')
+          );
           break;
         }
 
         case 404:
           notification.showError(
             'Servicio no encontrado',
-            'El servicio solicitado no está disponible.'
+            extractMessage(httpError, 'El servicio solicitado no está disponible.')
           );
           break;
 
         case 500:
           notification.showError(
             'Error interno',
-            'Ocurrió un error en el servidor. Intente nuevamente más tarde.'
+            extractMessage(
+              httpError,
+              'Ocurrió un error en el servidor. Intente nuevamente más tarde.'
+            )
+          );
+          break;
+
+        case 502:
+          notification.showError(
+            'Error de comunicación',
+            extractMessage(
+              httpError,
+              'El servicio no pudo completar la solicitud. Intente nuevamente.'
+            )
           );
           break;
 
         case 503:
           notification.showError(
             'Servicio no disponible',
-            'El servicio se encuentra temporalmente no disponible. Intente en unos minutos.'
+            extractMessage(
+              httpError,
+              'El servicio se encuentra temporalmente no disponible. Intente en unos minutos.'
+            )
           );
           break;
 
         default:
           notification.showError(
             'Error inesperado',
-            'Ocurrió un error inesperado. Intente nuevamente.'
+            extractMessage(httpError, 'Ocurrió un error inesperado. Intente nuevamente.')
           );
           break;
       }

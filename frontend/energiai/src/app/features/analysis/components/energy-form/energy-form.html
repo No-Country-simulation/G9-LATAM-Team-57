@@ -10,212 +10,265 @@
 
   <!-- Form -->
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="energy-form__fields">
-    <!-- Campo 1: Personas en la vivienda -->
-    <div
-      class="form-field"
-      [class.form-field--error]="
-        form.get('householdSize')?.invalid && form.get('householdSize')?.touched
-      "
-    >
-      <label class="form-field__label" for="householdSize">
-        <mat-icon>people</mat-icon>
-        Personas en la vivienda
-      </label>
-      <input
-        id="householdSize"
-        class="form-field__input"
-        type="number"
-        formControlName="householdSize"
-        placeholder="Ejemplo: 4"
-        min="1"
-        aria-describedby="householdSize-hint"
-      />
-      @if (form.get('householdSize')?.hasError('required') && form.get('householdSize')?.touched) {
-        <span class="form-field__error">Este campo es obligatorio</span>
-      } @else if (
-        form.get('householdSize')?.hasError('min') && form.get('householdSize')?.touched
-      ) {
-        <span class="form-field__error">Debe ser al menos 1 persona</span>
-      } @else {
-        <span class="form-field__hint" id="householdSize-hint"
-          >¿Cuántas personas viven en la vivienda?</span
-        >
-      }
-    </div>
-
-    <!-- Campo 2: Tipo de vivienda -->
-    <div
-      class="form-field"
-      [class.form-field--error]="
-        form.get('housingType')?.invalid && form.get('housingType')?.touched
-      "
-    >
-      <label class="form-field__label" for="housingType">
+    <!-- Sección: Datos del hogar -->
+    <fieldset class="form-section">
+      <legend class="form-section__title">
         <mat-icon>home</mat-icon>
-        Tipo de vivienda
-      </label>
-      <select
-        id="housingType"
-        class="form-field__select"
-        formControlName="housingType"
-        aria-describedby="housingType-hint"
+        Datos del hogar
+      </legend>
+
+      <!-- Campo 1: Personas en la vivienda -->
+      <div
+        class="form-field"
+        [class.form-field--error]="
+          form.get('householdSize')?.invalid && form.get('householdSize')?.touched
+        "
       >
-        <option value="" disabled selected>Seleccione el tipo</option>
-        @for (type of housingTypes; track type.value) {
-          <option [value]="type.value">{{ type.label }}</option>
+        <label class="form-field__label" for="householdSize">
+          <mat-icon>people</mat-icon>
+          Personas en la vivienda
+        </label>
+        <input
+          id="householdSize"
+          class="form-field__input"
+          type="number"
+          formControlName="householdSize"
+          placeholder="Ejemplo: 4"
+          min="1"
+          aria-describedby="householdSize-hint"
+        />
+        @if (
+          form.get('householdSize')?.hasError('required') && form.get('householdSize')?.touched
+        ) {
+          <span class="form-field__error">Este campo es obligatorio</span>
+        } @else if (
+          form.get('householdSize')?.hasError('min') && form.get('householdSize')?.touched
+        ) {
+          <span class="form-field__error">Debe ser al menos 1 persona</span>
+        } @else {
+          <span class="form-field__hint" id="householdSize-hint"
+            >¿Cuántas personas viven en la vivienda?</span
+          >
         }
-      </select>
-      @if (form.get('housingType')?.hasError('required') && form.get('housingType')?.touched) {
-        <span class="form-field__error">Seleccione un tipo de vivienda</span>
-      }
-    </div>
-
-    <!-- Campo 3: Aire acondicionado -->
-    <div
-      class="form-field"
-      [class.form-field--error]="form.get('hasAc')?.invalid && form.get('hasAc')?.touched"
-    >
-      <span class="form-field__label">
-        <mat-icon>ac_unit</mat-icon>
-        ¿La vivienda cuenta con aire acondicionado?
-      </span>
-      <div class="radio-group__options">
-        <label class="radio-option">
-          <input type="radio" formControlName="hasAc" [value]="1" />
-          <span class="radio-option__label">Sí</span>
-        </label>
-        <label class="radio-option">
-          <input type="radio" formControlName="hasAc" [value]="0" />
-          <span class="radio-option__label">No</span>
-        </label>
       </div>
-      @if (form.get('hasAc')?.hasError('required') && form.get('hasAc')?.touched) {
-        <span class="form-field__error">Seleccione una opción</span>
-      }
-    </div>
 
-    <!-- Campo 4: Home Office -->
-    <div
-      class="form-field"
-      [class.form-field--error]="form.get('homeOffice')?.invalid && form.get('homeOffice')?.touched"
-    >
-      <span class="form-field__label">
-        <mat-icon>laptop</mat-icon>
-        ¿Algún integrante trabaja regularmente desde casa?
-      </span>
-      <div class="radio-group__options">
-        <label class="radio-option">
-          <input type="radio" formControlName="homeOffice" [value]="true" />
-          <span class="radio-option__label">Sí</span>
+      <!-- Campo 2: Tipo de vivienda -->
+      <div
+        class="form-field"
+        [class.form-field--error]="
+          form.get('housingType')?.invalid && form.get('housingType')?.touched
+        "
+      >
+        <label class="form-field__label" for="housingType">
+          <mat-icon>home</mat-icon>
+          Tipo de vivienda
         </label>
-        <label class="radio-option">
-          <input type="radio" formControlName="homeOffice" [value]="false" />
-          <span class="radio-option__label">No</span>
-        </label>
+        <select
+          id="housingType"
+          class="form-field__select"
+          formControlName="housingType"
+          aria-describedby="housingType-hint"
+        >
+          <option value="" disabled selected>Seleccione el tipo</option>
+          @for (type of housingTypes; track type.value) {
+            <option [value]="type.value">{{ type.label }}</option>
+          }
+        </select>
+        @if (form.get('housingType')?.hasError('required') && form.get('housingType')?.touched) {
+          <span class="form-field__error">Seleccione un tipo de vivienda</span>
+        }
       </div>
-      @if (form.get('homeOffice')?.hasError('required') && form.get('homeOffice')?.touched) {
-        <span class="form-field__error">Seleccione una opción</span>
-      }
-    </div>
 
-    <!-- Campo 5: Equipos eléctricos -->
-    <div
-      class="form-field"
-      [class.form-field--error]="
-        form.get('equipmentCount')?.invalid && form.get('equipmentCount')?.touched
-      "
-    >
-      <label class="form-field__label" for="equipmentCount">
-        <mat-icon>devices</mat-icon>
-        Equipos eléctricos
-      </label>
-      <input
-        id="equipmentCount"
-        class="form-field__input"
-        type="number"
-        formControlName="equipmentCount"
-        placeholder="Ejemplo: 10"
-        min="0"
-        aria-describedby="equipmentCount-hint"
-      />
-      @if (
-        form.get('equipmentCount')?.hasError('required') && form.get('equipmentCount')?.touched
-      ) {
-        <span class="form-field__error">Este campo es obligatorio</span>
-      } @else if (
-        form.get('equipmentCount')?.hasError('min') && form.get('equipmentCount')?.touched
-      ) {
-        <span class="form-field__error">No puede ser un valor negativo</span>
-      } @else {
-        <span class="form-field__hint" id="equipmentCount-hint"
-          >Incluya televisores, computadoras, refrigeradora, microondas, lavadora, etc.</span
-        >
-      }
-    </div>
-
-    <!-- Campo 6: Consumo del último recibo -->
-    <div
-      class="form-field"
-      [class.form-field--error]="
-        form.get('consumoTotalMesAnterior')?.invalid && form.get('consumoTotalMesAnterior')?.touched
-      "
-    >
-      <label class="form-field__label" for="consumoRecibo">
-        <mat-icon>electric_meter</mat-icon>
-        Consumo del último recibo (kWh)
-      </label>
-      <input
-        id="consumoRecibo"
-        class="form-field__input"
-        type="number"
-        formControlName="consumoTotalMesAnterior"
-        placeholder="420"
-        min="0"
-        step="0.1"
-        aria-describedby="consumo-hint"
-      />
-      @if (
-        form.get('consumoTotalMesAnterior')?.hasError('required') &&
-        form.get('consumoTotalMesAnterior')?.touched
-      ) {
-        <span class="form-field__error">Este campo es obligatorio</span>
-      } @else if (
-        form.get('consumoTotalMesAnterior')?.hasError('min') &&
-        form.get('consumoTotalMesAnterior')?.touched
-      ) {
-        <span class="form-field__error">Debe ser mayor que cero</span>
-      } @else {
-        <span class="form-field__hint" id="consumo-hint"
-          >Ingrese el consumo total indicado en su último recibo eléctrico</span
-        >
-      }
-    </div>
-
-    <!-- Campo 7: Horas de uso simultáneo -->
-    <div
-      class="form-field"
-      [class.form-field--error]="
-        form.get('peakUsageLevel')?.invalid && form.get('peakUsageLevel')?.touched
-      "
-    >
-      <span class="form-field__label">
-        <mat-icon>schedule</mat-icon>
-        ¿Cuántas horas al día utiliza varios equipos eléctricos al mismo tiempo?
-      </span>
-      <div class="radio-group__options">
-        @for (level of peakUsageLevels; track level.value) {
+      <!-- Campo 3: Aire acondicionado -->
+      <div
+        class="form-field"
+        [class.form-field--error]="form.get('hasAc')?.invalid && form.get('hasAc')?.touched"
+      >
+        <span class="form-field__label">
+          <mat-icon>ac_unit</mat-icon>
+          ¿La vivienda cuenta con aire acondicionado?
+        </span>
+        <div class="radio-group__options">
           <label class="radio-option">
-            <input type="radio" formControlName="peakUsageLevel" [value]="level.value" />
-            <span class="radio-option__label">{{ level.label }}</span>
+            <input type="radio" formControlName="hasAc" [value]="true" />
+            <span class="radio-option__label">Sí</span>
           </label>
+          <label class="radio-option">
+            <input type="radio" formControlName="hasAc" [value]="false" />
+            <span class="radio-option__label">No</span>
+          </label>
+        </div>
+        @if (form.get('hasAc')?.hasError('required') && form.get('hasAc')?.touched) {
+          <span class="form-field__error">Seleccione una opción</span>
         }
       </div>
-      @if (
-        form.get('peakUsageLevel')?.hasError('required') && form.get('peakUsageLevel')?.touched
-      ) {
-        <span class="form-field__error">Seleccione una opción</span>
-      }
-    </div>
+
+      <!-- Campo 4: Home Office -->
+      <div
+        class="form-field"
+        [class.form-field--error]="
+          form.get('homeOffice')?.invalid && form.get('homeOffice')?.touched
+        "
+      >
+        <span class="form-field__label">
+          <mat-icon>laptop</mat-icon>
+          ¿Algún integrante trabaja regularmente desde casa?
+        </span>
+        <div class="radio-group__options">
+          <label class="radio-option">
+            <input type="radio" formControlName="homeOffice" [value]="true" />
+            <span class="radio-option__label">Sí</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" formControlName="homeOffice" [value]="false" />
+            <span class="radio-option__label">No</span>
+          </label>
+        </div>
+        @if (form.get('homeOffice')?.hasError('required') && form.get('homeOffice')?.touched) {
+          <span class="form-field__error">Seleccione una opción</span>
+        }
+      </div>
+
+      <!-- Campo 5: Equipos eléctricos -->
+      <div
+        class="form-field"
+        [class.form-field--error]="
+          form.get('equipmentCount')?.invalid && form.get('equipmentCount')?.touched
+        "
+      >
+        <label class="form-field__label" for="equipmentCount">
+          <mat-icon>devices</mat-icon>
+          Equipos eléctricos
+        </label>
+        <input
+          id="equipmentCount"
+          class="form-field__input"
+          type="number"
+          formControlName="equipmentCount"
+          placeholder="Ejemplo: 10"
+          min="0"
+          aria-describedby="equipmentCount-hint"
+        />
+        @if (
+          form.get('equipmentCount')?.hasError('required') && form.get('equipmentCount')?.touched
+        ) {
+          <span class="form-field__error">Este campo es obligatorio</span>
+        } @else if (
+          form.get('equipmentCount')?.hasError('min') && form.get('equipmentCount')?.touched
+        ) {
+          <span class="form-field__error">No puede ser un valor negativo</span>
+        } @else {
+          <span class="form-field__hint" id="equipmentCount-hint"
+            >Incluya televisores, computadoras, refrigeradora, microondas, lavadora, etc.</span
+          >
+        }
+      </div>
+
+      <!-- Campo 6: Consumo del último recibo -->
+      <div
+        class="form-field"
+        [class.form-field--error]="
+          form.get('consumoTotalMesAnterior')?.invalid &&
+          form.get('consumoTotalMesAnterior')?.touched
+        "
+      >
+        <label class="form-field__label" for="consumoRecibo">
+          <mat-icon>electric_meter</mat-icon>
+          Consumo del último recibo (kWh)
+        </label>
+        <input
+          id="consumoRecibo"
+          class="form-field__input"
+          type="number"
+          formControlName="consumoTotalMesAnterior"
+          placeholder="420"
+          min="0"
+          step="0.1"
+          aria-describedby="consumo-hint"
+        />
+        @if (
+          form.get('consumoTotalMesAnterior')?.hasError('required') &&
+          form.get('consumoTotalMesAnterior')?.touched
+        ) {
+          <span class="form-field__error">Este campo es obligatorio</span>
+        } @else if (
+          form.get('consumoTotalMesAnterior')?.hasError('min') &&
+          form.get('consumoTotalMesAnterior')?.touched
+        ) {
+          <span class="form-field__error">Debe ser mayor que cero</span>
+        } @else {
+          <span class="form-field__hint" id="consumo-hint"
+            >Ingrese el consumo total indicado en su último recibo eléctrico</span
+          >
+        }
+      </div>
+
+      <!-- Campo 7: Horas de uso simultáneo -->
+      <div
+        class="form-field"
+        [class.form-field--error]="
+          form.get('peakUsageLevel')?.invalid && form.get('peakUsageLevel')?.touched
+        "
+      >
+        <span class="form-field__label">
+          <mat-icon>schedule</mat-icon>
+          ¿Cuántas horas al día utiliza varios equipos eléctricos al mismo tiempo?
+        </span>
+        <div class="radio-group__options">
+          @for (level of peakUsageLevels; track level.value) {
+            <label class="radio-option">
+              <input type="radio" formControlName="peakUsageLevel" [value]="level.value" />
+              <span class="radio-option__label">{{ level.label }}</span>
+            </label>
+          }
+        </div>
+        @if (
+          form.get('peakUsageLevel')?.hasError('required') && form.get('peakUsageLevel')?.touched
+        ) {
+          <span class="form-field__error">Seleccione una opción</span>
+        }
+      </div>
+    </fieldset>
+
+    <!-- Sección: Parámetros de la distribuidora -->
+    <fieldset class="form-section">
+      <legend class="form-section__title">
+        <mat-icon>payments</mat-icon>
+        Parámetros de la distribuidora
+      </legend>
+
+      <!-- Campo 8: Tarifa por kWh -->
+      <div
+        class="form-field"
+        [class.form-field--error]="
+          form.get('costoPorKwh')?.invalid && form.get('costoPorKwh')?.touched
+        "
+      >
+        <label class="form-field__label" for="costoPorKwh">
+          <mat-icon>attach_money</mat-icon>
+          Tarifa por kWh (USD)
+        </label>
+        <input
+          id="costoPorKwh"
+          class="form-field__input"
+          type="number"
+          formControlName="costoPorKwh"
+          placeholder="0.75"
+          min="0.01"
+          step="0.01"
+          aria-describedby="costoPorKwh-hint"
+        />
+        @if (form.get('costoPorKwh')?.hasError('required') && form.get('costoPorKwh')?.touched) {
+          <span class="form-field__error">Este campo es obligatorio</span>
+        } @else if (form.get('costoPorKwh')?.hasError('min') && form.get('costoPorKwh')?.touched) {
+          <span class="form-field__error">Debe ser mayor que cero</span>
+        } @else {
+          <span class="form-field__hint" id="costoPorKwh-hint"
+            >Tarifa oficial aplicada por la empresa eléctrica</span
+          >
+        }
+      </div>
+    </fieldset>
 
     <!-- Botón Analizar -->
     <div class="energy-form__actions">

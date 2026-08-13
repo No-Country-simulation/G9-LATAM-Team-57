@@ -3,4 +3,5 @@ export interface EnergyAnalysisResponse {
   probabilidad: number;
   costoEstimadoMensual: number;
   recomendaciones: string[];
+  simulado?: boolean;
 }

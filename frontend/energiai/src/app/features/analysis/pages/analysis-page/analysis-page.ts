@@ -11,6 +11,7 @@ import { EnergyAnalysisRequest, EnergyAnalysisResponse } from '../../models';
 import { EnergyAnalysisService } from '../../services/energy-analysis.service';
 import { LoadingService } from '../../../../core/services/loading.service';
 import { NotificationService } from '../../../../core/services/notification.service';
+import { AnalysisStatusService } from '../../../../core/services/analysis-status.service';
 
 type AnalysisState = 'form' | 'loading' | 'result' | 'error';
 
@@ -34,6 +35,7 @@ export class AnalysisPage {
   private readonly analysisService = inject(EnergyAnalysisService);
   private readonly loadingService = inject(LoadingService);
   private readonly notification = inject(NotificationService);
+  private readonly statusService = inject(AnalysisStatusService);
 
   /** Current state of the analysis flow */
   readonly state = signal<AnalysisState>('form');
@@ -62,6 +64,7 @@ export class AnalysisPage {
     this.state.set('form');
     this.result.set(null);
     this.error.set(null);
+    this.statusService.reset();
   }
 
   private executeAnalysis(request: EnergyAnalysisRequest): void {
@@ -71,6 +74,7 @@ export class AnalysisPage {
 
     this.state.set('loading');
     this.error.set(null);
+    this.statusService.reset();
     this.loadingService.show();
 
     this.analysisService.analyzeConsumption(request).subscribe({
@@ -78,12 +82,18 @@ export class AnalysisPage {
         this.result.set(response);
         this.state.set('result');
         this.loadingService.hide();
+        if (response.simulado) {
+          this.statusService.markFallback();
+        } else {
+          this.statusService.markConectado();
+        }
       },
       error: (err) => {
         const errorMessage =
           err?.error?.message || 'No fue posible realizar el análisis. Intente nuevamente.';
         this.error.set(errorMessage);
         this.state.set('error');
+        this.statusService.reset();
         this.loadingService.hide();
       },
     });

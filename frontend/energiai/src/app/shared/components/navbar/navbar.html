@@ -6,6 +6,13 @@
 
   <span class="navbar__spacer"></span>
 
+  @if (statusLabel()) {
+    <span class="navbar__status" [class]="statusClass()" aria-live="polite">
+      <span class="navbar__status-dot"></span>
+      {{ statusLabel() }}
+    </span>
+  }
+
   <nav class="navbar__nav">
     <a
       mat-button

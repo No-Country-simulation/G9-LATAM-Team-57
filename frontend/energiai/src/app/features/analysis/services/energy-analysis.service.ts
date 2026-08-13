@@ -17,7 +17,9 @@ import { EnergyAnalysisResponse } from '../models/energy-analysis-response.inter
 })
 export class EnergyAnalysisService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = new URL('/analisis-energetico', environment.apiUrl).toString();
+  private readonly apiUrl = environment.apiUrl
+    ? new URL('/analisis-energetico', environment.apiUrl).toString()
+    : '/analisis-energetico';
   private readonly useMock = environment.useMock;
 
   /**
@@ -59,7 +61,7 @@ export class EnergyAnalysisService {
         'Considerar energías renovables para reducir aún más el impacto.',
         'Revisar periódicamente el estado de los equipos eléctricos.',
       ];
-    } else if (consumoPerCapita > 150 || (equipos > 12 && request.hasAc === 1)) {
+    } else if (consumoPerCapita > 150 || (equipos > 12 && request.hasAc)) {
       categoria = 'Ineficiente';
       probabilidad = 0.78;
       costoEstimadoMensual = consumo * 0.85;

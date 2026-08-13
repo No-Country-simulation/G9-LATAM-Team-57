@@ -1,10 +1,13 @@
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { firstValueFrom } from 'rxjs';
 
 import { environment as productionEnvironment } from '../../../../environments/environment.production';
 import { environment } from '../../../../environments/environment';
 import { EnergyAnalysisService } from './energy-analysis.service';
+import { HousingType, PeakUsageLevel } from '../models';
+import { EnergyAnalysisResponse } from '../models/energy-analysis-response.interface';
 
 describe('EnergyAnalysisService API route', () => {
   let service: EnergyAnalysisService;
@@ -24,10 +27,27 @@ describe('EnergyAnalysisService API route', () => {
     expect(apiUrl).toBe('http://localhost:8080/analisis-energetico');
   });
 
-  it('builds the current Java endpoint in production', () => {
-    const apiUrl = new URL('/analisis-energetico', productionEnvironment.apiUrl).toString();
-
+  it('builds a relative endpoint in production', () => {
     expect(productionEnvironment.useMock).toBe(false);
-    expect(apiUrl).toBe('https://api.energiai.cloud/analisis-energetico');
+    expect(productionEnvironment.apiUrl).toBe('');
+  });
+
+  it('returns a mock response with the expected shape', async () => {
+    const response: EnergyAnalysisResponse = await firstValueFrom(
+      service.analyzeConsumption({
+        householdSize: 4,
+        hasAc: true,
+        homeOffice: true,
+        housingType: HousingType.CASA,
+        equipmentCount: 10,
+        consumoTotalMesAnterior: 420,
+        peakUsageLevel: PeakUsageLevel.HIGH,
+      })
+    );
+
+    expect(response.categoria).toBeDefined();
+    expect(response.recomendaciones.length).toBeGreaterThan(0);
+    expect(response.costoEstimadoMensual).toBeDefined();
+    expect(response.simulado).toBeUndefined();
   });
 });
