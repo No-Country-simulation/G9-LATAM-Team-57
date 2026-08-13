@@ -2,6 +2,7 @@ package com.energiai.api.service;
 
 import com.energiai.api.client.MlModelClient;
 import com.energiai.api.client.MlModelClientImpl;
+import com.energiai.api.client.ResultadoPrediccion;
 import com.energiai.api.model.dto.request.HousingType;
 import com.energiai.api.model.dto.request.PeakUsageLevel;
 import com.energiai.api.model.dto.request.PrediccionRequest;
@@ -41,9 +42,11 @@ public class MlModelClientImplTest {
                 .andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON));
 
         PrediccionRequest request = new PrediccionRequest(3, 1, true, HousingType.CASA, 5, 14.0, PeakUsageLevel.HIGH);
-        AnalisisEnergeticoResponse response = mlModelClientImpl.predict(request);
+        ResultadoPrediccion resultado = mlModelClientImpl.predict(request);
+        AnalisisEnergeticoResponse response = resultado.response();
 
         assertThat(response.categoria()).isEqualTo(Categoria.Eficiente);
         assertThat(response.probabilidad()).isEqualTo(0.87);
+        assertThat(resultado.simulado()).isFalse();
     }
 }

@@ -14,7 +14,7 @@ public record AnalisisEnergeticoRequest(
         @NotNull(message = "Complete este campo")  Boolean homeOffice,
         @NotNull(message = "Complete este campo")  HousingType housingType,
         @NotNull(message = "Complete este campo")  @PositiveOrZero(message = "Debe ingresar un valor positivo") Integer equipmentCount,
-        @NotNull(message = "Complete este campo")  @PositiveOrZero(message = "Debe ingresar un valor positivo") Double consumoTotalMesAnterior,
+        @NotNull(message = "Complete este campo")  @Positive(message = "Debe ingresar un valor positivo") Double consumoTotalMesAnterior,
         @NotNull(message = "Complete este campo")  PeakUsageLevel peakUsageLevel,
         @PositiveOrZero(message = "Debe ser un valor positivo") Double costoPorKwh)
 

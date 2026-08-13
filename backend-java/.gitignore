@@ -4,6 +4,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+# Artefactos Angular generados por build.sh (no se versionan)
+src/main/resources/static/
+
 ### STS ###
 .apt_generated
 .classpath

@@ -1,6 +1,7 @@
 package com.energiai.api.controller;
 
 import com.energiai.api.client.MlModelClient;
+import com.energiai.api.client.ResultadoPrediccion;
 import com.energiai.api.model.dto.request.HousingType;
 import com.energiai.api.model.dto.request.PeakUsageLevel;
 import com.energiai.api.model.dto.request.PrediccionRequest;
@@ -70,7 +71,7 @@ public class PredictControllerTest {
 
         when(requestMapper.toPrediccionRequest(any())).thenReturn(mappedRequest);
         when(mlModelClient.predict(mappedRequest))
-                .thenReturn(new AnalisisEnergeticoResponse(Categoria.Ineficiente, 0.81));
+                .thenReturn(new ResultadoPrediccion(new AnalisisEnergeticoResponse(Categoria.Ineficiente, 0.81), false));
 
 
         when(recomendacionService.recomendacionesPara(eq(Categoria.Ineficiente), any()))
