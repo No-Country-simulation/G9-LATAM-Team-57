@@ -1,0 +1,55 @@
+<section class="analysis-page">
+  <!-- STATE: Form -->
+  @if (state() === 'form') {
+    <div class="analysis-page__form section page-enter">
+      <div class="container container--narrow">
+        <app-energy-form (submitForm)="onFormSubmit($event)" />
+      </div>
+    </div>
+  }
+
+  <!-- STATE: Loading -->
+  @if (state() === 'loading') {
+    <div class="analysis-page__loading page-enter">
+      <app-loading />
+    </div>
+  }
+
+  <!-- STATE: Result -->
+  @if (state() === 'result' && result()) {
+    <div class="analysis-page__result section page-enter">
+      <div class="container">
+        <h2 class="text-display-medium analysis-page__title">Resultados del Análisis</h2>
+
+        <div class="results-grid">
+          <app-result-card
+            [categoria]="result()!.categoria"
+            [probabilidad]="result()!.probabilidad"
+          />
+          <app-cost-card [costoEstimado]="result()!.costoEstimadoMensual" />
+          <app-recommendation-card [recomendaciones]="result()!.recomendaciones" />
+        </div>
+
+        <!-- New Analysis Button -->
+        <div class="analysis-page__actions">
+          <button class="btn-secondary" (click)="onNewAnalysis()">
+            <mat-icon>refresh</mat-icon>
+            Nuevo análisis
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- STATE: Error -->
+  @if (state() === 'error') {
+    <div class="analysis-page__error page-enter">
+      <div class="container container--narrow">
+        <app-error
+          [message]="error() ?? 'No fue posible realizar el análisis. Intente nuevamente.'"
+          (retry)="onRetry()"
+        />
+      </div>
+    </div>
+  }
+</section>

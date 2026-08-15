@@ -1,0 +1,237 @@
+// ============================================
+// EnergIAi – Cards
+// Source: Penpot Design System
+// (Card/Base, Recommendation Card, Cost Card, Error Card)
+// ============================================
+
+@use 'variables' as v;
+
+// --- Base Card ---
+// Penpot: white bg, radius 8px, padding 24px, shadow elevation-1, hover elevation-2
+.card {
+  background-color: v.$color-surface;
+  border-radius: v.$radius-md;
+  padding: v.$spacing-lg;
+  box-shadow: v.$elevation-1;
+  transition: box-shadow v.$transition-normal;
+  box-sizing: border-box;
+
+  &:hover {
+    box-shadow: v.$elevation-2;
+  }
+}
+
+.card__title {
+  font-family: v.$font-family-primary;
+  font-size: v.$font-size-title-large;
+  font-weight: v.$font-weight-semibold;
+  line-height: v.$line-height-title-large;
+  color: v.$color-on-surface;
+  margin: 0 0 v.$spacing-sm;
+}
+
+.card__content {
+  font-family: v.$font-family-primary;
+  font-size: v.$font-size-body-medium;
+  font-weight: v.$font-weight-regular;
+  line-height: v.$line-height-body-medium;
+  color: v.$color-on-surface-variant;
+}
+
+// --- Result Category Card ---
+// Penpot: centered content, badge + probability + progress bar
+.result-card {
+  @extend .card;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: v.$spacing-md;
+  text-align: center;
+  padding: v.$spacing-xl v.$spacing-lg;
+
+  &__label {
+    font-family: v.$font-family-primary;
+    font-size: v.$font-size-title-medium;
+    font-weight: v.$font-weight-semibold;
+    color: v.$color-on-surface-variant;
+  }
+
+  &__value {
+    font-family: v.$font-family-primary;
+    font-size: v.$font-size-display-medium;
+    font-weight: v.$font-weight-bold;
+    color: v.$color-on-surface;
+  }
+
+  &__subtitle {
+    font-family: v.$font-family-primary;
+    font-size: v.$font-size-body-small;
+    color: v.$color-on-surface-variant;
+  }
+
+  &__progress {
+    width: 100%;
+    max-width: 240px;
+    height: 8px;
+    background-color: v.$color-outline;
+    border-radius: v.$radius-sm;
+    overflow: hidden;
+
+    &-bar {
+      height: 100%;
+      border-radius: v.$radius-sm;
+      transition: width v.$transition-slow;
+
+      &--eficiente {
+        background-color: v.$color-eficiente;
+      }
+
+      &--moderado {
+        background-color: v.$color-moderado;
+      }
+
+      &--ineficiente {
+        background-color: v.$color-ineficiente;
+      }
+    }
+  }
+}
+
+// --- Cost Card ---
+// Penpot: centered, icon + label + large value + /mes
+.cost-card {
+  @extend .card;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: v.$spacing-sm;
+  text-align: center;
+  padding: v.$spacing-lg;
+
+  &__icon {
+    font-size: 32px;
+    color: v.$color-primary;
+  }
+
+  &__label {
+    font-family: v.$font-family-primary;
+    font-size: v.$font-size-body-medium;
+    font-weight: v.$font-weight-regular;
+    color: v.$color-on-surface-variant;
+  }
+
+  &__value {
+    font-family: v.$font-family-primary;
+    font-size: 32px;
+    font-weight: v.$font-weight-bold;
+    color: v.$color-on-surface;
+  }
+
+  &__period {
+    font-family: v.$font-family-primary;
+    font-size: v.$font-size-body-medium;
+    font-weight: v.$font-weight-regular;
+    color: v.$color-on-surface-variant;
+  }
+}
+
+// --- Recommendation Card ---
+// Penpot: left green border (3px), list with checkmarks
+.recommendation-card {
+  @extend .card;
+  border-left: 3px solid v.$color-success;
+  display: flex;
+  flex-direction: column;
+  gap: v.$spacing-md;
+
+  &__title {
+    font-family: v.$font-family-primary;
+    font-size: v.$font-size-title-large;
+    font-weight: v.$font-weight-semibold;
+    color: v.$color-on-surface;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: v.$spacing-sm;
+  }
+
+  &__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-family: v.$font-family-primary;
+    font-size: v.$font-size-body-medium;
+    font-weight: v.$font-weight-regular;
+    color: v.$color-on-surface;
+    line-height: v.$line-height-body-medium;
+
+    &::before {
+      content: '✓';
+      color: v.$color-success;
+      font-weight: v.$font-weight-bold;
+      font-size: v.$font-size-body-medium;
+      flex-shrink: 0;
+    }
+  }
+}
+
+// --- Error Card ---
+// Penpot: left red border (4px), icon + message + retry button
+.error-card {
+  @extend .card;
+  border-left: 4px solid v.$color-error;
+  display: flex;
+  flex-direction: column;
+  gap: v.$spacing-md;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: v.$spacing-sm;
+  }
+
+  &__icon {
+    color: v.$color-error;
+    font-size: 20px;
+  }
+
+  &__title {
+    font-family: v.$font-family-primary;
+    font-size: 18px;
+    font-weight: v.$font-weight-semibold;
+    color: v.$color-error;
+  }
+
+  &__message {
+    font-family: v.$font-family-primary;
+    font-size: v.$font-size-body-large;
+    font-weight: v.$font-weight-regular;
+    color: v.$color-on-surface;
+    line-height: v.$line-height-body-large;
+  }
+}
+
+// --- Results Grid ---
+// 3-column layout on desktop, stacked on mobile
+.results-grid {
+  display: grid;
+  gap: v.$spacing-lg;
+
+  @include v.mobile {
+    grid-template-columns: 1fr;
+  }
+
+  @include v.tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include v.desktop {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

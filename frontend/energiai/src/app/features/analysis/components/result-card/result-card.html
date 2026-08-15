@@ -1,0 +1,16 @@
+<div class="result-card">
+  <span class="result-card__label">Categoría</span>
+  <div class="badge" [ngClass]="badgeClass()">
+    <span class="badge__dot"></span>
+    {{ categoria() }}
+  </div>
+  <span class="result-card__value">{{ progressWidth() }}</span>
+  <span class="result-card__subtitle">Probabilidad</span>
+  <div class="result-card__progress">
+    <div
+      class="result-card__progress-bar"
+      [ngClass]="progressClass()"
+      [style.width]="progressWidth()"
+    ></div>
+  </div>
+</div>

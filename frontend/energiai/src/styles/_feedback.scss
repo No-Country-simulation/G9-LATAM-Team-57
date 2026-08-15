@@ -1,0 +1,185 @@
+// ============================================
+// EnergIAi – Feedback Components
+// Source: Penpot Design System (Loading, Snackbar, Dialog)
+// ============================================
+
+@use 'variables' as v;
+
+// --- Loading ---
+// Penpot: spinner (48px, green) + text centered
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: v.$spacing-md;
+  padding: v.$spacing-3xl;
+
+  &__spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid v.$color-primary-container;
+    border-top-color: v.$color-primary;
+    border-radius: v.$radius-full;
+    animation: spin 1s linear infinite;
+  }
+
+  &__text {
+    font-family: v.$font-family-primary;
+    font-size: v.$font-size-body-medium;
+    font-weight: v.$font-weight-regular;
+    color: v.$color-on-surface-variant;
+    text-align: center;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// --- Loading Overlay ---
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.85);
+  z-index: 9999;
+  animation: fadeIn 200ms ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// --- Snackbar ---
+// Penpot: #212121 bg, white text, green action, radius 8px, bottom center
+.snackbar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: v.$spacing-md;
+  background-color: v.$color-on-surface;
+  border-radius: v.$radius-md;
+  padding: v.$spacing-sm v.$spacing-md;
+  min-width: 300px;
+  max-width: 500px;
+  box-shadow: v.$elevation-2;
+  animation: slideUp 200ms ease-out;
+
+  &__message {
+    font-family: v.$font-family-primary;
+    font-size: v.$font-size-body-medium;
+    font-weight: v.$font-weight-regular;
+    color: v.$color-surface;
+  }
+
+  &__action {
+    font-family: v.$font-family-primary;
+    font-size: v.$font-size-body-medium;
+    font-weight: v.$font-weight-medium;
+    color: v.$color-success;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: v.$spacing-xs v.$spacing-sm;
+    border-radius: v.$radius-sm;
+    transition: background-color v.$transition-fast;
+
+    &:hover {
+      background-color: rgba(v.$color-success, 0.1);
+    }
+  }
+}
+
+// Snackbar container (fixed at bottom)
+.snackbar-container {
+  position: fixed;
+  bottom: v.$spacing-lg;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+// --- Dialog / Modal ---
+// Penpot: white, radius 16px, elevation-3, max 480px
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+  animation: fadeIn 200ms ease-in-out;
+}
+
+.dialog {
+  background-color: v.$color-surface;
+  border-radius: v.$radius-lg;
+  box-shadow: v.$elevation-3;
+  padding: v.$spacing-lg;
+  max-width: 480px;
+  width: calc(100% - 2 * v.$spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: v.$spacing-md;
+  animation: scaleIn 200ms ease-out;
+
+  &__title {
+    font-family: v.$font-family-primary;
+    font-size: v.$font-size-title-large;
+    font-weight: v.$font-weight-semibold;
+    color: v.$color-on-surface;
+  }
+
+  &__content {
+    font-family: v.$font-family-primary;
+    font-size: v.$font-size-body-medium;
+    font-weight: v.$font-weight-regular;
+    color: v.$color-on-surface-variant;
+    line-height: v.$line-height-body-medium;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: v.$spacing-sm;
+    margin-top: v.$spacing-sm;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+// --- Page Transitions ---
+.page-enter {
+  animation: fadeIn 200ms ease-in-out;
+}

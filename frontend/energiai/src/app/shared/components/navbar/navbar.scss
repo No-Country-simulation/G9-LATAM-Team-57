@@ -1,0 +1,103 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: linear-gradient(135deg, #2e7d32, #388e3c);
+  color: white;
+  padding: 0 var(--energiai-spacing-lg);
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: var(--energiai-spacing-sm);
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+  }
+
+  &__icon {
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+  }
+
+  &__title {
+    font-family: 'Inter', 'Roboto', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  &__spacer {
+    flex: 1;
+  }
+
+  &__nav a {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+    transition: color 200ms ease;
+
+    &:hover,
+    &.active {
+      color: white;
+    }
+  }
+
+  &__status {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--energiai-spacing-sm);
+    margin-right: var(--energiai-spacing-md);
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+  }
+
+  &__status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: currentColor;
+  }
+
+  &__status--conectado {
+    color: #4caf50;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+
+  &__status--fallback {
+    color: #f44336;
+    background-color: rgba(255, 255, 255, 0.9);
+    animation: navbar-blink 1s step-start infinite;
+  }
+}
+
+@keyframes navbar-blink {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+// Responsive: ocultar nav en mobile muy pequeño
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0 var(--energiai-spacing-md);
+
+    &__title {
+      font-size: 1.2rem;
+    }
+
+    &__nav a {
+      font-size: 0.85rem;
+    }
+
+    &__status {
+      font-size: 0.65rem;
+      padding: 3px 8px;
+      margin-right: var(--energiai-spacing-sm);
+    }
+  }
+}

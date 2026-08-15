@@ -1,0 +1,49 @@
+@use 'styles/variables' as v;
+
+// ============================================
+// Analysis Page – Layout for all states
+// Based on Penpot Design System
+// ============================================
+
+:host {
+  display: block;
+}
+
+.analysis-page {
+  min-height: calc(100vh - 64px - 120px); // viewport - navbar - footer
+
+  &__form {
+    background-color: v.$color-surface-variant;
+  }
+
+  &__loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    background-color: v.$color-surface-variant;
+  }
+
+  &__result {
+    background-color: v.$color-surface-variant;
+  }
+
+  &__title {
+    text-align: center;
+    margin-bottom: v.$spacing-xl;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    margin-top: v.$spacing-xl;
+  }
+
+  &__error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    background-color: v.$color-surface-variant;
+  }
+}

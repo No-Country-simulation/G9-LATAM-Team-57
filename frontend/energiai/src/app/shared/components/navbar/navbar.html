@@ -1,0 +1,27 @@
+<mat-toolbar class="navbar" color="primary">
+  <a routerLink="/" class="navbar__brand">
+    <mat-icon class="navbar__icon">bolt</mat-icon>
+    <span class="navbar__title">EnergIAi</span>
+  </a>
+
+  <span class="navbar__spacer"></span>
+
+  @if (statusLabel()) {
+    <span class="navbar__status" [class]="statusClass()" aria-live="polite">
+      <span class="navbar__status-dot"></span>
+      {{ statusLabel() }}
+    </span>
+  }
+
+  <nav class="navbar__nav">
+    <a
+      mat-button
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Inicio
+    </a>
+    <a mat-button routerLink="/analysis" routerLinkActive="active"> Analizar </a>
+  </nav>
+</mat-toolbar>

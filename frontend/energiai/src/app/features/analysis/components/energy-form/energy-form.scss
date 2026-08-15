@@ -1,0 +1,65 @@
+@use 'styles/variables' as v;
+
+// ============================================
+// EnergyForm – Component-specific styles
+// Uses design system global classes (form-card, form-field, btn-primary, etc.)
+// Only layout/structural overrides here
+// ============================================
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.energy-form__fields {
+  display: flex;
+  flex-direction: column;
+  gap: v.$spacing-lg;
+}
+
+.form-section {
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: v.$spacing-lg;
+}
+
+.form-section__title {
+  display: flex;
+  align-items: center;
+  gap: v.$spacing-sm;
+  padding: 0;
+  margin: 0 0 v.$spacing-xs;
+  font-family: v.$font-family-primary;
+  font-size: v.$font-size-title-large;
+  font-weight: v.$font-weight-semibold;
+  line-height: v.$line-height-title-large;
+  color: v.$color-primary;
+
+  mat-icon {
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+  }
+}
+
+.form-section + .form-section {
+  border-top: 1px solid v.$color-outline;
+  padding-top: v.$spacing-lg;
+}
+
+.energy-form__actions {
+  display: flex;
+  justify-content: center;
+  padding-top: v.$spacing-md;
+}
+
+// Angular Material icon alignment within labels
+.form-field__label mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  color: v.$color-on-surface-variant;
+}

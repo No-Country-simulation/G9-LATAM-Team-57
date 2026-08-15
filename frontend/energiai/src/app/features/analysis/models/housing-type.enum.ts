@@ -1,0 +1,5 @@
+export enum HousingType {
+  CASA = 'CASA',
+  DEPARTAMENTO = 'DEPARTAMENTO',
+  MONOAMBIENTE = 'MONOAMBIENTE',
+}
