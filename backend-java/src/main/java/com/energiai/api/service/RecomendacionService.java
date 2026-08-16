@@ -33,7 +33,7 @@ public class RecomendacionService {
     public List<String> recomendacionesPara(Categoria categoria, AnalisisEnergeticoRequest request){
         List<String> recomendaciones = new ArrayList<>(RECOMENDACIONES.get(categoria));
 
-        if (request.hasAc()){
+        if (request.hasAc() != null && request.hasAc() == 1){
             recomendaciones.add("Programa el aire acondicionado unos grados más templado para reducir su consumo.");
             recomendaciones.add("Mantén las puertas y ventanas cerradas mientras funciona el aire condicionado.");
         }

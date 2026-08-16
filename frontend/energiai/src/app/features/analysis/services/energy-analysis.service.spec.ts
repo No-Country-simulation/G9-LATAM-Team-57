@@ -36,7 +36,7 @@ describe('EnergyAnalysisService API route', () => {
     const response: EnergyAnalysisResponse = await firstValueFrom(
       service.analyzeConsumption({
         householdSize: 4,
-        hasAc: true,
+        hasAc: 1,
         homeOffice: true,
         housingType: HousingType.CASA,
         equipmentCount: 10,

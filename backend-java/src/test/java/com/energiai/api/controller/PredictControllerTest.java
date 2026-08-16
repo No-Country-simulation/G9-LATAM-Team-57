@@ -48,7 +48,7 @@ public class PredictControllerTest {
     private static final String VALID_PAYLOAD = """
         {
           "householdSize": 4,
-          "hasAc": true,
+          "hasAc": 1,
           "homeOffice": true,
           "housingType": "CASA",
           "equipmentCount": 10,

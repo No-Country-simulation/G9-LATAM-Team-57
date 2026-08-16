@@ -31,7 +31,7 @@ export class EnergyForm {
 
   readonly form = this.fb.group({
     householdSize: [null as number | null, [Validators.required, Validators.min(1)]],
-    hasAc: [null as boolean | null, [Validators.required]],
+    hasAc: [null as number | null, [Validators.required]],
     homeOffice: [null as boolean | null, [Validators.required]],
     housingType: [null as HousingType | null, [Validators.required]],
     equipmentCount: [null as number | null, [Validators.required, Validators.min(0)]],

@@ -16,7 +16,7 @@ public class RequestMapperTest {
     void convertMonthlyConsumptionToDailyAverage(){
         AnalisisEnergeticoRequest request = new AnalisisEnergeticoRequest(
                 4,
-                true,
+                1,
                 true,
                 HousingType.CASA,
                 10,

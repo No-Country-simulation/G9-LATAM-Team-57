@@ -14,13 +14,13 @@ public class RecomendacionServiceTest {
 
     private final RecomendacionService service = new RecomendacionService();
 
-    private static AnalisisEnergeticoRequest requestCon(boolean hasAc, boolean homeOffice, int equipmentCount, PeakUsageLevel peakUsageLevel) {
+    private static AnalisisEnergeticoRequest requestCon(int hasAc, boolean homeOffice, int equipmentCount, PeakUsageLevel peakUsageLevel) {
         return new AnalisisEnergeticoRequest(3, hasAc, homeOffice, HousingType.CASA, equipmentCount, 300.0, peakUsageLevel,0.0);
     }
 
     @Test
     void returnsAtLeastThreeRecomendacionesForEachCategory() {
-        AnalisisEnergeticoRequest request = requestCon(false, false, 5, PeakUsageLevel.LOW);
+        AnalisisEnergeticoRequest request = requestCon(0, false, 5, PeakUsageLevel.LOW);
 
         assertThat(service.recomendacionesPara(Categoria.Eficiente, request).size()).isGreaterThanOrEqualTo(2);
         assertThat(service.recomendacionesPara(Categoria.Moderado, request).size()).isGreaterThanOrEqualTo(2);
@@ -29,8 +29,8 @@ public class RecomendacionServiceTest {
 
     @Test
     void addsExtraRecomendacionWhenHasAc() {
-        AnalisisEnergeticoRequest conAc = requestCon(true, false, 3, PeakUsageLevel.LOW);
-        AnalisisEnergeticoRequest sinAc = requestCon(false, false, 2, PeakUsageLevel.LOW);
+        AnalisisEnergeticoRequest conAc = requestCon(1, false, 3, PeakUsageLevel.LOW);
+        AnalisisEnergeticoRequest sinAc = requestCon(0, false, 2, PeakUsageLevel.LOW);
 
         int conAcSize = service.recomendacionesPara(Categoria.Eficiente, conAc).size();
         int sinAcSize = service.recomendacionesPara(Categoria.Eficiente, sinAc).size();
@@ -40,8 +40,8 @@ public class RecomendacionServiceTest {
 
     @Test
     void addsExtraRecomendacionWhenPeakUsageIsHigh() {
-        AnalisisEnergeticoRequest picoAlto = requestCon(false, false, 5, PeakUsageLevel.HIGH);
-        AnalisisEnergeticoRequest picoBajo = requestCon(false, false, 5, PeakUsageLevel.LOW);
+        AnalisisEnergeticoRequest picoAlto = requestCon(0, false, 5, PeakUsageLevel.HIGH);
+        AnalisisEnergeticoRequest picoBajo = requestCon(0, false, 5, PeakUsageLevel.LOW);
 
         int altoSize = service.recomendacionesPara(Categoria.Moderado, picoAlto).size();
         int bajoSize = service.recomendacionesPara(Categoria.Moderado, picoBajo).size();

@@ -61,7 +61,7 @@ export class EnergyAnalysisService {
         'Considerar energías renovables para reducir aún más el impacto.',
         'Revisar periódicamente el estado de los equipos eléctricos.',
       ];
-    } else if (consumoPerCapita > 150 || (equipos > 12 && request.hasAc)) {
+    } else if (consumoPerCapita > 150 || (equipos > 12 && request.hasAc === 1)) {
       categoria = 'Ineficiente';
       probabilidad = 0.78;
       costoEstimadoMensual = consumo * 0.85;

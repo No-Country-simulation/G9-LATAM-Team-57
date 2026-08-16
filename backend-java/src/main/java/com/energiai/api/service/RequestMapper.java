@@ -24,7 +24,7 @@ public class RequestMapper {
     public PrediccionRequest toPrediccionRequest(AnalisisEnergeticoRequest request){
         return new PrediccionRequest(
           request.householdSize(),
-          request.hasAc()? 1:0 ,
+          request.hasAc(),
           request.homeOffice(),
           request.housingType(),
           request.equipmentCount(),
@@ -37,7 +37,7 @@ public class RequestMapper {
         MlPrediccionRequest mlPrediccionRequest = new MlPrediccionRequest();
 
         mlPrediccionRequest.setHouseholdSize(request.householdSize());
-        mlPrediccionRequest.setHasAc(request.hasAc() ? 1 : 0);
+        mlPrediccionRequest.setHasAc(request.hasAc());
         mlPrediccionRequest.setHomeOffice(request.homeOffice());
         mlPrediccionRequest.setHousingType(request.housingType().toValue());
         mlPrediccionRequest.setEquipmentCount(request.equipmentCount());

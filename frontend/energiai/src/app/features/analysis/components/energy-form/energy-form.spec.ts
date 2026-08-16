@@ -18,13 +18,13 @@ describe('EnergyForm', () => {
     fixture.detectChanges();
   });
 
-  it('emits a request with boolean hasAc and costoPorKwh', () => {
+  it('emits a request with numeric hasAc and costoPorKwh', () => {
     let emitted: EnergyAnalysisRequest | undefined;
     component.submitForm.subscribe((value) => (emitted = value));
 
     component.form.setValue({
       householdSize: 4,
-      hasAc: true,
+      hasAc: 1,
       homeOffice: false,
       housingType: HousingType.CASA,
       equipmentCount: 10,
@@ -36,7 +36,7 @@ describe('EnergyForm', () => {
     component.onSubmit();
 
     expect(emitted).toBeDefined();
-    expect(emitted?.hasAc).toBe(true);
+    expect(emitted?.hasAc).toBe(1);
     expect(emitted?.costoPorKwh).toBe(0.8);
     expect(emitted?.housingType).toBe(HousingType.CASA);
   });

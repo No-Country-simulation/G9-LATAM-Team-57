@@ -3,7 +3,7 @@ import { PeakUsageLevel } from './peak-usage-level.enum';
 
 export interface EnergyAnalysisRequest {
   householdSize: number;
-  hasAc: boolean;
+  hasAc: number;
   homeOffice: boolean;
   housingType: HousingType;
   equipmentCount: number;
